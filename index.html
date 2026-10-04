@@ -8,91 +8,175 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Vương Quốc Cờ Vua</title>
+
+
+<title>Vương Quốc Cờ Vua ♟️</title>
 
 
 
 <style>
 
+/* =========================================================
+
+   1. MÀU SẮC CHÍNH
+
+========================================================= */
+
 :root{
 
-    --blue:#4A90E2;
+    --blue:#4A90E2;
 
-    --blue-dark:#3176C5;
+    --blue-dark:#3176C5;
 
-    --sky:#EAF7FF;
+    --blue-light:#EAF5FF;
 
-    --yellow:#FFD166;
 
-    --cream:#FFF8E8;
 
-    --green:#67C587;
+    --yellow:#FFD166;
 
-    --green-dark:#43A867;
+    --cream:#FFF8E8;
 
-    --red:#F26B6B;
 
-    --orange:#FF9F68;
 
-    --text:#334155;
+    --green:#72C596;
 
-    --muted:#718096;
+    --green-dark:#4EAA77;
 
-    --light:#FFF0C7;
 
-    --dark:#79B7E8;
 
-    --shadow:0 8px 25px rgba(52,93,125,.14);
+    --orange:#FF9F68;
+
+    --red:#F06A6A;
+
+
+
+    --text:#334155;
+
+    --muted:#718096;
+
+
+
+    --white:#FFFFFF;
+
+
+
+    --board-light:#FFF0C7;
+
+    --board-dark:#79B7E8;
+
+
+
+    --shadow:0 8px 24px rgba(53,94,130,.13);
 
 }
 
 
 
-\*{box-sizing:border-box}
+/* =========================================================
+
+   2. CÀI ĐẶT CHUNG
+
+========================================================= */
+
+
+
+*{
+
+    box-sizing:border-box;
+
+}
 
 
 
 body{
 
-    margin:0;
+    margin:0;
 
-    font-family:"Segoe UI",Arial,sans-serif;
+    font-family:
 
-    color:var(--text);
+        "Segoe UI",
 
-    min-height:100vh;
+        Arial,
 
-    background:linear-gradient(180deg,#EAF7FF,#F9FCFF 55%,#FFF9EC);
+        sans-serif;
+
+
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #EAF7FF 0%,
+
+            #F8FCFF 45%,
+
+            #FFF9EC 100%
+
+        );
+
+
+
+    color:var(--text);
+
+    min-height:100vh;
 
 }
 
 
 
-button,input{font:inherit}
+button,
 
-button{cursor:pointer}
+input{
+
+    font:inherit;
+
+}
 
 
 
-/* ================= HEADER ================= */
+button{
+
+    cursor:pointer;
+
+}
 
 
 
-header{
+/* =========================================================
 
-    height:80px;
+   3. HEADER
 
-    background:#fff;
+========================================================= */
 
-    display:flex;
 
-    align-items:center;
 
-    padding:0 32px;
+.header{
 
-    border-bottom:4px solid #DDEFFF;
+    height:82px;
 
-    box-shadow:0 3px 15px rgba(70,120,160,.08);
+    background:white;
+
+
+
+    display:flex;
+
+    align-items:center;
+
+
+
+    padding:0 34px;
+
+
+
+    border-bottom:4px solid #DDEFFF;
+
+
+
+    box-shadow:
+
+        0 3px 15px rgba(70,120,160,.08);
 
 }
 
@@ -100,11 +184,11 @@ header{
 
 .logo{
 
-    display:flex;
+    display:flex;
 
-    align-items:center;
+    align-items:center;
 
-    gap:12px;
+    gap:13px;
 
 }
 
@@ -112,223 +196,377 @@ header{
 
 .logo-icon{
 
-    width:52px;
+    width:53px;
 
-    height:52px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:16px;
-
-    color:#fff;
-
-    font-size:31px;
-
-    background:linear-gradient(135deg,#4A90E2,#77C4F5);
-
-    box-shadow:0 5px 0 #2871B5;
-
-}
+    height:53px;
 
 
 
-.logo strong{
-
-    display:block;
-
-    color:#306EA8;
-
-    font-size:22px;
-
-}
+    border-radius:17px;
 
 
 
-.logo small{color:#8395A5}
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
 
 
 
-.room{
+    font-size:32px;
 
-    margin-left:auto;
 
-    display:flex;
 
-    gap:8px;
+    background:
 
-    align-items:center;
+        linear-gradient(
 
-    background:#F3F9FF;
+            135deg,
 
-    border:2px solid #D9ECFA;
+            var(--blue),
 
-    border-radius:14px;
+            #77C4F5
 
-    padding:7px;
+        );
+
+
+
+    color:white;
+
+
+
+    box-shadow:
+
+        0 5px 0 #2871B5;
 
 }
 
 
 
-.room input{
+.logo-text strong{
 
-    width:90px;
+    display:block;
 
-    border:2px solid #D4E6F4;
+    font-size:23px;
 
-    padding:9px;
-
-    text-align:center;
-
-    border-radius:9px;
-
-    outline:none;
-
-    font-weight:800;
+    color:#306EA8;
 
 }
 
 
 
-/* ================= BUTTON ================= */
+.logo-text span{
+
+    font-size:13px;
+
+    color:#8294A6;
+
+}
+
+
+
+/* ----- Mã phòng ----- */
+
+
+
+.room-box{
+
+    margin-left:auto;
+
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+
+
+    background:#F3F9FF;
+
+
+
+    padding:8px;
+
+
+
+    border-radius:15px;
+
+
+
+    border:2px solid #D9ECFA;
+
+}
+
+
+
+.room-box span{
+
+    font-weight:700;
+
+    color:#4C7193;
+
+    padding-left:8px;
+
+}
+
+
+
+.room-box input{
+
+    width:100px;
+
+
+
+    border:2px solid #D4E6F4;
+
+    background:white;
+
+
+
+    padding:10px;
+
+
+
+    border-radius:10px;
+
+
+
+    text-align:center;
+
+    font-weight:800;
+
+
+
+    color:#3675AC;
+
+    outline:none;
+
+}
+
+
+
+.room-box input:focus{
+
+    border-color:var(--blue);
+
+}
+
+
+
+/* =========================================================
+
+   4. BUTTON
+
+========================================================= */
 
 
 
 .btn{
 
-    border:0;
+    border:none;
 
-    border-radius:11px;
-
-    padding:11px 15px;
-
-    font-weight:800;
-
-    transition:.15s;
-
-}
+    border-radius:11px;
 
 
 
-.btn:hover{transform:translateY(-2px)}
+    padding:11px 16px;
 
 
 
-.blue{
+    font-weight:750;
 
-    background:var(--blue);
 
-    color:#fff;
 
-    box-shadow:0 4px 0 var(--blue-dark);
+    transition:.18s;
 
 }
 
 
 
-.green{
+.btn:hover{
 
-    background:var(--green);
-
-    color:#fff;
-
-    box-shadow:0 4px 0 var(--green-dark);
+    transform:translateY(-2px);
 
 }
 
 
 
-.yellow{
+.btn:active{
 
-    background:var(--yellow);
-
-    color:#725600;
-
-    box-shadow:0 4px 0 #E4AE37;
+    transform:translateY(1px);
 
 }
 
 
 
-.soft{
+.btn-blue{
 
-    background:#EEF5FA;
+    background:var(--blue);
 
-    color:#587287;
+    color:white;
 
-    box-shadow:0 4px 0 #D7E3EB;
-
-}
-
-
-
-.red{
-
-    background:#F17B7B;
-
-    color:white;
-
-    box-shadow:0 4px 0 #CF5656;
+    box-shadow:0 4px 0 var(--blue-dark);
 
 }
 
 
 
-/* ================= LAYOUT ================= */
+.btn-green{
+
+    background:var(--green);
+
+    color:white;
+
+    box-shadow:0 4px 0 var(--green-dark);
+
+}
+
+
+
+.btn-yellow{
+
+    background:var(--yellow);
+
+    color:#745800;
+
+    box-shadow:0 4px 0 #E6AF37;
+
+}
+
+
+
+.btn-orange{
+
+    background:var(--orange);
+
+    color:white;
+
+    box-shadow:0 4px 0 #DD7845;
+
+}
+
+
+
+.btn-soft{
+
+    background:#EEF5FA;
+
+    color:#55718A;
+
+    box-shadow:0 4px 0 #D5E3ED;
+
+}
+
+
+
+/* =========================================================
+
+   5. BỐ CỤC
+
+========================================================= */
 
 
 
 .app{
 
-    max-width:1450px;
+    max-width:1450px;
 
-    margin:26px auto;
+    margin:28px auto;
 
-    padding:0 22px;
 
-    display:grid;
 
-    grid-template-columns:260px minmax(500px,650px) 330px;
+    padding:0 24px;
 
-    gap:25px;
 
-    align-items:start;
+
+    display:grid;
+
+
+
+    grid-template-columns:
+
+        270px
+
+        minmax(500px, 650px)
+
+        330px;
+
+
+
+    gap:27px;
+
+
+
+    align-items:start;
 
 }
+
+
+
+/* =========================================================
+
+   6. CARD
+
+========================================================= */
 
 
 
 .card{
 
-    background:#fff;
+    background:white;
 
-    border-radius:21px;
 
-    box-shadow:var(--shadow);
 
-    border:2px solid #E7F1F7;
+    border-radius:22px;
 
-    overflow:hidden;
+
+
+    box-shadow:var(--shadow);
+
+
+
+    border:2px solid #E8F2F8;
+
+
+
+    overflow:hidden;
 
 }
 
 
 
-/* ================= MENU ================= */
+/* =========================================================
+
+   7. MENU BÊN TRÁI
+
+========================================================= */
 
 
 
 .profile{
 
-    text-align:center;
+    padding:22px;
 
-    padding:20px;
 
-    background:linear-gradient(135deg,#E6F5FF,#FFF8DE);
+
+    text-align:center;
+
+
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #E6F5FF,
+
+            #FFF8DE
+
+        );
 
 }
 
@@ -336,25 +574,37 @@ header{
 
 .avatar{
 
-    width:70px;
+    width:75px;
 
-    height:70px;
+    height:75px;
 
-    margin:auto;
 
-    border-radius:50%;
 
-    background:white;
+    margin:auto;
 
-    border:5px solid #BFE3FA;
 
-    display:flex;
 
-    align-items:center;
+    border-radius:50%;
 
-    justify-content:center;
 
-    font-size:38px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+
+    background:white;
+
+
+
+    border:5px solid #BFE3FA;
+
+
+
+    font-size:40px;
 
 }
 
@@ -362,9 +612,9 @@ header{
 
 .profile h3{
 
-    margin:9px 0 3px;
+    margin:11px 0 4px;
 
-    color:#3479B4;
+    color:#3479B4;
 
 }
 
@@ -372,27 +622,37 @@ header{
 
 .profile p{
 
-    margin:0;
+    margin:0;
 
-    color:#8192A1;
+    color:#7D92A4;
 
-    font-size:13px;
+    font-size:14px;
 
 }
 
 
 
-.section-title{
+/* ----- Bài học ----- */
 
-    padding:17px 18px 8px;
 
-    font-size:12px;
 
-    font-weight:900;
+.lesson-title{
 
-    color:#9AA8B5;
+    padding:18px 20px 10px;
 
-    text-transform:uppercase;
+
+
+    font-size:13px;
+
+    font-weight:800;
+
+
+
+    color:#9AA8B5;
+
+
+
+    text-transform:uppercase;
 
 }
 
@@ -400,25 +660,41 @@ header{
 
 .lesson{
 
-    margin:6px 11px;
+    margin:7px 12px;
 
-    padding:12px 13px;
 
-    border-radius:12px;
 
-    display:flex;
+    padding:13px 14px;
 
-    align-items:center;
 
-    gap:10px;
 
-    color:#627789;
+    border-radius:13px;
 
-    font-weight:750;
 
-    cursor:pointer;
 
-    transition:.18s;
+    display:flex;
+
+    align-items:center;
+
+
+
+    gap:12px;
+
+
+
+    font-weight:700;
+
+
+
+    color:#63788B;
+
+
+
+    cursor:pointer;
+
+
+
+    transition:.2s;
 
 }
 
@@ -426,9 +702,9 @@ header{
 
 .lesson:hover{
 
-    background:#F1F8FD;
+    background:#F1F8FD;
 
-    transform:translateX(3px);
+    transform:translateX(3px);
 
 }
 
@@ -436,357 +712,337 @@ header{
 
 .lesson.active{
 
-    color:white;
-
-    background:linear-gradient(135deg,#4A90E2,#6DB7E9);
-
-    box-shadow:0 5px 12px rgba(74,144,226,.24);
-
-}
+    color:white;
 
 
 
-.lesson .ico{
+    background:
 
-    font-size:23px;
+        linear-gradient(
 
-    width:30px;
+            135deg,
 
-    text-align:center;
+            var(--blue),
 
-}
+            #6DB7E9
 
-
-
-/* ================= CENTER ================= */
+        );
 
 
 
-.title-box{
+    box-shadow:
 
-    background:#fff;
-
-    border:2px solid #E6F2F9;
-
-    border-radius:18px;
-
-    padding:14px 18px;
-
-    margin-bottom:14px;
-
-    box-shadow:var(--shadow);
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
+        0 5px 12px rgba(74,144,226,.25);
 
 }
 
 
 
-.title-box .emoji{font-size:32px}
+.lesson-icon{
+
+    width:34px;
+
+    height:34px;
 
 
 
-.title-box strong{
+    border-radius:10px;
 
-    display:block;
 
-    color:#3677AD;
 
-    font-size:18px;
+    background:rgba(255,255,255,.22);
+
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+
+    font-size:22px;
 
 }
 
 
 
-.title-box span{
+/* =========================================================
 
-    color:#7C8F9E;
+   8. KHU VỰC BÀN CỜ
 
-    font-size:13px;
+========================================================= */
+
+
+
+.center{
+
+    min-width:0;
 
 }
+
+
+
+.welcome{
+
+    background:white;
+
+
+
+    border-radius:18px;
+
+
+
+    padding:16px 20px;
+
+
+
+    margin-bottom:16px;
+
+
+
+    box-shadow:var(--shadow);
+
+
+
+    border:2px solid #E6F2F9;
+
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+}
+
+
+
+.welcome-icon{
+
+    font-size:33px;
+
+}
+
+
+
+.welcome strong{
+
+    display:block;
+
+    color:#3677AD;
+
+    font-size:18px;
+
+}
+
+
+
+.welcome span{
+
+    color:#7C8F9E;
+
+    font-size:14px;
+
+}
+
+
+
+/* ----- Board container ----- */
 
 
 
 .board-shell{
 
-    padding:12px;
+    padding:13px;
 
-    background:white;
 
-    border-radius:22px;
 
-    border:3px solid #DDEFFA;
+    border-radius:23px;
 
-    box-shadow:0 12px 35px rgba(47,100,140,.17);
+
+
+    background:white;
+
+
+
+    box-shadow:
+
+        0 12px 35px rgba(47,100,140,.18);
+
+
+
+    border:3px solid #DDEFFA;
+
+}
+
+
+
+.board{
+
+    width:100%;
+
+
+
+    aspect-ratio:1;
+
+
+
+    display:grid;
+
+
+
+    grid-template-columns:repeat(8, 1fr);
+
+
+
+    overflow:hidden;
+
+
+
+    border-radius:14px;
 
 }
 
 
 
-\#board{
-
-    display:grid;
-
-    grid-template-columns:repeat(8,1fr);
-
-    width:100%;
-
-    aspect-ratio:1;
-
-    border-radius:13px;
-
-    overflow:hidden;
-
-}
+/* ----- Ô cờ ----- */
 
 
 
 .square{
 
-    position:relative;
+    position:relative;
 
-    display:flex;
 
-    justify-content:center;
 
-    align-items:center;
+    display:flex;
 
-    font-size:clamp(35px,5vw,61px);
+    align-items:center;
 
-    user-select:none;
+    justify-content:center;
+
+
+
+    user-select:none;
+
+
+
+    font-size:
+
+        clamp(
+
+            36px,
+
+            5vw,
+
+            62px
+
+        );
 
 }
 
 
 
-.light{background:var(--light)}
+.light{
 
-.dark{background:var(--dark)}
+    background:var(--board-light);
+
+}
+
+
+
+.dark{
+
+    background:var(--board-dark);
+
+}
+
+
+
+/* ----- Quân đang chọn ----- */
 
 
 
 .square.selected{
 
-    box-shadow:inset 0 0 0 6px #FFD32A;
+    box-shadow:
 
-    z-index:2;
+        inset 0 0 0 6px
 
-}
+        rgba(255,196,0,.95);
 
 
 
-.square.correct{
-
-    box-shadow:inset 0 0 0 6px rgba(66,190,102,.85);
+    z-index:2;
 
 }
 
 
 
-.square.wrong{
+/* ----- Hiển thị ô vừa đi ----- */
 
-    box-shadow:inset 0 0 0 6px rgba(240,75,75,.9);
+
+
+.square.last{
+
+    box-shadow:
+
+        inset 0 0 0 5px
+
+        rgba(91,197,111,.75);
 
 }
+
+
+
+/* ----- Quân cờ ----- */
 
 
 
 .piece{
 
-    cursor:grab;
-
-    line-height:1;
-
-    filter:drop-shadow(0 3px 1px rgba(0,0,0,.15));
-
-}
+    cursor:grab;
 
 
 
-.piece:hover{transform:scale(1.07)}
+    line-height:1;
 
 
 
-.toolbar{
+    filter:
 
-    display:flex;
+        drop-shadow(
 
-    gap:8px;
+            0 3px 1px
 
-    margin-top:13px;
+            rgba(0,0,0,.16)
 
-}
-
-
-
-.toolbar button{flex:1}
+        );
 
 
 
-/* =========================================================
-
-   KHO QUÂN CỜ
-
-\========================================================= */
-
-
-
-.piece-bank{
-
-    display:none;
-
-    margin-top:17px;
-
-    padding:17px;
-
-    background:white;
-
-    border:2px solid #E3EFF6;
-
-    border-radius:20px;
-
-    box-shadow:var(--shadow);
+    transition:.12s;
 
 }
 
 
 
-.piece-bank.show{display:block}
+.piece:hover{
 
-
-
-.bank-header{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    margin-bottom:13px;
+    transform:scale(1.08);
 
 }
 
 
 
-.bank-header strong{
+.piece:active{
 
-    color:#3978AA;
+    cursor:grabbing;
 
-    font-size:17px;
-
-}
-
-
-
-.bank-header span{
-
-    font-size:12px;
-
-    color:#8495A3;
-
-}
-
-
-
-.bank-row{
-
-    display:grid;
-
-    grid-template-columns:100px 1fr;
-
-    gap:10px;
-
-    align-items:center;
-
-    margin:8px 0;
-
-}
-
-
-
-.bank-label{
-
-    font-size:13px;
-
-    font-weight:800;
-
-    color:#748695;
-
-}
-
-
-
-.bank-pieces{
-
-    display:grid;
-
-    grid-template-columns:repeat(6,1fr);
-
-    gap:5px;
-
-}
-
-
-
-.bank-piece{
-
-    height:55px;
-
-    border-radius:11px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:39px;
-
-    cursor:grab;
-
-    user-select:none;
-
-    background:#F2F8FC;
-
-    border:2px solid #E0EDF5;
-
-    transition:.15s;
-
-}
-
-
-
-.bank-piece:hover{
-
-    background:#FFF5CF;
-
-    border-color:#F3CF62;
-
-    transform:translateY(-3px);
-
-}
-
-
-
-.bank-help{
-
-    background:#EFF8FF;
-
-    border-radius:11px;
-
-    padding:10px 12px;
-
-    color:#607E94;
-
-    font-size:13px;
-
-    margin-top:12px;
+    transform:scale(.94);
 
 }
 
@@ -794,291 +1050,521 @@ header{
 
 /* =========================================================
 
-   KẾT QUẢ KIỂM TRA
+   9. THANH DƯỚI BÀN CỜ
 
-\========================================================= */
-
-
-
-.result{
-
-    display:none;
-
-    margin-top:14px;
-
-    border-radius:16px;
-
-    padding:15px;
-
-    text-align:center;
-
-    font-weight:800;
-
-}
+========================================================= */
 
 
 
-.result.show{display:block}
+.board-toolbar{
+
+    margin-top:15px;
 
 
 
-.result.success{
+    display:flex;
 
-    color:#378153;
+    gap:9px;
 
-    background:#EAF9EF;
 
-    border:2px solid #A6DDB8;
+
+    flex-wrap:wrap;
 
 }
 
 
 
-.result.error{
+.board-toolbar button{
 
-    color:#B65454;
+    flex:1;
 
-    background:#FFF0F0;
-
-    border:2px solid #F1B3B3;
+    min-width:125px;
 
 }
 
 
 
-.result .big{
+/* =========================================================
 
-    font-size:27px;
+   10. PANEL GIÁO VIÊN / HỌC SINH
 
-    margin-bottom:5px;
-
-}
+========================================================= */
 
 
 
-/* ================= RIGHT ================= */
+.panel-header{
+
+    padding:20px;
 
 
 
-.panel-head{
+    background:
 
-    padding:19px;
+        linear-gradient(
 
-    background:linear-gradient(135deg,#4A90E2,#69B6E8);
+            135deg,
 
-    color:white;
+            #4A90E2,
 
-}
+            #69B6E8
+
+        );
 
 
 
-.panel-head h2{
-
-    margin:0;
-
-    font-size:19px;
+    color:white;
 
 }
 
 
 
-.panel-head p{
+.panel-header h2{
 
-    margin:4px 0 0;
+    margin:0;
 
-    font-size:12px;
-
-    opacity:.9;
+    font-size:20px;
 
 }
 
 
 
-.panel-body{padding:17px}
+.panel-header p{
+
+    margin:5px 0 0;
+
+    opacity:.88;
+
+    font-size:13px;
+
+}
+
+
+
+.panel-content{
+
+    padding:19px;
+
+}
+
+
+
+/* ----- Vai trò ----- */
 
 
 
 .roles{
 
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:8px;
-
-}
+    display:grid;
 
 
 
-.role{
+    grid-template-columns:1fr 1fr;
 
-    padding:11px 4px;
 
-    border-radius:11px;
 
-    border:2px solid #E1EBF2;
+    gap:9px;
 
-    background:#F7FAFC;
 
-    color:#718393;
 
-    font-weight:800;
+    margin-bottom:17px;
 
 }
 
 
 
-.role.active{
+.role-btn{
 
-    background:#E9F5FF;
+    border:2px solid #E2ECF3;
 
-    border-color:#67ADE1;
 
-    color:#3178B1;
+
+    padding:12px 5px;
+
+
+
+    border-radius:12px;
+
+
+
+    background:#F7FAFC;
+
+
+
+    color:#708393;
+
+
+
+    font-weight:800;
 
 }
+
+
+
+.role-btn.active{
+
+    background:#E9F5FF;
+
+
+
+    border-color:#67ADE1;
+
+
+
+    color:#3178B1;
+
+}
+
+
+
+/* ----- Connection ----- */
 
 
 
 .connection{
 
-    margin:13px 0;
+    display:flex;
 
-    background:#F0FAF4;
+    align-items:center;
 
-    color:#4C8B65;
-
-    border-radius:11px;
-
-    padding:10px;
-
-    font-size:13px;
-
-    font-weight:700;
-
-}
+    gap:8px;
 
 
 
-.task{
-
-    background:#FFF8DF;
-
-    border:2px dashed #F2CE69;
-
-    border-radius:14px;
-
-    padding:14px;
-
-    margin-bottom:13px;
-
-}
+    padding:11px 12px;
 
 
 
-.task strong{
+    background:#F0FAF4;
 
-    display:block;
 
-    color:#A87800;
 
-    font-size:13px;
+    color:#4C8B65;
 
-    margin-bottom:5px;
+
+
+    border-radius:11px;
+
+
+
+    font-size:13px;
+
+
+
+    font-weight:700;
+
+
+
+    margin-bottom:14px;
 
 }
 
 
 
-.task p{
+.dot{
 
-    margin:0;
+    width:10px;
 
-    color:#776740;
+    height:10px;
 
-    font-size:13px;
 
-    line-height:1.45;
+
+    background:#5AC47A;
+
+
+
+    border-radius:50%;
+
+
+
+    box-shadow:
+
+        0 0 0 4px
+
+        rgba(90,196,122,.15);
 
 }
+
+
+
+/* ----- Nhiệm vụ ----- */
+
+
+
+.mission{
+
+    padding:16px;
+
+
+
+    border-radius:15px;
+
+
+
+    background:#FFF8DF;
+
+
+
+    border:2px dashed #F2CE69;
+
+
+
+    margin-bottom:17px;
+
+}
+
+
+
+.mission-title{
+
+    color:#A87800;
+
+
+
+    font-size:14px;
+
+    font-weight:900;
+
+
+
+    margin-bottom:5px;
+
+}
+
+
+
+.mission p{
+
+    margin:0;
+
+
+
+    font-size:14px;
+
+
+
+    color:#796942;
+
+
+
+    line-height:1.5;
+
+}
+
+
+
+/* ----- Status ----- */
 
 
 
 .status{
 
-    background:#EFF7FD;
+    padding:13px;
 
-    padding:12px;
 
-    border-radius:11px;
 
-    color:#557B98;
+    border-radius:12px;
 
-    font-size:13px;
 
-    line-height:1.5;
+
+    background:#EFF7FD;
+
+
+
+    color:#557B98;
+
+
+
+    font-size:14px;
+
+
+
+    line-height:1.5;
+
+
+
+    margin-bottom:15px;
 
 }
+
+
+
+/* =========================================================
+
+   11. NHẬT KÝ
+
+========================================================= */
 
 
 
 .log-title{
 
-    margin:14px 0 7px;
-
-    font-weight:900;
-
-    color:#60788B;
-
-    font-size:13px;
-
-}
+    font-size:14px;
 
 
 
-\#log{
+    font-weight:900;
 
-    height:130px;
 
-    overflow:auto;
 
-    background:#F8FAFC;
+    color:#60788B;
 
-    border:1px solid #E7EEF3;
 
-    border-radius:11px;
 
-    padding:8px;
-
-    font-size:12px;
+    margin-bottom:8px;
 
 }
 
 
 
-.log-item{
+.log{
 
-    padding:6px 2px;
+    height:145px;
 
-    border-bottom:1px dashed #E2E9EE;
 
-    color:#71818D;
+
+    overflow:auto;
+
+
+
+    background:#F8FAFC;
+
+
+
+    border-radius:12px;
+
+
+
+    padding:10px;
+
+
+
+    border:1px solid #E7EEF3;
+
+
+
+    font-size:13px;
 
 }
 
 
 
-@media(max-width:1050px){
+.log-entry{
 
-    .app{
+    padding:7px 4px;
 
-        grid-template-columns:1fr;
 
-        max-width:680px;
 
-    }
+    border-bottom:
 
-    .sidebar{display:none}
+        1px dashed #E3EAF0;
+
+
+
+    color:#6B7E8C;
+
+}
+
+
+
+/* =========================================================
+
+   12. SAO KHEN THƯỞNG
+
+========================================================= */
+
+
+
+.reward{
+
+    margin-top:15px;
+
+
+
+    display:flex;
+
+
+
+    justify-content:center;
+
+
+
+    gap:5px;
+
+
+
+    font-size:26px;
+
+}
+
+
+
+/* =========================================================
+
+   13. RESPONSIVE
+
+========================================================= */
+
+
+
+@media(max-width:1150px){
+
+
+
+    .app{
+
+        grid-template-columns:
+
+            220px
+
+            minmax(450px,1fr)
+
+            300px;
+
+    }
+
+
+
+}
+
+
+
+@media(max-width:950px){
+
+
+
+    .app{
+
+        grid-template-columns:1fr;
+
+        max-width:680px;
+
+    }
+
+
+
+    .sidebar{
+
+        display:none;
+
+    }
+
+
+
+    .header{
+
+        padding:0 15px;
+
+    }
+
+
+
+    .logo-text span{
+
+        display:none;
+
+    }
+
+
 
 }
 
@@ -1086,15 +1572,57 @@ header{
 
 @media(max-width:600px){
 
-    header{padding:0 12px}
 
-    .logo strong,.logo small{display:none}
 
-    .room span{display:none}
+    .room-box span{
 
-    .app{padding:0 9px}
+        display:none;
 
-    .bank-row{grid-template-columns:1fr}
+    }
+
+
+
+    .room-box input{
+
+        width:75px;
+
+    }
+
+
+
+    .logo-text{
+
+        display:none;
+
+    }
+
+
+
+    .header{
+
+        height:70px;
+
+    }
+
+
+
+    .app{
+
+        padding:0 10px;
+
+        margin-top:15px;
+
+    }
+
+
+
+    .board-shell{
+
+        padding:7px;
+
+    }
+
+
 
 }
 
@@ -1104,40 +1632,107 @@ header{
 
 
 
+
+
 <body>
 
 
 
-<header>
+<!-- ======================================================
+
+     HEADER
+
+======================================================= -->
 
 
 
-    <div class="logo">
-
-        <div class="logo-icon">♞</div>
-
-        <div>
-
-            <strong>Vương Quốc Cờ Vua</strong>
-
-            <small>Học cờ thật vui mỗi ngày</small>
-
-        </div>
-
-    </div>
+<header class="header">
 
 
 
-    <div class="room">
+    <div class="logo">
 
-        <span>Phòng:</span>
 
-        <input id="roomCode" value="CO123">
 
-        <button class="btn yellow" onclick="createRoom()">Tạo phòng</button>
-        <button class="btn blue" onclick="joinRoom()">Vào lớp</button>
+        <div class="logo-icon">
 
-    </div>
+            ♞
+
+        </div>
+
+
+
+        <div class="logo-text">
+
+
+
+            <strong>
+
+                Vương Quốc Cờ Vua
+
+            </strong>
+
+
+
+            <span>
+
+                Học cờ thật vui mỗi ngày
+
+            </span>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+    <div class="room-box">
+
+
+
+        <span>
+
+            Phòng:
+
+        </span>
+
+
+
+        <input
+
+            id="roomCode"
+
+            value="CO123"
+
+            maxlength="8"
+
+        >
+
+
+
+        <button class="btn btn-green" onclick="createRoom()">Tạo phòng</button>
+
+        <button
+
+            class="btn btn-blue"
+
+            onclick="joinRoom()"
+
+        >
+
+            Vào lớp
+
+        </button>
+
+
+
+    </div>
 
 
 
@@ -1145,11 +1740,27 @@ header{
 
 
 
+
+
+<!-- ======================================================
+
+     APP
+
+======================================================= -->
+
+
+
 <main class="app">
 
 
 
-<!-- MENU -->
+
+
+<!-- ======================================================
+
+     MENU TRÁI
+
+======================================================= -->
 
 
 
@@ -1157,111 +1768,253 @@ header{
 
 
 
-    <div class="profile">
-
-        <div class="avatar">🧒</div>
-
-        <h3>Nhà thám hiểm nhỏ</h3>
-
-        <p>Cùng khám phá thế giới cờ vua!</p>
-
-    </div>
+    <div class="profile">
 
 
 
-    <div class="section-title">Khám phá quân cờ</div>
+        <div class="avatar">
+
+            🧒
+
+        </div>
 
 
 
-    <div class="lesson">
+        <h3>
 
-        <div class="ico">♜</div>
+            Nhà thám hiểm nhỏ
 
-        Quân Xe
-
-    </div>
+        </h3>
 
 
 
-    <div class="lesson">
+        <p>
 
-        <div class="ico">♝</div>
+            Hôm nay mình học cờ nhé!
 
-        Quân Tượng
-
-    </div>
+        </p>
 
 
 
-    <div class="lesson">
-
-        <div class="ico">♛</div>
-
-        Quân Hậu
-
-    </div>
+    </div>
 
 
 
-    <div class="lesson">
-
-        <div class="ico">♚</div>
-
-        Quân Vua
-
-    </div>
 
 
+    <div class="lesson-title">
 
-    <div class="lesson">
+        Khám phá quân cờ
 
-        <div class="ico">♞</div>
-
-        Quân Mã
-
-    </div>
+    </div>
 
 
 
-    <div class="lesson">
 
-        <div class="ico">♟</div>
 
-        Quân Tốt
-
-    </div>
+    <div class="lesson active">
 
 
 
-    <div class="section-title">Luyện tập</div>
+        <div class="lesson-icon">
+
+            ♟
+
+        </div>
 
 
 
-    <div
-
-        id="arrangeLesson"
-
-        class="lesson active"
-
-        onclick="openArrangeMode()"
-
-    >
-
-        <div class="ico">🧩</div>
-
-        Sắp xếp quân
-
-    </div>
+        Các quân cờ
 
 
 
-    <div class="lesson">
+    </div>
 
-        <div class="ico">⭐</div>
 
-        Bài tập vui
 
-    </div>
+
+
+    <div class="lesson">
+
+
+
+        <div class="lesson-icon">
+
+            ♜
+
+        </div>
+
+
+
+        Quân Xe
+
+
+
+    </div>
+
+
+
+
+
+    <div class="lesson">
+
+
+
+        <div class="lesson-icon">
+
+            ♝
+
+        </div>
+
+
+
+        Quân Tượng
+
+
+
+    </div>
+
+
+
+
+
+    <div class="lesson">
+
+
+
+        <div class="lesson-icon">
+
+            ♛
+
+        </div>
+
+
+
+        Quân Hậu
+
+
+
+    </div>
+
+
+
+
+
+    <div class="lesson">
+
+
+
+        <div class="lesson-icon">
+
+            ♚
+
+        </div>
+
+
+
+        Quân Vua
+
+
+
+    </div>
+
+
+
+
+
+    <div class="lesson">
+
+
+
+        <div class="lesson-icon">
+
+            ♞
+
+        </div>
+
+
+
+        Quân Mã
+
+
+
+    </div>
+
+
+
+
+
+    <div class="lesson">
+
+
+
+        <div class="lesson-icon">
+
+            ♟
+
+        </div>
+
+
+
+        Quân Tốt
+
+
+
+    </div>
+
+
+
+
+
+    <div class="lesson-title">
+
+        Thử thách
+
+    </div>
+
+
+
+
+
+    <div class="lesson">
+
+
+
+        <div class="lesson-icon">
+
+            🧩
+
+        </div>
+
+
+
+        Xếp bàn cờ
+
+
+
+    </div>
+
+
+
+
+
+    <div class="lesson">
+
+
+
+        <div class="lesson-icon">
+
+            ⭐
+
+        </div>
+
+
+
+        Bài tập vui
+
+
+
+    </div>
 
 
 
@@ -1271,431 +2024,141 @@ header{
 
 
 
-<!-- CENTER -->
 
 
+<!-- ======================================================
 
-<section>
+     BÀN CỜ
 
+======================================================= -->
 
 
-    <div class="title-box">
 
+<section class="center">
 
 
-        <div class="emoji">🧩</div>
 
 
 
-        <div>
+    <div class="welcome">
 
-            <strong id="lessonTitle">
 
-                Thử thách: Sắp xếp quân cờ
 
-            </strong>
+        <div class="welcome-icon">
 
+            👋
 
+        </div>
 
-            <span id="lessonSubtitle">
 
-                Kéo các quân bên dưới vào đúng vị trí trên bàn cờ.
 
-            </span>
+        <div>
 
-        </div>
 
 
+            <strong>
 
-    </div>
+                Chào mừng đến lớp học cờ!
 
+            </strong>
 
 
 
+            <span>
 
-    <div class="board-shell">
+                Hãy kéo quân cờ đến vị trí em muốn.
 
-        <div id="board"></div>
+            </span>
 
-    </div>
 
 
+        </div>
 
 
 
-    <div class="toolbar">
+    </div>
 
 
 
-        <button
 
-            class="btn green"
 
-            onclick="checkArrangement()"
 
-        >
 
-            ✓ Kiểm tra
+    <div class="board-shell">
 
-        </button>
 
 
+        <div
 
-        <button
+            id="board"
 
-            class="btn yellow"
+            class="board"
 
-            onclick="resetArrange()"
+        ></div>
 
-        >
 
-            ↻ Làm lại
 
-        </button>
+    </div>
 
 
 
-        <button
 
-            class="btn red"
 
-            onclick="removeSelected()"
 
-        >
 
-            🗑 Xóa quân
+    <div class="board-toolbar">
 
-        </button>
 
 
+        <button
 
-    </div>
+            class="btn btn-green"
 
+            onclick="setupStart()"
 
+        >
 
+            ♟ Xếp bàn chuẩn
 
+        </button>
 
-    <!-- KHO QUÂN -->
 
 
 
-    <div
 
-        id="pieceBank"
+        <button
 
-        class="piece-bank show"
+            class="btn btn-yellow"
 
-    >
+            onclick="undoMove()"
 
+        >
 
+            ↩ Đi lại
 
-        <div class="bank-header">
+        </button>
 
 
 
-            <strong>
 
-                🎒 Kho quân cờ
 
-            </strong>
+        <button
 
+            class="btn btn-soft"
 
+            onclick="clearBoard()"
 
-            <span>
+        >
 
-                Kéo quân lên bàn
+            ✨ Xóa bàn
 
-            </span>
+        </button>
 
 
 
-        </div>
+    </div>
 
 
-
-
-
-        <!-- QUÂN ĐEN -->
-
-
-
-        <div class="bank-row">
-
-
-
-            <div class="bank-label">
-
-                ⚫ Quân Đen
-
-            </div>
-
-
-
-            <div class="bank-pieces">
-
-
-
-                <div
-
-                    class="bank-piece"
-
-                    draggable="true"
-
-                    data-piece="r"
-
-                >
-
-                    ♜
-
-                </div>
-
-
-
-                <div
-
-                    class="bank-piece"
-
-                    draggable="true"
-
-                    data-piece="n"
-
-                >
-
-                    ♞
-
-                </div>
-
-
-
-                <div
-
-                    class="bank-piece"
-
-                    draggable="true"
-
-                    data-piece="b"
-
-                >
-
-                    ♝
-
-                </div>
-
-
-
-                <div
-
-                    class="bank-piece"
-
-                    draggable="true"
-
-                    data-piece="q"
-
-                >
-
-                    ♛
-
-                </div>
-
-
-
-                <div
-
-                    class="bank-piece"
-
-                    draggable="true"
-
-                    data-piece="k"
-
-                >
-
-                    ♚
-
-                </div>
-
-
-
-                <div
-
-                    class="bank-piece"
-
-                    draggable="true"
-
-                    data-piece="p"
-
-                >
-
-                    ♟
-
-                </div>
-
-
-
-            </div>
-
-
-
-        </div>
-
-
-
-
-
-        <!-- QUÂN TRẮNG -->
-
-
-
-        <div class="bank-row">
-
-
-
-            <div class="bank-label">
-
-                ⚪ Quân Trắng
-
-            </div>
-
-
-
-            <div class="bank-pieces">
-
-
-
-                <div
-
-                    class="bank-piece"
-
-                    draggable="true"
-
-                    data-piece="R"
-
-                >
-
-                    ♖
-
-                </div>
-
-
-
-                <div
-
-                    class="bank-piece"
-
-                    draggable="true"
-
-                    data-piece="N"
-
-                >
-
-                    ♘
-
-                </div>
-
-
-
-                <div
-
-                    class="bank-piece"
-
-                    draggable="true"
-
-                    data-piece="B"
-
-                >
-
-                    ♗
-
-                </div>
-
-
-
-                <div
-
-                    class="bank-piece"
-
-                    draggable="true"
-
-                    data-piece="Q"
-
-                >
-
-                    ♕
-
-                </div>
-
-
-
-                <div
-
-                    class="bank-piece"
-
-                    draggable="true"
-
-                    data-piece="K"
-
-                >
-
-                    ♔
-
-                </div>
-
-
-
-                <div
-
-                    class="bank-piece"
-
-                    draggable="true"
-
-                    data-piece="P"
-
-                >
-
-                    ♙
-
-                </div>
-
-
-
-            </div>
-
-
-
-        </div>
-
-
-
-
-
-        <div class="bank-help">
-
-            💡 <b>Cách chơi:</b>
-
-            Em có thể sử dụng một quân trong kho nhiều lần.
-
-            Hãy xếp đủ 32 quân vào vị trí bắt đầu của một ván cờ.
-
-        </div>
-
-
-
-    </div>
-
-
-
-
-
-    <!-- KẾT QUẢ -->
-
-
-
-    <div
-
-        id="result"
-
-        class="result"
-
-    ></div>
 
 
 
@@ -1705,7 +2168,13 @@ header{
 
 
 
-<!-- RIGHT -->
+
+
+<!-- ======================================================
+
+     PANEL PHẢI
+
+======================================================= -->
 
 
 
@@ -1713,137 +2182,199 @@ header{
 
 
 
-    <div class="panel-head">
 
-        <h2>🏫 Phòng học trực tiếp</h2>
 
-        <p>Giáo viên theo dõi học sinh thao tác</p>
+    <div class="panel-header">
 
-    </div>
 
 
+        <h2>
 
-    <div class="panel-body">
+            🏫 Phòng học trực tiếp
 
+        </h2>
 
 
-        <div class="roles">
 
+        <p>
 
+            Giáo viên và học sinh cùng thao tác
 
-            <button
+        </p>
 
-                id="studentBtn"
 
-                class="role active"
 
-                onclick="setRole('student')"
+    </div>
 
-            >
 
-                🧒 Học sinh
 
-            </button>
 
 
+    <div class="panel-content">
 
-            <button
 
-                id="teacherBtn"
 
-                class="role"
 
-                onclick="setRole('teacher')"
 
-            >
+        <div class="roles">
 
-                👩‍🏫 Giáo viên
 
-            </button>
 
+            <button
 
+                id="studentBtn"
 
-        </div>
+                class="role-btn active"
 
+                onclick="setRole('student')"
 
+            >
 
+                🧒 Học sinh
 
+            </button>
 
-        <div
 
-            id="connection"
 
-            class="connection"
 
-        >
 
-            ● Chưa vào phòng
+            <button
 
-        </div>
+                id="teacherBtn"
 
+                class="role-btn"
 
+                onclick="setRole('teacher')"
 
+            >
 
+                👩‍🏫 Giáo viên
 
-        <div class="task">
+            </button>
 
 
 
-            <strong>
+        </div>
 
-                ⭐ NHIỆM VỤ
 
-            </strong>
 
 
 
-            <p id="taskText">
 
-                Sắp xếp 32 quân cờ vào đúng vị trí bắt đầu.
 
-            </p>
+        <div
 
+            class="connection"
 
+            id="connection"
 
-        </div>
+        >
 
 
 
+            <div class="dot"></div>
 
 
-        <div
 
-            id="status"
+            Chưa vào phòng
 
-            class="status"
 
-        >
 
-            Hãy kéo một quân từ kho lên bàn cờ.
+        </div>
 
-        </div>
 
 
 
 
 
-        <div class="log-title">
 
-            📋 Hoạt động của học sinh
+        <div class="mission">
 
-        </div>
 
 
+            <div class="mission-title">
 
-        <div id="log"></div>
+                ⭐ NHIỆM VỤ HÔM NAY
 
+            </div>
 
 
-    </div>
+
+            <p id="missionText">
+
+                Hãy thử di chuyển một quân cờ trên bàn.
+
+            </p>
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <div
+
+            class="status"
+
+            id="status"
+
+        >
+
+            Chọn hoặc kéo một quân cờ để bắt đầu.
+
+        </div>
+
+
+
+
+
+
+
+        <div class="log-title">
+
+            📋 Hoạt động gần đây
+
+        </div>
+
+
+
+
+
+        <div
+
+            class="log"
+
+            id="log"
+
+        ></div>
+
+
+
+
+
+
+
+        <div class="reward">
+
+            ⭐ ⭐ ⭐ ☆ ☆
+
+        </div>
+
+
+
+
+
+    </div>
 
 
 
 </aside>
+
+
 
 
 
@@ -1853,52 +2384,57 @@ header{
 
 
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script>
 const firebaseConfig={apiKey:"AIzaSyBL95lreBAEGfPL2TIv2FnxTNBVarVA1t0",authDomain:"hoccovua-1f26d.firebaseapp.com",projectId:"hoccovua-1f26d",storageBucket:"hoccovua-1f26d.firebasestorage.app",messagingSenderId:"33828595114",appId:"1:33828595114:web:18869b2affad6b4044f7d3",measurementId:"G-682SXZ1W48"};
-const firebaseApp=initializeApp(firebaseConfig); const db=getFirestore(firebaseApp); let unsubscribeRoom=null; let applyingRemote=false;
+firebase.initializeApp(firebaseConfig);
+const db=firebase.firestore();
+</script>
+
+<script>
 
 
 
+/* =========================================================
 
-/* =====================================================
+   1. KÝ HIỆU QUÂN CỜ
 
-   QUÂN CỜ
-
-\===================================================== */
-
-
-
-const symbols = {
+========================================================= */
 
 
 
-    r:"♜",
-
-    n:"♞",
-
-    b:"♝",
-
-    q:"♛",
-
-    k:"♚",
-
-    p:"♟",
+const pieceSymbols = {
 
 
 
-    R:"♖",
+    r:"♜",
 
-    N:"♘",
+    n:"♞",
 
-    B:"♗",
+    b:"♝",
 
-    Q:"♕",
+    q:"♛",
 
-    K:"♔",
+    k:"♚",
 
-    P:"♙"
+    p:"♟",
+
+
+
+    R:"♖",
+
+    N:"♘",
+
+    B:"♗",
+
+    Q:"♕",
+
+    K:"♔",
+
+    P:"♙"
 
 
 
@@ -1908,207 +2444,164 @@ const symbols = {
 
 
 
-/* =====================================================
+/* =========================================================
 
-   TRẠNG THÁI
+   2. BIẾN TRẠNG THÁI
 
-\===================================================== */
+========================================================= */
 
 
 
-let boardState =
+let state = [];
 
-    Array(64).fill("");
 
 
+let selected = null;
 
-let selected =
 
-    null;
 
+let lastFrom = null;
 
+let lastTo = null;
 
-let dragFromBoard =
 
-    null;
 
+let role = "student";
 
 
-let dragPieceFromBank =
 
-    null;
+let room = "";
 
 
 
-let checked =
+let roomUnsubscribe = null;
+let roomRef = null;
 
-    false;
 
 
+let history = [];
 
-let role =
 
-    "student";
 
 
 
-let room =
+/* =========================================================
 
-    "";
+   3. TẠO THẾ CỜ BAN ĐẦU
 
+========================================================= */
 
 
-let channel =
 
-    null;
+function getStartPosition(){
 
 
 
+    const s =
 
+        Array(64).fill("");
 
-/* =====================================================
 
-   ĐÁP ÁN
 
-\===================================================== */
+    const blackBack =
 
+        "rnbqkbnr";
 
 
-function correctPosition(){
 
+    const whiteBack =
 
+        "RNBQKBNR";
 
-    const answer =
 
-        Array(64).fill("");
 
 
 
+    /* Quân đen */
 
 
-    /* ĐEN */
 
+    blackBack
 
+        .split("")
 
-    const blackBack =
+        .forEach(
 
-        "rnbqkbnr";
+            (piece,index) =>
 
+            s[index] = piece
 
+        );
 
 
 
-    blackBack
 
-        .split("")
 
-        .forEach(
+    for(
 
-            (piece,index) => {
+        let i = 8;
 
+        i < 16;
 
+        i++
 
-                answer[index] =
+    ){
 
-                    piece;
 
 
+        s[i] = "p";
 
-            }
 
-        );
 
+    }
 
 
 
 
-    for(
 
-        let i = 8;
+    /* Quân trắng */
 
-        i < 16;
 
-        i++
 
-    ){
+    for(
 
+        let i = 48;
 
+        i < 56;
 
-        answer[i] =
+        i++
 
-            "p";
+    ){
 
 
 
-    }
+        s[i] = "P";
 
 
 
+    }
 
 
-    /* TRẮNG */
 
 
 
-    for(
+    whiteBack
 
-        let i = 48;
+        .split("")
 
-        i < 56;
+        .forEach(
 
-        i++
+            (piece,index) =>
 
-    ){
+            s[56 + index] = piece
 
+        );
 
 
-        answer[i] =
 
-            "P";
 
 
-
-    }
-
-
-
-
-
-    const whiteBack =
-
-        "RNBQKBNR";
-
-
-
-
-
-    whiteBack
-
-        .split("")
-
-        .forEach(
-
-            (piece,index) => {
-
-
-
-                answer[
-
-                    56 + index
-
-                ] = piece;
-
-
-
-            }
-
-        );
-
-
-
-
-
-    return answer;
+    return s;
 
 
 
@@ -2118,11 +2611,19 @@ function correctPosition(){
 
 
 
-/* =====================================================
+/* =========================================================
 
-   VẼ BÀN CỜ
+   4. VẼ BÀN CỜ
 
-\===================================================== */
+========================================================= */
+
+
+
+const board =
+
+    document.getElementById("board");
+
+
 
 
 
@@ -2130,349 +2631,265 @@ function renderBoard(){
 
 
 
-    const board =
+    board.innerHTML = "";
 
-        document.getElementById(
 
-            "board"
 
-        );
 
 
+    state.forEach(
 
+        (piece,index) => {
 
 
-    board.innerHTML =
 
-        "";
+            const row =
 
+                Math.floor(index / 8);
 
 
 
+            const col =
 
-    const answer =
+                index % 8;
 
-        correctPosition();
 
 
 
 
+            const square =
 
-    boardState.forEach(
+                document.createElement("div");
 
-        (piece,index) => {
 
 
 
-            const row =
 
-                Math.floor(
+            square.className =
 
-                    index / 8
+                "square " +
 
-                );
+                (
 
+                    (row + col) % 2 === 0
 
+                    ? "light"
 
-            const col =
+                    : "dark"
 
-                index % 8;
+                );
 
 
 
 
 
-            const square =
+            /* Ô đang chọn */
 
-                document.createElement(
 
-                    "div"
 
-                );
+            if(
 
+                selected === index
 
+            ){
 
 
 
-            square.className =
+                square.classList.add(
 
-                "square "
+                    "selected"
 
-                +
+                );
 
-                (
 
-                    (row + col) % 2 === 0
 
-                    ? "light"
+            }
 
-                    : "dark"
 
-                );
 
 
 
+            /* Nước đi vừa rồi */
 
 
-            if(
 
-                selected === index
+            if(
 
-            ){
+                index === lastFrom ||
 
+                index === lastTo
 
+            ){
 
-                square.classList.add(
 
-                    "selected"
 
-                );
+                square.classList.add(
 
+                    "last"
 
+                );
 
-            }
 
 
+            }
 
 
 
-            /*
 
-               Sau khi bấm kiểm tra:
 
-               - quân đúng: xanh
+            square.dataset.index =
 
-               - quân sai: đỏ
+                index;
 
 
 
-               Ô trống không tô đỏ để
 
-               giao diện không quá rối.
 
-            */
+            /* Cho phép thả quân */
 
 
 
-            if(
+            square.ondragover =
 
-                checked &&
+                event => {
 
-                piece
 
-            ){
 
+                    event.preventDefault();
 
 
-                if(
 
-                    piece ===
+                };
 
-                    answer[index]
 
-                ){
 
 
 
-                    square
+            square.ondrop =
 
-                        .classList
+                event => {
 
-                        .add("correct");
 
 
+                    event.preventDefault();
 
-                }
 
 
+                    movePiece(index);
 
-                else{
 
 
+                };
 
-                    square
 
-                        .classList
 
-                        .add("wrong");
 
 
+            /* Click */
 
-                }
 
 
+            square.onclick =
 
-            }
+                () => {
 
 
 
+                    clickSquare(index);
 
 
-            /* CLICK */
 
+                };
 
 
-            square.onclick =
 
-                () => {
 
 
+            /* Nếu ô có quân */
 
-                    selectSquare(
 
-                        index
 
-                    );
+            if(piece){
 
 
 
-                };
+                const pieceElement =
 
+                    document.createElement(
 
+                        "span"
 
+                    );
 
 
-            /* CHO PHÉP THẢ */
 
 
 
-            square.ondragover =
+                pieceElement.className =
 
-                event => {
+                    "piece";
 
 
 
-                    event.preventDefault();
 
 
+                pieceElement.textContent =
 
-                };
+                    pieceSymbols[piece];
 
 
 
 
 
-            square.ondrop =
+                pieceElement.draggable =
 
-                event => {
+                    true;
 
 
 
-                    event.preventDefault();
 
 
+                pieceElement.ondragstart =
 
-                    dropOnSquare(
+                    () => {
 
-                        index
 
-                    );
 
+                        selected = index;
 
 
-                };
 
+                    };
 
 
 
 
-            /* QUÂN TRÊN BÀN */
 
+                square.appendChild(
 
+                    pieceElement
 
-            if(piece){
+                );
 
 
 
-                const p =
+            }
 
-                    document.createElement(
 
-                        "span"
 
-                    );
 
 
+            board.appendChild(
 
+                square
 
+            );
 
-                p.className =
 
-                    "piece";
 
+        }
 
-
-
-
-                p.textContent =
-
-                    symbols[piece];
-
-
-
-
-
-                p.draggable =
-
-                    true;
-
-
-
-
-
-                p.ondragstart =
-
-                    event => {
-
-
-
-                        event.stopPropagation();
-
-
-
-                        dragFromBoard =
-
-                            index;
-
-
-
-                        dragPieceFromBank =
-
-                            null;
-
-
-
-                    };
-
-
-
-
-
-                square.appendChild(
-
-                    p
-
-                );
-
-
-
-            }
-
-
-
-
-
-            board.appendChild(
-
-                square
-
-            );
-
-
-
-        }
-
-    );
+    );
 
 
 
@@ -2482,57 +2899,80 @@ function renderBoard(){
 
 
 
-/* =====================================================
+/* =========================================================
 
-   KÉO QUÂN TỪ KHO
+   5. CLICK VÀO Ô
 
-\===================================================== */
-
-
-
-function setupBank(){
+========================================================= */
 
 
 
-    document
-
-        .querySelectorAll(
-
-            ".bank-piece"
-
-        )
-
-        .forEach(
-
-            element => {
+function clickSquare(index){
+    if(role==="teacher"&&roomRef){document.getElementById("status").textContent="👀 Giáo viên đang quan sát học sinh.";return;}
 
 
 
-                element.ondragstart =
-
-                    () => {
+    /* Chưa chọn quân */
 
 
 
-                        dragPieceFromBank =
-
-                            element.dataset.piece;
+    if(selected === null){
 
 
 
-                        dragFromBoard =
-
-                            null;
+        if(state[index]){
 
 
 
-                    };
+            selected = index;
 
 
 
-            }
+            renderBoard();
 
-        );
+
+
+        }
+
+
+
+        return;
+
+
+
+    }
+
+
+
+
+
+    /* Click lại chính ô đó */
+
+
+
+    if(selected === index){
+
+
+
+        selected = null;
+
+
+
+        renderBoard();
+
+
+
+        return;
+
+
+
+    }
+
+
+
+
+
+    movePiece(index);
 
 
 
@@ -2542,188 +2982,188 @@ function setupBank(){
 
 
 
-/* =====================================================
+/* =========================================================
 
-   THẢ QUÂN
+   6. DI CHUYỂN QUÂN
 
-\===================================================== */
+========================================================= */
 
 
 
-function dropOnSquare(index){
- if(role === "teacher"){setStatus("Chế độ giáo viên chỉ quan sát. Hãy thao tác ở máy học sinh.");return;}
+function movePiece(to){
+    if(role==="teacher"&&roomRef){selected=null;renderBoard();return;}
 
 
 
-    checked =
+    if(selected === null){
 
-        false;
+        return;
 
+    }
 
 
 
 
-    hideResult();
 
+    const from =
 
+        selected;
 
 
 
-    /* KÉO TỪ KHO */
 
 
+    if(!state[from]){
 
-    if(
 
-        dragPieceFromBank
 
-    ){
+        selected = null;
 
 
 
-        boardState[index] =
+        renderBoard();
 
-            dragPieceFromBank;
 
 
+        return;
 
 
 
-        addLog(
+    }
 
-            "Đặt "
 
-            +
 
-            pieceName(
 
-                dragPieceFromBank
 
-            )
+    /* Lưu để hoàn tác */
 
-            +
 
-            " vào "
 
-            +
+    history.push(
 
-            squareName(index)
+        [...state]
 
-        );
+    );
 
 
 
 
 
-        dragPieceFromBank =
+    const movingPiece =
 
-            null;
+        state[from];
 
 
 
 
 
-        selected =
+    state[to] =
 
-            index;
+        movingPiece;
 
 
 
 
 
-        renderBoard();
+    state[from] =
 
+        "";
 
 
-        sendBoard();
 
 
 
-        return;
+    selected =
 
+        null;
 
 
-    }
 
 
 
+    lastFrom =
 
+        from;
 
-    /* KÉO QUÂN ĐANG Ở BÀN */
 
 
 
-    if(
 
-        dragFromBoard !== null
+    lastTo =
 
-    ){
+        to;
 
 
 
-        const from =
 
-            dragFromBoard;
 
+    const message =
 
+        (
 
+            role === "student"
 
+            ? "Học sinh"
 
-        boardState[index] =
+            : "Giáo viên"
 
-            boardState[from];
+        )
 
+        +
 
+        " đi "
 
+        +
 
+        squareName(from)
 
-        boardState[from] =
+        +
 
-            "";
+        " → "
 
+        +
 
+        squareName(to);
 
 
 
-        dragFromBoard =
 
-            null;
 
+    addLog(message);
 
 
 
 
-        selected =
 
-            index;
+    document.getElementById(
 
+        "status"
 
+    ).innerHTML =
 
+        "👏 <b>Tốt lắm!</b> "
 
+        +
 
-        addLog(
+        squareName(from)
 
-            "Di chuyển quân đến "
+        +
 
-            +
+        " → "
 
-            squareName(index)
+        +
 
-        );
+        squareName(to);
 
 
 
 
 
-        renderBoard();
+    renderBoard();
 
 
 
-        sendBoard();
-
-
-
-    }
+    sendBoard();
 
 
 
@@ -2733,768 +3173,11 @@ function dropOnSquare(index){
 
 
 
-/* =====================================================
+/* =========================================================
 
-   CHỌN Ô
+   7. TÊN Ô CỜ
 
-\===================================================== */
-
-
-
-function selectSquare(index){
-
-
-
-    if(
-
-        boardState[index]
-
-    ){
-
-
-
-        selected =
-
-            index;
-
-
-
-    }
-
-
-
-    else{
-
-
-
-        selected =
-
-            null;
-
-
-
-    }
-
-
-
-
-
-    renderBoard();
-
-
-
-}
-
-
-
-
-
-/* =====================================================
-
-   XÓA QUÂN ĐƯỢC CHỌN
-
-\===================================================== */
-
-
-
-function removeSelected(){
- if(role === "teacher"){setStatus("Chế độ giáo viên chỉ quan sát. Hãy thao tác ở máy học sinh.");return;}
-
-
-
-    if(
-
-        selected === null ||
-
-        !boardState[selected]
-
-    ){
-
-
-
-        setStatus(
-
-            "Hãy chọn một quân trên bàn trước."
-
-        );
-
-
-
-        return;
-
-
-
-    }
-
-
-
-
-
-    const old =
-
-        selected;
-
-
-
-
-
-    boardState[old] =
-
-        "";
-
-
-
-
-
-    selected =
-
-        null;
-
-
-
-
-
-    checked =
-
-        false;
-
-
-
-
-
-    hideResult();
-
-
-
-
-
-    addLog(
-
-        "Xóa quân tại "
-
-        +
-
-        squareName(old)
-
-    );
-
-
-
-
-
-    renderBoard();
-
-
-
-    sendBoard();
-
-
-
-}
-
-
-
-
-
-/* =====================================================
-
-   KIỂM TRA ĐÚNG SAI
-
-\===================================================== */
-
-
-
-function checkArrangement(){
- if(role === "teacher"){setStatus("Chế độ giáo viên chỉ quan sát. Hãy thao tác ở máy học sinh.");return;}
-
-
-
-    const answer =
-
-        correctPosition();
-
-
-
-
-
-    let correct =
-
-        0;
-
-
-
-    let wrong =
-
-        0;
-
-
-
-    let placed =
-
-        0;
-
-
-
-
-
-    for(
-
-        let i = 0;
-
-        i < 64;
-
-        i++
-
-    ){
-
-
-
-        if(
-
-            boardState[i]
-
-        ){
-
-
-
-            placed++;
-
-
-
-
-
-            if(
-
-                boardState[i] ===
-
-                answer[i]
-
-            ){
-
-
-
-                correct++;
-
-
-
-            }
-
-
-
-            else{
-
-
-
-                wrong++;
-
-
-
-            }
-
-
-
-        }
-
-
-
-    }
-
-
-
-
-
-    checked =
-
-        true;
-
-
-
-
-
-    renderBoard();
-
-
-
-
-
-    const result =
-
-        document.getElementById(
-
-            "result"
-
-        );
-
-
-
-
-
-    result.className =
-
-        "result show";
-
-
-
-
-
-    /*
-
-       Hoàn toàn chính xác
-
-    */
-
-
-
-    if(
-
-        JSON.stringify(
-
-            boardState
-
-        )
-
-        ===
-
-        JSON.stringify(
-
-            answer
-
-        )
-
-    ){
-
-
-
-        result.classList.add(
-
-            "success"
-
-        );
-
-
-
-
-
-        result.innerHTML =
-
-
-
-            '<div class="big">'
-
-            +
-
-            '🎉 ⭐ ⭐ ⭐'
-
-            +
-
-            '</div>'
-
-            +
-
-            'Xuất sắc! Em đã xếp đúng toàn bộ bàn cờ!';
-
-
-
-
-
-        setStatus(
-
-            "🏆 Hoàn thành thử thách! 32/32 quân chính xác."
-
-        );
-
-
-
-
-
-        addLog(
-
-            "HOÀN THÀNH bài xếp bàn cờ"
-
-        );
-
-
-
-    }
-
-
-
-    else{
-
-
-
-        result.classList.add(
-
-            "error"
-
-        );
-
-
-
-
-
-        let missing =
-
-            32 - placed;
-
-
-
-
-
-        if(
-
-            missing < 0
-
-        ){
-
-
-
-            missing =
-
-                0;
-
-
-
-        }
-
-
-
-
-
-        result.innerHTML =
-
-
-
-            '<div class="big">'
-
-            +
-
-            '🤔 Thử lại nhé!'
-
-            +
-
-            '</div>'
-
-            +
-
-            'Đúng: '
-
-            +
-
-            correct
-
-            +
-
-            '/32 quân'
-
-            +
-
-            '<br>'
-
-            +
-
-            'Đặt sai vị trí: '
-
-            +
-
-            wrong
-
-            +
-
-            ' quân'
-
-            +
-
-            '<br>'
-
-            +
-
-            'Còn thiếu: '
-
-            +
-
-            missing
-
-            +
-
-            ' quân';
-
-
-
-
-
-        setStatus(
-
-            "Ô viền xanh là đúng. Ô viền đỏ cần xem lại."
-
-        );
-
-
-
-
-
-        addLog(
-
-            "Kiểm tra: "
-
-            +
-
-            correct
-
-            +
-
-            "/32 quân đúng"
-
-        );
-
-
-
-    }
-
-
-
-
-
-    sendBoard();
-
-
-
-}
-
-
-
-
-
-/* =====================================================
-
-   LÀM LẠI
-
-\===================================================== */
-
-
-
-function resetArrange(){
- if(role === "teacher"){setStatus("Chế độ giáo viên chỉ quan sát. Hãy thao tác ở máy học sinh.");return;}
-
-
-
-    boardState =
-
-        Array(64).fill("");
-
-
-
-
-
-    selected =
-
-        null;
-
-
-
-
-
-    checked =
-
-        false;
-
-
-
-
-
-    hideResult();
-
-
-
-
-
-    renderBoard();
-
-
-
-
-
-    setStatus(
-
-        "Bàn cờ đã được làm trống. Hãy bắt đầu xếp nhé!"
-
-    );
-
-
-
-
-
-    addLog(
-
-        "Bắt đầu lại bài tập"
-
-    );
-
-
-
-
-
-    sendBoard();
-
-
-
-}
-
-
-
-
-
-/* =====================================================
-
-   MỞ CHẾ ĐỘ SẮP XẾP
-
-\===================================================== */
-
-
-
-function openArrangeMode(){
-
-
-
-    document
-
-        .getElementById(
-
-            "pieceBank"
-
-        )
-
-        .classList
-
-        .add("show");
-
-
-
-
-
-    document
-
-        .getElementById(
-
-            "lessonTitle"
-
-        )
-
-        .textContent =
-
-            "Thử thách: Sắp xếp quân cờ";
-
-
-
-
-
-    document
-
-        .getElementById(
-
-            "lessonSubtitle"
-
-        )
-
-        .textContent =
-
-            "Kéo các quân bên dưới vào đúng vị trí trên bàn cờ.";
-
-
-
-
-
-    document
-
-        .getElementById(
-
-            "taskText"
-
-        )
-
-        .textContent =
-
-            "Sắp xếp đủ 32 quân vào vị trí bắt đầu của một ván cờ.";
-
-
-
-
-
-    resetArrange();
-
-
-
-}
-
-
-
-
-
-/* =====================================================
-
-   TÊN QUÂN
-
-\===================================================== */
-
-
-
-function pieceName(piece){
-
-
-
-    const names = {
-
-
-
-        r:"Xe đen",
-
-        n:"Mã đen",
-
-        b:"Tượng đen",
-
-        q:"Hậu đen",
-
-        k:"Vua đen",
-
-        p:"Tốt đen",
-
-
-
-        R:"Xe trắng",
-
-        N:"Mã trắng",
-
-        B:"Tượng trắng",
-
-        Q:"Hậu trắng",
-
-        K:"Vua trắng",
-
-        P:"Tốt trắng"
-
-
-
-    };
-
-
-
-
-
-    return names[piece];
-
-
-
-}
-
-
-
-
-
-/* =====================================================
-
-   TÊN Ô
-
-\===================================================== */
+========================================================= */
 
 
 
@@ -3502,61 +3185,39 @@ function squareName(index){
 
 
 
-    return (
+    const files =
 
-        "abcdefgh"[
-
-            index % 8
-
-        ]
-
-        +
-
-        (
-
-            8 -
-
-            Math.floor(
-
-                index / 8
-
-            )
-
-        )
-
-    );
-
-
-
-}
+        "abcdefgh";
 
 
 
 
 
-/* =====================================================
+    const column =
 
-   STATUS
-
-\===================================================== */
+        index % 8;
 
 
 
-function setStatus(text){
+
+
+    const row =
+
+        Math.floor(index / 8);
 
 
 
-    document
 
-        .getElementById(
 
-            "status"
+    return (
 
-        )
+        files[column]
 
-        .textContent =
+        +
 
-            text;
+        (8 - row)
+
+    );
 
 
 
@@ -3566,55 +3227,11 @@ function setStatus(text){
 
 
 
-/* =====================================================
+/* =========================================================
 
-   RESULT
+   8. NHẬT KÝ
 
-\===================================================== */
-
-
-
-function hideResult(){
-
-
-
-    const result =
-
-        document.getElementById(
-
-            "result"
-
-        );
-
-
-
-
-
-    result.className =
-
-        "result";
-
-
-
-
-
-    result.innerHTML =
-
-        "";
-
-
-
-}
-
-
-
-
-
-/* =====================================================
-
-   LOG
-
-\===================================================== */
+========================================================= */
 
 
 
@@ -3622,65 +3239,65 @@ function addLog(text){
 
 
 
-    const log =
+    const log =
 
-        document.getElementById(
+        document.getElementById(
 
-            "log"
+            "log"
 
-        );
-
-
-
-
-
-    const item =
-
-        document.createElement(
-
-            "div"
-
-        );
+        );
 
 
 
 
 
-    item.className =
+    const entry =
 
-        "log-item";
+        document.createElement(
 
+            "div"
 
-
-
-
-    item.textContent =
-
-        new Date()
-
-            .toLocaleTimeString(
-
-                "vi-VN"
-
-            )
-
-        +
-
-        " • "
-
-        +
-
-        text;
+        );
 
 
 
 
 
-    log.prepend(
+    entry.className =
 
-        item
+        "log-entry";
 
-    );
+
+
+
+
+    entry.textContent =
+
+        new Date()
+
+            .toLocaleTimeString(
+
+                "vi-VN"
+
+            )
+
+        +
+
+        " • "
+
+        +
+
+        text;
+
+
+
+
+
+    log.prepend(
+
+        entry
+
+    );
 
 
 
@@ -3690,11 +3307,11 @@ function addLog(text){
 
 
 
-/* =====================================================
+/* =========================================================
 
-   GIÁO VIÊN / HỌC SINH
+   9. CHỌN VAI TRÒ
 
-\===================================================== */
+========================================================= */
 
 
 
@@ -3702,87 +3319,113 @@ function setRole(newRole){
 
 
 
-    role =
+    role =
 
-        newRole;
-
-
-
-
-
-    document
-
-        .getElementById(
-
-            "studentBtn"
-
-        )
-
-        .classList.toggle(
-
-            "active",
-
-            role === "student"
-
-        );
+        newRole;
 
 
 
 
 
-    document
+    document
 
-        .getElementById(
+        .getElementById(
 
-            "teacherBtn"
+            "studentBtn"
 
-        )
+        )
 
-        .classList.toggle(
+        .classList.toggle(
 
-            "active",
+            "active",
 
-            role === "teacher"
+            role === "student"
 
-        );
-
-
+        );
 
 
 
-    if(
-
-        role === "teacher"
-
-    ){
 
 
+    document
 
-        setStatus(
+        .getElementById(
 
-            "Bạn đang ở chế độ giáo viên. Có thể quan sát thao tác của học sinh."
+            "teacherBtn"
 
-        );
+        )
 
+        .classList.toggle(
 
+            "active",
 
-    }
+            role === "teacher"
 
-
-
-    else{
+        );
 
 
 
-        setStatus(
-
-            "Hãy kéo quân từ kho lên bàn cờ."
-
-        );
 
 
+    if(
 
-    }
+        role === "teacher"
+
+    ){
+
+
+
+        document.getElementById(
+
+            "missionText"
+
+        ).textContent =
+
+            "Quan sát học sinh thao tác trực tiếp trên bàn cờ.";
+
+
+
+    }
+
+
+
+    else{
+
+
+
+        document.getElementById(
+
+            "missionText"
+
+        ).textContent =
+
+            "Hãy thử di chuyển một quân cờ trên bàn.";
+
+
+
+    }
+
+
+
+
+
+    addLog(
+
+        "Đổi vai trò thành "
+
+        +
+
+        (
+
+            role === "teacher"
+
+            ? "Giáo viên"
+
+            : "Học sinh"
+
+        )
+
+    );
 
 
 
@@ -3792,47 +3435,334 @@ function setRole(newRole){
 
 
 
-/* =====================================================
-
-   PHÒNG HỌC
-
-\===================================================== */
-
-
-
+/* =========================================================
+   10. PHÒNG HỌC FIREBASE
+========================================================= */
+function normalizeRoomCode(v){return String(v||"").trim().toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,8);}
+function stopRoomListener(){if(roomUnsubscribe){roomUnsubscribe();roomUnsubscribe=null;}}
+function listenToRoom(){
+  stopRoomListener();
+  roomUnsubscribe=roomRef.onSnapshot(snap=>{
+    if(!snap.exists)return;
+    const data=snap.data();
+    if(Array.isArray(data.state)&&data.state.length===64){state=[...data.state];lastFrom=data.lastFrom??null;lastTo=data.lastTo??null;selected=null;renderBoard();}
+    if(role==="teacher"&&data.studentOnline)document.getElementById("connection").innerHTML='<div class="dot"></div>Học sinh đã vào • Phòng '+room;
+  },err=>{console.error(err);document.getElementById("status").textContent="Không thể kết nối Firebase. Kiểm tra Firestore Rules và Internet.";});
+}
 async function createRoom(){
- setRole("teacher"); room=String(Math.floor(100000+Math.random()*900000)); document.getElementById("roomCode").value=room;
- await setDoc(doc(db,"rooms",room),{board:Array(64).fill(""),checked:false,studentOnline:false,lastAction:"Giáo viên đã tạo phòng",updatedAt:serverTimestamp()});
- boardState=Array(64).fill(""); checked=false; renderBoard(); listenRoom(); document.getElementById("connection").textContent="● Phòng "+room+" — gửi mã này cho học sinh"; setStatus("Phòng đã tạo. Đang chờ học sinh vào lớp..."); addLog("Đã tạo phòng "+room);
+  try{
+    setRole("teacher");room=String(Math.floor(100000+Math.random()*900000));document.getElementById("roomCode").value=room;roomRef=db.collection("rooms").doc(room);
+    state=getStartPosition();lastFrom=lastTo=selected=null;renderBoard();
+    await roomRef.set({state:[...state],lastFrom:null,lastTo:null,studentOnline:false,lastActor:"teacher",createdAt:firebase.firestore.FieldValue.serverTimestamp(),updatedAt:firebase.firestore.FieldValue.serverTimestamp()});
+    listenToRoom();document.getElementById("connection").innerHTML='<div class="dot"></div>Đã tạo phòng '+room+' • Chờ học sinh';document.getElementById("status").innerHTML='📨 Gửi mã <b>'+room+'</b> cho học sinh.';addLog("Giáo viên đã tạo phòng "+room);
+  }catch(e){console.error(e);alert("Không tạo được phòng. Kiểm tra Firestore Rules và Internet.");}
 }
 async function joinRoom(){
- room=document.getElementById("roomCode").value.trim().toUpperCase(); if(!room){alert("Hãy nhập mã phòng.");return;}
- const ref=doc(db,"rooms",room), snap=await getDoc(ref); if(!snap.exists()){alert("Không tìm thấy phòng "+room+". Hãy kiểm tra lại mã.");return;}
- if(role==="student") await updateDoc(ref,{studentOnline:true,lastAction:"Học sinh đã vào lớp",updatedAt:serverTimestamp()});
- listenRoom(); document.getElementById("connection").textContent="● Đã vào phòng "+room; addLog("Đã vào phòng "+room);
+  try{
+    room=normalizeRoomCode(document.getElementById("roomCode").value);if(!room){alert("Hãy nhập mã phòng.");return;}document.getElementById("roomCode").value=room;roomRef=db.collection("rooms").doc(room);
+    const snap=await roomRef.get();if(!snap.exists){alert("Không tìm thấy phòng "+room+".");roomRef=null;return;}
+    if(role==="student")await roomRef.update({studentOnline:true,updatedAt:firebase.firestore.FieldValue.serverTimestamp()});
+    listenToRoom();document.getElementById("connection").innerHTML='<div class="dot"></div>Đã vào phòng '+room;document.getElementById("status").textContent=role==="student"?"✅ Đã kết nối với giáo viên.":"👀 Đang quan sát học sinh.";addLog((role==="student"?"Học sinh":"Giáo viên")+" đã vào phòng "+room);
+  }catch(e){console.error(e);alert("Không vào được phòng. Kiểm tra Firestore Rules và Internet.");}
 }
-function listenRoom(){
- if(unsubscribeRoom) unsubscribeRoom(); const ref=doc(db,"rooms",room);
- unsubscribeRoom=onSnapshot(ref,snap=>{if(!snap.exists())return; const data=snap.data(); if(Array.isArray(data.board)){applyingRemote=true;boardState=[...data.board];checked=!!data.checked;selected=null;renderBoard();applyingRemote=false;} if(role==="teacher"){document.getElementById("connection").textContent=data.studentOnline?"● Học sinh đang ở trong phòng "+room:"● Phòng "+room+" — đang chờ học sinh"; if(data.lastAction)setStatus("👀 "+data.lastAction);}},err=>{console.error(err);setStatus("Không kết nối được Firebase. Hãy kiểm tra Firestore Rules và Internet.");});
+/* =========================================================
+   11. GỬI BÀN CỜ LÊN FIRESTORE
+========================================================= */
+async function sendBoard(){
+  if(!roomRef||role!=="student")return;
+  try{await roomRef.update({state:[...state],lastFrom:lastFrom??null,lastTo:lastTo??null,lastActor:"student",studentOnline:true,updatedAt:firebase.firestore.FieldValue.serverTimestamp()});}
+  catch(e){console.error(e);document.getElementById("status").textContent="⚠️ Chưa gửi được thao tác lên Firebase.";}
 }
-async function sendBoard(actionText="Học sinh vừa thay đổi bàn cờ"){
- if(!room||role!=="student"||applyingRemote)return; try{await setDoc(doc(db,"rooms",room),{board:[...boardState],checked,studentOnline:true,lastAction:actionText,updatedAt:serverTimestamp()},{merge:true});}catch(err){console.error(err);setStatus("Không gửi được thao tác lên Firebase.");}
+
+/* =========================================================
+
+   12. XẾP BÀN CHUẨN
+
+========================================================= */
+
+
+
+function setupStart(){
+
+
+
+    history.push(
+
+        [...state]
+
+    );
+
+
+
+
+
+    state =
+
+        getStartPosition();
+
+
+
+
+
+    lastFrom =
+
+        null;
+
+
+
+
+
+    lastTo =
+
+        null;
+
+
+
+
+
+    selected =
+
+        null;
+
+
+
+
+
+    renderBoard();
+
+
+
+
+
+    addLog(
+
+        "Đã xếp bàn cờ chuẩn"
+
+    );
+
+
+
+
+
+    sendBoard();
+
+
+
 }
-Object.assign(window,{createRoom,joinRoom,setRole,openArrangeMode,checkArrangement,resetArrange,removeSelected});
-
-/* =====================================================
-
-   KHỞI ĐỘNG
-
-\===================================================== */
 
 
 
-setupBank();
+
+
+/* =========================================================
+
+   13. XÓA BÀN
+
+========================================================= */
 
 
 
-openArrangeMode();
+function clearBoard(){
+
+
+
+    history.push(
+
+        [...state]
+
+    );
+
+
+
+
+
+    state =
+
+        Array(64).fill("");
+
+
+
+
+
+    selected =
+
+        null;
+
+
+
+
+
+    lastFrom =
+
+        null;
+
+
+
+
+
+    lastTo =
+
+        null;
+
+
+
+
+
+    renderBoard();
+
+
+
+
+
+    addLog(
+
+        "Đã xóa bàn cờ"
+
+    );
+
+
+
+
+
+    sendBoard();
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   14. HOÀN TÁC
+
+========================================================= */
+
+
+
+function undoMove(){
+
+
+
+    if(
+
+        history.length === 0
+
+    ){
+
+
+
+        document
+
+            .getElementById(
+
+                "status"
+
+            )
+
+            .textContent =
+
+                "Chưa có nước đi nào để quay lại.";
+
+
+
+        return;
+
+
+
+    }
+
+
+
+
+
+    state =
+
+        history.pop();
+
+
+
+
+
+    selected =
+
+        null;
+
+
+
+
+
+    lastFrom =
+
+        null;
+
+
+
+
+
+    lastTo =
+
+        null;
+
+
+
+
+
+    renderBoard();
+
+
+
+
+
+    addLog(
+
+        "Đã quay lại thao tác trước"
+
+    );
+
+
+
+
+
+    sendBoard();
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   15. KHỞI TẠO
+
+========================================================= */
+
+
+
+state =
+
+    getStartPosition();
+
+
+
+
+
+renderBoard();
+
+
+
+
+
+addLog(
+
+    "Bàn cờ đã sẵn sàng!"
+
+);
 
 
 
