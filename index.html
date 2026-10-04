@@ -1641,10 +1641,35 @@ button{
 .piece-game-title{font-size:17px;color:#4679a8}
 .piece-game-score{background:#fff;border-radius:999px;padding:8px 13px;color:#e49a00;white-space:nowrap}
 .piece-game-help{font-size:13px;font-weight:700;color:#7b8794;margin-top:3px}
-.square.game-star::after{content:"★";position:absolute;font-size:clamp(18px,3vw,34px);color:#ffc928;text-shadow:0 2px 0 #e39c00,0 3px 8px rgba(0,0,0,.18);pointer-events:none;z-index:1}
-.square.game-star .piece{position:relative;z-index:2}
+.board-star{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    font-size:clamp(24px,4vw,42px);
+    line-height:1;
+    pointer-events:none;
+    z-index:1;
+    filter:drop-shadow(0 3px 3px rgba(153,103,0,.30));
+    animation:starFloat 1.15s ease-in-out infinite, starGlow .9s ease-in-out infinite alternate;
+}
+.square .piece{position:relative;z-index:2}
 .square.illegal{animation:badMove .28s ease}
 @keyframes badMove{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@keyframes starFloat{
+    0%,100%{transform:translate(-50%,-50%) translateY(0) rotate(-5deg) scale(1)}
+    50%{transform:translate(-50%,-50%) translateY(-7px) rotate(5deg) scale(1.12)}
+}
+@keyframes starGlow{
+    from{filter:drop-shadow(0 2px 2px rgba(153,103,0,.25));opacity:.88}
+    to{filter:drop-shadow(0 0 10px rgba(255,201,40,.95));opacity:1}
+}
+@keyframes starCollected{
+    0%{transform:translate(-50%,-50%) scale(1);opacity:1}
+    65%{transform:translate(-50%,-70%) scale(1.55) rotate(18deg);opacity:1}
+    100%{transform:translate(-50%,-110%) scale(.2) rotate(35deg);opacity:0}
+}
+.board-star.collected{animation:starCollected .32s ease-out forwards}
 
 </style>
 
@@ -3134,9 +3159,14 @@ function movePiece(to){
 
         "";
 
+    let collectedStar = false;
     if(pieceGame){
         pieceGame.hasMoved = true;
-        if(pieceGame.stars.delete(to)){
+        if(pieceGame.stars.has(to)){
+            collectedStar = true;
+            const starNode = board.children[to]?.querySelector(".board-star");
+            if(starNode) starNode.classList.add("collected");
+            pieceGame.stars.delete(to);
             pieceGame.score++;
             updatePieceGameBar();
             if(pieceGame.score >= 10){
@@ -3221,9 +3251,12 @@ function movePiece(to){
 
 
 
-    renderBoard();
-
-
+    if(collectedStar){
+        // Cho hoạt ảnh nhặt sao chạy xong rồi mới vẽ lại bàn; sao đã bị xóa khỏi Set nên sẽ biến mất.
+        setTimeout(renderBoard, 300);
+    }else{
+        renderBoard();
+    }
 
     sendBoard();
 
