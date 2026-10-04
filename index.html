@@ -2845,6 +2845,17 @@ function renderBoard(){
 
 
 
+            /* Hiển thị ngôi sao cần nhặt trong thử thách */
+            if(pieceGame && pieceGame.stars && pieceGame.stars.has(index)){
+                const starElement = document.createElement("span");
+                starElement.className = "board-star";
+                starElement.textContent = "⭐";
+                starElement.setAttribute("aria-label", "Ngôi sao");
+                square.appendChild(starElement);
+            }
+
+
+
             /* Nếu ô có quân */
 
 
