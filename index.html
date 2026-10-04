@@ -2132,9 +2132,9 @@ button{
     <div id="pieceGameBar" class="piece-game-bar">
         <div>
             <div id="pieceGameTitle" class="piece-game-title">⭐ Thử thách quân cờ</div>
-            <div id="pieceGameHelp" class="piece-game-help">Đi đúng luật để nhặt đủ 10 ngôi sao.</div>
+            <div id="pieceGameHelp" class="piece-game-help">Đi đúng luật để nhặt đủ 6 ngôi sao.</div>
         </div>
-        <div id="pieceGameScore" class="piece-game-score">⭐ 0 / 10</div>
+        <div id="pieceGameScore" class="piece-game-score">⭐ 0 / 6</div>
     </div>
 
     <div class="board-shell">
@@ -2539,7 +2539,7 @@ let pieceGame = null;
 const pieceGameNames = {R:"Quân Xe",B:"Quân Tượng",Q:"Quân Hậu",K:"Quân Vua",N:"Quân Mã",P:"Quân Tốt"};
 const pieceGameTips = {
   R:"Xe đi ngang hoặc dọc. Hãy đáp xuống ô có sao!",
-  B:"Tượng chỉ đi chéo. Có 2 quân Tượng đứng trên hai màu ô khác nhau; hãy dùng đúng quân để nhặt đủ 10 ngôi sao!",
+  B:"Tượng chỉ đi chéo. Có 2 quân Tượng đứng trên hai màu ô khác nhau; hãy dùng đúng quân để nhặt đủ 6 ngôi sao!",
   Q:"Hậu đi ngang, dọc hoặc chéo.",
   K:"Vua chỉ đi 1 ô mỗi lượt theo mọi hướng.",
   N:"Mã đi hình chữ L: 2 ô một hướng và 1 ô vuông góc.",
@@ -3169,8 +3169,8 @@ function movePiece(to){
             pieceGame.stars.delete(to);
             pieceGame.score++;
             updatePieceGameBar();
-            if(pieceGame.score >= 10){
-                document.getElementById("status").innerHTML = "🏆 <b>Xuất sắc!</b> Em đã nhặt đủ 10/10 ngôi sao với " + pieceGameNames[pieceGame.piece] + "!";
+            if(pieceGame.score >= 6){
+                document.getElementById("status").innerHTML = "🏆 <b>Xuất sắc!</b> Em đã nhặt đủ 6/6 ngôi sao với " + pieceGameNames[pieceGame.piece] + "!";
             }
         }
     }
@@ -3239,7 +3239,7 @@ function movePiece(to){
 
 
 
-    if(!pieceGame || pieceGame.score < 10){
+    if(!pieceGame || pieceGame.score < 6){
         document.getElementById(
             "status"
         ).innerHTML = pieceGame
@@ -3593,7 +3593,7 @@ function isLegalPieceGameMove(from,to,piece){
   return false;
 }
 function randomChoice(a){return a[Math.floor(Math.random()*a.length)];}
-function generateStarPath(piece,start,limit=10){
+function generateStarPath(piece,start,limit=6){
   const stars=[]; let cur=start; let first=true; let guard=0;
   while(stars.length<limit && guard++<1000){
     const candidates=[];
@@ -3615,43 +3615,45 @@ function startPieceGame(piece){
   let start = piece==="P" ? 52 : 36; // e2 cho Tốt, e4 cho các quân khác
   state=Array(64).fill(""); state[start]=piece;
   pieceGame={piece,stars:new Set(),score:0,hasMoved:false};
-  let stars;
+  let stars=[];
+
+  // Chỉ dùng 6 sao. Các vị trí được chọn cách xa nhau để bàn cờ thoáng,
+  // học sinh phải di chuyển quân qua nhiều ô thay vì nhặt các sao liền nhau.
   if(piece==="P"){
-    // Hiện đủ 10 sao ngay từ đầu. Dùng 2 Tốt trên d2 và e2,
-    // mỗi Tốt có 5 sao trên đường tiến của mình (d3-d7 và e3-e7).
-    // Như vậy học sinh nhìn thấy đủ 10 sao và vẫn phải đi đúng luật Tốt.
-    const pawnE = 52; // e2
-    const pawnD = 51; // d2
+    // Hai Tốt ở c2 và f2; mỗi quân có 3 sao trên đường tiến riêng.
+    // Các sao xen kẽ theo hàng nên không nằm sát nhau.
+    const pawnC=50; // c2
+    const pawnF=53; // f2
     state=Array(64).fill("");
-    state[pawnE]="P";
-    state[pawnD]="P";
-    stars=[44,36,28,20,12, 43,35,27,19,11];
+    state[pawnC]="P"; state[pawnF]="P";
+    stars=[42,26,10, 37,21,5]; // c3,c5,c7 và f4,f6,f8
   }else if(piece==="B"){
-    // Tượng luôn ở nguyên màu ô. Vì vậy dùng 2 Tượng ở hai màu ô khác nhau.
-    // Mỗi Tượng có 5 ngôi sao trên màu ô mà nó có thể đi tới => đủ 10 sao.
-    const lightBishop = 36; // e4
-    const darkBishop  = 35; // d4 - màu ô đối diện e4
-    const lightStars = generateStarPath("B", lightBishop, 5);
-    const darkStars  = generateStarPath("B", darkBishop, 5);
-    stars=[...lightStars, ...darkStars];
+    // Hai Tượng ở hai màu ô khác nhau, mỗi Tượng phụ trách 3 sao.
+    const bishopA=36; // e4
+    const bishopB=35; // d4
     state=Array(64).fill("");
-    state[lightBishop]="B";
-    state[darkBishop]="B";
-  }else{
-    stars=generateStarPath(piece,start,10);
-    // Khôi phục quân sau quá trình mô phỏng tạo đường sao.
-    state=Array(64).fill(""); state[start]=piece;
+    state[bishopA]="B"; state[bishopB]="B";
+    stars=[0,18,54, 7,21,51];
+  }else if(piece==="R"){
+    stars=[0,7,16,47,56,63];
+  }else if(piece==="Q"){
+    stars=[2,7,16,47,56,61];
+  }else if(piece==="K"){
+    stars=[0,7,18,45,56,63];
+  }else if(piece==="N"){
+    stars=[1,14,16,47,49,62];
   }
+
   pieceGame.stars=new Set(stars);
   document.getElementById("pieceGameBar").classList.add("show");
   document.getElementById("pieceGameTitle").textContent="⭐ Thử thách " + pieceGameNames[piece];
-  document.getElementById("pieceGameHelp").textContent=pieceGameTips[piece];
+  document.getElementById("pieceGameHelp").textContent=pieceGameTips[piece].replace(/10/g,"6");
   document.querySelectorAll(".board-toolbar").forEach(x=>x.style.display="none");
-  document.getElementById("missionText").textContent="Đi đúng luật và nhặt đủ 10 ngôi sao. Mỗi sao = 1 điểm.";
+  document.getElementById("missionText").textContent="Đi đúng luật và nhặt đủ 6 ngôi sao. Mỗi sao = 1 điểm.";
   updatePieceGameBar(); renderBoard();
 }
 function updatePieceGameBar(){
-  document.getElementById("pieceGameScore").textContent="⭐ " + pieceGame.score + " / 10";
+  document.getElementById("pieceGameScore").textContent="⭐ " + pieceGame.score + " / 6";
 }
 function exitPieceGame(){
   pieceGame=null; history=[]; selected=lastFrom=lastTo=null; state=getStartPosition();
