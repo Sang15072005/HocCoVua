@@ -1634,6 +1634,18 @@ button{
 
 }
 
+
+/* ===== TRÒ CHƠI NHẶT SAO THEO LUẬT QUÂN CỜ ===== */
+.piece-game-bar{display:none;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px;padding:12px 16px;border-radius:16px;background:#fff7d6;border:2px solid #ffd45c;font-weight:800;color:#5b6574;box-shadow:0 6px 16px rgba(79,116,150,.10)}
+.piece-game-bar.show{display:flex}
+.piece-game-title{font-size:17px;color:#4679a8}
+.piece-game-score{background:#fff;border-radius:999px;padding:8px 13px;color:#e49a00;white-space:nowrap}
+.piece-game-help{font-size:13px;font-weight:700;color:#7b8794;margin-top:3px}
+.square.game-star::after{content:"★";position:absolute;font-size:clamp(18px,3vw,34px);color:#ffc928;text-shadow:0 2px 0 #e39c00,0 3px 8px rgba(0,0,0,.18);pointer-events:none;z-index:1}
+.square.game-star .piece{position:relative;z-index:2}
+.square.illegal{animation:badMove .28s ease}
+@keyframes badMove{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
 </style>
 
 </head>
@@ -1820,7 +1832,7 @@ button{
 
 
 
-    <div class="lesson active">
+    <div class="lesson active" data-piece="FREE">
 
 
 
@@ -1842,7 +1854,7 @@ button{
 
 
 
-    <div class="lesson">
+    <div class="lesson" data-piece="R">
 
 
 
@@ -1864,7 +1876,7 @@ button{
 
 
 
-    <div class="lesson">
+    <div class="lesson" data-piece="B">
 
 
 
@@ -1886,7 +1898,7 @@ button{
 
 
 
-    <div class="lesson">
+    <div class="lesson" data-piece="Q">
 
 
 
@@ -1908,7 +1920,7 @@ button{
 
 
 
-    <div class="lesson">
+    <div class="lesson" data-piece="K">
 
 
 
@@ -1930,7 +1942,7 @@ button{
 
 
 
-    <div class="lesson">
+    <div class="lesson" data-piece="N">
 
 
 
@@ -1952,7 +1964,7 @@ button{
 
 
 
-    <div class="lesson">
+    <div class="lesson" data-piece="P">
 
 
 
@@ -2091,6 +2103,14 @@ button{
 
 
 
+
+    <div id="pieceGameBar" class="piece-game-bar">
+        <div>
+            <div id="pieceGameTitle" class="piece-game-title">⭐ Thử thách quân cờ</div>
+            <div id="pieceGameHelp" class="piece-game-help">Đi đúng luật để nhặt đủ 10 ngôi sao.</div>
+        </div>
+        <div id="pieceGameScore" class="piece-game-score">⭐ 0 / 10</div>
+    </div>
 
     <div class="board-shell">
 
@@ -2488,6 +2508,18 @@ let roomRef = null;
 
 
 let history = [];
+
+/* Trò chơi riêng cho từng quân cờ */
+let pieceGame = null;
+const pieceGameNames = {R:"Quân Xe",B:"Quân Tượng",Q:"Quân Hậu",K:"Quân Vua",N:"Quân Mã",P:"Quân Tốt"};
+const pieceGameTips = {
+  R:"Xe đi ngang hoặc dọc. Hãy đáp xuống ô có sao!",
+  B:"Tượng chỉ đi chéo. Hãy tìm đường chéo đến các ngôi sao!",
+  Q:"Hậu đi ngang, dọc hoặc chéo.",
+  K:"Vua chỉ đi 1 ô mỗi lượt theo mọi hướng.",
+  N:"Mã đi hình chữ L: 2 ô một hướng và 1 ô vuông góc.",
+  P:"Tốt trắng đi thẳng lên 1 ô; ở lượt đầu có thể đi 2 ô. Sao trong trò chơi Tốt nằm trên đường tiến."
+};
 
 
 
@@ -3046,6 +3078,17 @@ function movePiece(to){
 
 
 
+    /* Trong trò chơi quân cờ: chỉ cho phép nước đi đúng luật */
+    if(pieceGame){
+        if(!isLegalPieceGameMove(from,to,pieceGame.piece)){
+            document.getElementById("status").textContent = "💡 Chưa đúng luật của " + pieceGameNames[pieceGame.piece] + ". Thử lại nhé!";
+            const bad = board.children[to];
+            if(bad){ bad.classList.remove("illegal"); void bad.offsetWidth; bad.classList.add("illegal"); }
+            selected = from;
+            return;
+        }
+    }
+
     /* Lưu để hoàn tác */
 
 
@@ -3080,7 +3123,16 @@ function movePiece(to){
 
         "";
 
-
+    if(pieceGame){
+        pieceGame.hasMoved = true;
+        if(pieceGame.stars.delete(to)){
+            pieceGame.score++;
+            updatePieceGameBar();
+            if(pieceGame.score >= 10){
+                document.getElementById("status").innerHTML = "🏆 <b>Xuất sắc!</b> Em đã nhặt đủ 10/10 ngôi sao với " + pieceGameNames[pieceGame.piece] + "!";
+            }
+        }
+    }
 
 
 
@@ -3146,25 +3198,13 @@ function movePiece(to){
 
 
 
-    document.getElementById(
-
-        "status"
-
-    ).innerHTML =
-
-        "👏 <b>Tốt lắm!</b> "
-
-        +
-
-        squareName(from)
-
-        +
-
-        " → "
-
-        +
-
-        squareName(to);
+    if(!pieceGame || pieceGame.score < 10){
+        document.getElementById(
+            "status"
+        ).innerHTML = pieceGame
+            ? "⭐ Đúng luật! Điểm: <b>" + pieceGame.score + "/10</b>"
+            : "👏 <b>Tốt lắm!</b> " + squareName(from) + " → " + squareName(to);
+    }
 
 
 
@@ -3480,10 +3520,98 @@ async function joinRoom(){
    11. GỬI BÀN CỜ LÊN FIRESTORE
 ========================================================= */
 async function sendBoard(){
+  if(pieceGame)return;
   if(!roomRef||role!=="student")return;
   try{await roomRef.update({state:[...state],lastFrom:lastFrom??null,lastTo:lastTo??null,lastActor:"student",studentOnline:true,updatedAt:firebase.firestore.FieldValue.serverTimestamp()});}
   catch(e){console.error(e);document.getElementById("status").textContent="⚠️ Chưa gửi được thao tác lên Firebase.";}
 }
+
+/* =========================================================
+   TRÒ CHƠI: MỖI QUÂN MỘT BÀN CỜ RIÊNG, NHẶT 10 SAO
+========================================================= */
+function isPathClear(from,to){
+  const fr=Math.floor(from/8), fc=from%8, tr=Math.floor(to/8), tc=to%8;
+  const dr=Math.sign(tr-fr), dc=Math.sign(tc-fc);
+  let r=fr+dr,c=fc+dc;
+  while(r!==tr || c!==tc){ if(state[r*8+c]) return false; r+=dr;c+=dc; }
+  return true;
+}
+function isLegalPieceGameMove(from,to,piece){
+  if(from===to || state[to]) return false;
+  const fr=Math.floor(from/8),fc=from%8,tr=Math.floor(to/8),tc=to%8;
+  const dr=tr-fr,dc=tc-fc,ar=Math.abs(dr),ac=Math.abs(dc);
+  if(piece==="R") return (dr===0||dc===0) && isPathClear(from,to);
+  if(piece==="B") return ar===ac && ar>0 && isPathClear(from,to);
+  if(piece==="Q") return ((dr===0||dc===0)||(ar===ac&&ar>0)) && isPathClear(from,to);
+  if(piece==="K") return Math.max(ar,ac)===1;
+  if(piece==="N") return (ar===2&&ac===1)||(ar===1&&ac===2);
+  if(piece==="P") return dc===0 && (dr===-1 || (!pieceGame.hasMoved && fr===6 && dr===-2));
+  return false;
+}
+function randomChoice(a){return a[Math.floor(Math.random()*a.length)];}
+function generateStarPath(piece,start){
+  const stars=[]; let cur=start; let first=true; let guard=0;
+  while(stars.length<10 && guard++<1000){
+    const candidates=[];
+    for(let to=0;to<64;to++){
+      if(to===cur || stars.includes(to)) continue;
+      const saved=pieceGame;
+      pieceGame={piece,hasMoved:!first,stars:new Set(),score:0};
+      state=Array(64).fill(""); state[cur]=piece;
+      if(isLegalPieceGameMove(cur,to,piece)) candidates.push(to);
+      pieceGame=saved;
+    }
+    if(!candidates.length) break;
+    const next=randomChoice(candidates); stars.push(next); cur=next; first=false;
+  }
+  return stars;
+}
+function startPieceGame(piece){
+  history=[]; lastFrom=lastTo=selected=null;
+  let start = piece==="P" ? 52 : 36; // e2 cho Tốt, e4 cho các quân khác
+  state=Array(64).fill(""); state[start]=piece;
+  pieceGame={piece,stars:new Set(),score:0,hasMoved:false};
+  let stars;
+  if(piece==="P"){
+    // Tốt không thể đi lùi: tạo 6 sao trên cột e và 4 sao đích thưởng lặp theo lượt mới.
+    // Để đủ 10 điểm, khi tới hàng cuối trò chơi tự đưa Tốt về hàng xuất phát và tạo chặng mới.
+    stars=[44,36,28,20,12,4];
+  }else{
+    stars=generateStarPath(piece,start);
+    // Khôi phục quân sau quá trình mô phỏng tạo đường sao.
+    state=Array(64).fill(""); state[start]=piece;
+  }
+  pieceGame.stars=new Set(stars);
+  document.getElementById("pieceGameBar").classList.add("show");
+  document.getElementById("pieceGameTitle").textContent="⭐ Thử thách " + pieceGameNames[piece];
+  document.getElementById("pieceGameHelp").textContent=pieceGameTips[piece];
+  document.querySelectorAll(".board-toolbar").forEach(x=>x.style.display="none");
+  document.getElementById("missionText").textContent="Đi đúng luật và nhặt đủ 10 ngôi sao. Mỗi sao = 1 điểm.";
+  updatePieceGameBar(); renderBoard();
+}
+function updatePieceGameBar(){
+  document.getElementById("pieceGameScore").textContent="⭐ " + pieceGame.score + " / 10";
+  // Riêng Tốt: khi hết chặng, tạo chặng mới cho tới đủ 10 điểm.
+  if(pieceGame.piece==="P" && pieceGame.stars.size===0 && pieceGame.score<10){
+    state=Array(64).fill(""); state[52]="P"; pieceGame.hasMoved=false;
+    const need=Math.min(6,10-pieceGame.score);
+    pieceGame.stars=new Set([44,36,28,20,12,4].slice(0,need));
+  }
+}
+function exitPieceGame(){
+  pieceGame=null; history=[]; selected=lastFrom=lastTo=null; state=getStartPosition();
+  document.getElementById("pieceGameBar").classList.remove("show");
+  document.querySelectorAll(".board-toolbar").forEach(x=>x.style.display="flex");
+  document.getElementById("missionText").textContent=role==="teacher"?"Quan sát học sinh thao tác trực tiếp trên bàn cờ.":"Hãy thử di chuyển một quân cờ trên bàn.";
+  renderBoard();
+}
+document.querySelectorAll(".lesson[data-piece]").forEach(item=>{
+  item.addEventListener("click",()=>{
+    document.querySelectorAll(".lesson").forEach(x=>x.classList.remove("active")); item.classList.add("active");
+    const p=item.dataset.piece;
+    if(p==="FREE") exitPieceGame(); else startPieceGame(p);
+  });
+});
 
 /* =========================================================
 
