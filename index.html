@@ -2514,11 +2514,11 @@ let pieceGame = null;
 const pieceGameNames = {R:"Quân Xe",B:"Quân Tượng",Q:"Quân Hậu",K:"Quân Vua",N:"Quân Mã",P:"Quân Tốt"};
 const pieceGameTips = {
   R:"Xe đi ngang hoặc dọc. Hãy đáp xuống ô có sao!",
-  B:"Tượng chỉ đi chéo. Hãy tìm đường chéo đến các ngôi sao!",
+  B:"Tượng chỉ đi chéo. Có 2 quân Tượng đứng trên hai màu ô khác nhau; hãy dùng đúng quân để nhặt đủ 10 ngôi sao!",
   Q:"Hậu đi ngang, dọc hoặc chéo.",
   K:"Vua chỉ đi 1 ô mỗi lượt theo mọi hướng.",
   N:"Mã đi hình chữ L: 2 ô một hướng và 1 ô vuông góc.",
-  P:"Tốt trắng đi thẳng lên 1 ô; ở lượt đầu có thể đi 2 ô. Sao trong trò chơi Tốt nằm trên đường tiến."
+  P:"Tốt trắng đi thẳng lên 1 ô. Có 2 quân Tốt và đủ 10 ngôi sao hiện sẵn trên hai đường tiến."
 };
 
 
@@ -3549,9 +3549,9 @@ function isLegalPieceGameMove(from,to,piece){
   return false;
 }
 function randomChoice(a){return a[Math.floor(Math.random()*a.length)];}
-function generateStarPath(piece,start){
+function generateStarPath(piece,start,limit=10){
   const stars=[]; let cur=start; let first=true; let guard=0;
-  while(stars.length<10 && guard++<1000){
+  while(stars.length<limit && guard++<1000){
     const candidates=[];
     for(let to=0;to<64;to++){
       if(to===cur || stars.includes(to)) continue;
@@ -3573,11 +3573,28 @@ function startPieceGame(piece){
   pieceGame={piece,stars:new Set(),score:0,hasMoved:false};
   let stars;
   if(piece==="P"){
-    // Tốt không thể đi lùi: tạo 6 sao trên cột e và 4 sao đích thưởng lặp theo lượt mới.
-    // Để đủ 10 điểm, khi tới hàng cuối trò chơi tự đưa Tốt về hàng xuất phát và tạo chặng mới.
-    stars=[44,36,28,20,12,4];
+    // Hiện đủ 10 sao ngay từ đầu. Dùng 2 Tốt trên d2 và e2,
+    // mỗi Tốt có 5 sao trên đường tiến của mình (d3-d7 và e3-e7).
+    // Như vậy học sinh nhìn thấy đủ 10 sao và vẫn phải đi đúng luật Tốt.
+    const pawnE = 52; // e2
+    const pawnD = 51; // d2
+    state=Array(64).fill("");
+    state[pawnE]="P";
+    state[pawnD]="P";
+    stars=[44,36,28,20,12, 43,35,27,19,11];
+  }else if(piece==="B"){
+    // Tượng luôn ở nguyên màu ô. Vì vậy dùng 2 Tượng ở hai màu ô khác nhau.
+    // Mỗi Tượng có 5 ngôi sao trên màu ô mà nó có thể đi tới => đủ 10 sao.
+    const lightBishop = 36; // e4
+    const darkBishop  = 35; // d4 - màu ô đối diện e4
+    const lightStars = generateStarPath("B", lightBishop, 5);
+    const darkStars  = generateStarPath("B", darkBishop, 5);
+    stars=[...lightStars, ...darkStars];
+    state=Array(64).fill("");
+    state[lightBishop]="B";
+    state[darkBishop]="B";
   }else{
-    stars=generateStarPath(piece,start);
+    stars=generateStarPath(piece,start,10);
     // Khôi phục quân sau quá trình mô phỏng tạo đường sao.
     state=Array(64).fill(""); state[start]=piece;
   }
@@ -3591,12 +3608,6 @@ function startPieceGame(piece){
 }
 function updatePieceGameBar(){
   document.getElementById("pieceGameScore").textContent="⭐ " + pieceGame.score + " / 10";
-  // Riêng Tốt: khi hết chặng, tạo chặng mới cho tới đủ 10 điểm.
-  if(pieceGame.piece==="P" && pieceGame.stars.size===0 && pieceGame.score<10){
-    state=Array(64).fill(""); state[52]="P"; pieceGame.hasMoved=false;
-    const need=Math.min(6,10-pieceGame.score);
-    pieceGame.stars=new Set([44,36,28,20,12,4].slice(0,need));
-  }
 }
 function exitPieceGame(){
   pieceGame=null; history=[]; selected=lastFrom=lastTo=null; state=getStartPosition();
