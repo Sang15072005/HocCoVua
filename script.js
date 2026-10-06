@@ -13,7 +13,14 @@ const CHESS_PIECE_SVG = {
   "bP": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#26384a" stroke="#f5f7fa" stroke-width="3" stroke-linejoin="round"><circle cx="50" cy="28" r="15"/><path d="M38 43h24c0 14 5 23 13 33H25c8-10 13-19 13-33z"/><path d="M23 77h54l7 14H16z"/><path d="M14 92h72v5H14z"/></g></svg>`
 };
 
-function pieceSvgMarkup(pieceCode){ return CHESS_PIECE_SVG[pieceCode] || ""; }
+function pieceSvgMarkup(pieceCode){
+    // Trong bàn cờ hiện tại: chữ HOA = quân Trắng, chữ thường = quân Đen.
+    // Bộ SVG dùng khóa wK/wQ/... và bK/bQ/...
+    if (!pieceCode) return "";
+    const isWhite = pieceCode === pieceCode.toUpperCase();
+    const key = (isWhite ? "w" : "b") + pieceCode.toUpperCase();
+    return CHESS_PIECE_SVG[key] || "";
+}
 
 const firebaseConfig={apiKey:"AIzaSyBL95lreBAEGfPL2TIv2FnxTNBVarVA1t0",authDomain:"hoccovua-1f26d.firebaseapp.com",projectId:"hoccovua-1f26d",storageBucket:"hoccovua-1f26d.firebasestorage.app",messagingSenderId:"33828595114",appId:"1:33828595114:web:18869b2affad6b4044f7d3",measurementId:"G-682SXZ1W48"};
 firebase.initializeApp(firebaseConfig);
