@@ -1,3 +1,20 @@
+const CHESS_PIECE_SVG = {
+  "wK": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#fff" stroke="#26384a" stroke-width="5" stroke-linejoin="round"><path d="M50 8v22M40 18h20"/><path d="M34 39c0-11 7-17 16-17s16 6 16 17c0 8-5 14-10 18l10 15H34l10-15c-5-4-10-10-10-18z"/><path d="M27 73h46l6 12H21z"/><path d="M18 87h64v7H18z"/></g></svg>`,
+  "bK": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#26384a" stroke="#f5f7fa" stroke-width="3" stroke-linejoin="round"><path d="M50 8v22M40 18h20"/><path d="M34 39c0-11 7-17 16-17s16 6 16 17c0 8-5 14-10 18l10 15H34l10-15c-5-4-10-10-10-18z"/><path d="M27 73h46l6 12H21z"/><path d="M18 87h64v7H18z"/></g></svg>`,
+  "wQ": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#fff" stroke="#26384a" stroke-width="5" stroke-linejoin="round"><circle cx="18" cy="25" r="6"/><circle cx="38" cy="16" r="6"/><circle cx="62" cy="16" r="6"/><circle cx="82" cy="25" r="6"/><path d="M18 31l12 38h40l12-38-19 21-13-30-13 30z"/><path d="M26 70h48l5 13H21z"/><path d="M18 86h64v8H18z"/></g></svg>`,
+  "bQ": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#26384a" stroke="#f5f7fa" stroke-width="3" stroke-linejoin="round"><circle cx="18" cy="25" r="6"/><circle cx="38" cy="16" r="6"/><circle cx="62" cy="16" r="6"/><circle cx="82" cy="25" r="6"/><path d="M18 31l12 38h40l12-38-19 21-13-30-13 30z"/><path d="M26 70h48l5 13H21z"/><path d="M18 86h64v8H18z"/></g></svg>`,
+  "wR": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#fff" stroke="#26384a" stroke-width="5" stroke-linejoin="round"><path d="M24 16h13v12h13V16h13v12h13V16h8v27H16V16z"/><path d="M24 43h52l-6 34H30z"/><path d="M25 77h50l6 12H19z"/><path d="M16 90h68v6H16z"/></g></svg>`,
+  "bR": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#26384a" stroke="#f5f7fa" stroke-width="3" stroke-linejoin="round"><path d="M24 16h13v12h13V16h13v12h13V16h8v27H16V16z"/><path d="M24 43h52l-6 34H30z"/><path d="M25 77h50l6 12H19z"/><path d="M16 90h68v6H16z"/></g></svg>`,
+  "wB": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#fff" stroke="#26384a" stroke-width="5" stroke-linejoin="round"><path d="M50 12c13 10 19 21 13 33-3 6-8 10-13 14-5-4-10-8-13-14-6-12 0-23 13-33z"/><path d="M56 24L42 45"/><path d="M34 59h32l9 18H25z"/><path d="M22 79h56l6 12H16z"/><path d="M14 92h72v5H14z"/></g></svg>`,
+  "bB": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#26384a" stroke="#f5f7fa" stroke-width="3" stroke-linejoin="round"><path d="M50 12c13 10 19 21 13 33-3 6-8 10-13 14-5-4-10-8-13-14-6-12 0-23 13-33z"/><path d="M56 24L42 45"/><path d="M34 59h32l9 18H25z"/><path d="M22 79h56l6 12H16z"/><path d="M14 92h72v5H14z"/></g></svg>`,
+  "wN": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#fff" stroke="#26384a" stroke-width="5" stroke-linejoin="round"><path d="M27 70c2-20 10-31 27-40l-8-14c22 2 35 18 31 39-2 9-7 16-15 22H30z"/><path d="M48 35c-8 3-14 8-19 16 10-2 17-1 24 4"/><circle cx="61" cy="35" r="3" fill="#26384a" stroke="none"/><path d="M24 77h50l7 13H17z"/><path d="M14 92h70v5H14z"/></g></svg>`,
+  "bN": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#26384a" stroke="#f5f7fa" stroke-width="3" stroke-linejoin="round"><path d="M27 70c2-20 10-31 27-40l-8-14c22 2 35 18 31 39-2 9-7 16-15 22H30z"/><path d="M48 35c-8 3-14 8-19 16 10-2 17-1 24 4"/><circle cx="61" cy="35" r="3" fill="#f5f7fa" stroke="none"/><path d="M24 77h50l7 13H17z"/><path d="M14 92h70v5H14z"/></g></svg>`,
+  "wP": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#fff" stroke="#26384a" stroke-width="5" stroke-linejoin="round"><circle cx="50" cy="28" r="15"/><path d="M38 43h24c0 14 5 23 13 33H25c8-10 13-19 13-33z"/><path d="M23 77h54l7 14H16z"/><path d="M14 92h72v5H14z"/></g></svg>`,
+  "bP": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#26384a" stroke="#f5f7fa" stroke-width="3" stroke-linejoin="round"><circle cx="50" cy="28" r="15"/><path d="M38 43h24c0 14 5 23 13 33H25c8-10 13-19 13-33z"/><path d="M23 77h54l7 14H16z"/><path d="M14 92h72v5H14z"/></g></svg>`
+};
+
+function pieceSvgMarkup(pieceCode){ return CHESS_PIECE_SVG[pieceCode] || ""; }
+
 const firebaseConfig={apiKey:"AIzaSyBL95lreBAEGfPL2TIv2FnxTNBVarVA1t0",authDomain:"hoccovua-1f26d.firebaseapp.com",projectId:"hoccovua-1f26d",storageBucket:"hoccovua-1f26d.firebasestorage.app",messagingSenderId:"33828595114",appId:"1:33828595114:web:18869b2affad6b4044f7d3",measurementId:"G-682SXZ1W48"};
 firebase.initializeApp(firebaseConfig);
 const db=firebase.firestore();
@@ -480,9 +497,7 @@ function renderBoard(){
 
 
 
-                pieceElement.textContent =
-
-                    pieceSymbols[piece];
+                pieceElement.innerHTML = pieceSvgMarkup(piece);
 
 
 

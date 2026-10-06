@@ -1656,3 +1656,27 @@ button{
 /* ===== GỢI Ý NƯỚC ĐI BẰNG CHẤM MỜ ===== */
 .move-hint{position:absolute;left:50%;top:50%;width:25%;height:25%;transform:translate(-50%,-50%);border-radius:50%;background:rgba(75,105,61,.68);pointer-events:none;z-index:3;box-shadow:0 1px 3px rgba(0,0,0,.12)}
 .square.has-star .move-hint{width:18%;height:18%;left:78%;top:22%;background:rgba(75,105,61,.55)}
+
+
+/* ===== Bộ quân cờ SVG sắc nét ===== */
+.piece svg,
+.palette-piece svg,
+.tray-piece svg,
+.chess-piece svg {
+    width: 86%;
+    height: 86%;
+    display: block;
+    margin: auto;
+    overflow: visible;
+    pointer-events: none;
+    filter: drop-shadow(0 2px 1px rgba(20, 35, 50, .18));
+}
+.piece,
+.palette-piece,
+.tray-piece,
+.chess-piece {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent !important;
+}
