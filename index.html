@@ -14,7 +14,1691 @@
 
 
 
-<link rel="stylesheet" href="./style.css">
+<style>
+/* =========================================================
+
+   1. MÀU SẮC CHÍNH
+
+========================================================= */
+
+:root{
+
+    --blue:#4A90E2;
+
+    --blue-dark:#3176C5;
+
+    --blue-light:#EAF5FF;
+
+
+
+    --yellow:#FFD166;
+
+    --cream:#FFF8E8;
+
+
+
+    --green:#72C596;
+
+    --green-dark:#4EAA77;
+
+
+
+    --orange:#FF9F68;
+
+    --red:#F06A6A;
+
+
+
+    --text:#334155;
+
+    --muted:#718096;
+
+
+
+    --white:#FFFFFF;
+
+
+
+    --board-light:#FFF0C7;
+
+    --board-dark:#79B7E8;
+
+
+
+    --shadow:0 8px 24px rgba(53,94,130,.13);
+
+}
+
+
+
+/* =========================================================
+
+   2. CÀI ĐẶT CHUNG
+
+========================================================= */
+
+
+
+*{
+
+    box-sizing:border-box;
+
+}
+
+
+
+body{
+
+    margin:0;
+
+    font-family:
+
+        "Segoe UI",
+
+        Arial,
+
+        sans-serif;
+
+
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #EAF7FF 0%,
+
+            #F8FCFF 45%,
+
+            #FFF9EC 100%
+
+        );
+
+
+
+    color:var(--text);
+
+    min-height:100vh;
+
+}
+
+
+
+button,
+
+input{
+
+    font:inherit;
+
+}
+
+
+
+button{
+
+    cursor:pointer;
+
+}
+
+
+
+/* =========================================================
+
+   3. HEADER
+
+========================================================= */
+
+
+
+.header{
+
+    height:82px;
+
+    background:white;
+
+
+
+    display:flex;
+
+    align-items:center;
+
+
+
+    padding:0 34px;
+
+
+
+    border-bottom:4px solid #DDEFFF;
+
+
+
+    box-shadow:
+
+        0 3px 15px rgba(70,120,160,.08);
+
+}
+
+
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+}
+
+
+
+.logo-icon{
+
+    width:53px;
+
+    height:53px;
+
+
+
+    border-radius:17px;
+
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+
+    font-size:32px;
+
+
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            var(--blue),
+
+            #77C4F5
+
+        );
+
+
+
+    color:white;
+
+
+
+    box-shadow:
+
+        0 5px 0 #2871B5;
+
+}
+
+
+
+.logo-text strong{
+
+    display:block;
+
+    font-size:23px;
+
+    color:#306EA8;
+
+}
+
+
+
+.logo-text span{
+
+    font-size:13px;
+
+    color:#8294A6;
+
+}
+
+
+
+/* ----- Mã phòng ----- */
+
+
+
+.room-box{
+
+    margin-left:auto;
+
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+
+
+    background:#F3F9FF;
+
+
+
+    padding:8px;
+
+
+
+    border-radius:15px;
+
+
+
+    border:2px solid #D9ECFA;
+
+}
+
+
+
+.room-box span{
+
+    font-weight:700;
+
+    color:#4C7193;
+
+    padding-left:8px;
+
+}
+
+
+
+.room-box input{
+
+    width:100px;
+
+
+
+    border:2px solid #D4E6F4;
+
+    background:white;
+
+
+
+    padding:10px;
+
+
+
+    border-radius:10px;
+
+
+
+    text-align:center;
+
+    font-weight:800;
+
+
+
+    color:#3675AC;
+
+    outline:none;
+
+}
+
+
+
+.room-box input:focus{
+
+    border-color:var(--blue);
+
+}
+
+
+
+/* =========================================================
+
+   4. BUTTON
+
+========================================================= */
+
+
+
+.btn{
+
+    border:none;
+
+    border-radius:11px;
+
+
+
+    padding:11px 16px;
+
+
+
+    font-weight:750;
+
+
+
+    transition:.18s;
+
+}
+
+
+
+.btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+
+
+.btn:active{
+
+    transform:translateY(1px);
+
+}
+
+
+
+.btn-blue{
+
+    background:var(--blue);
+
+    color:white;
+
+    box-shadow:0 4px 0 var(--blue-dark);
+
+}
+
+
+
+.btn-green{
+
+    background:var(--green);
+
+    color:white;
+
+    box-shadow:0 4px 0 var(--green-dark);
+
+}
+
+
+
+.btn-yellow{
+
+    background:var(--yellow);
+
+    color:#745800;
+
+    box-shadow:0 4px 0 #E6AF37;
+
+}
+
+
+
+.btn-orange{
+
+    background:var(--orange);
+
+    color:white;
+
+    box-shadow:0 4px 0 #DD7845;
+
+}
+
+
+
+.btn-soft{
+
+    background:#EEF5FA;
+
+    color:#55718A;
+
+    box-shadow:0 4px 0 #D5E3ED;
+
+}
+
+
+
+/* =========================================================
+
+   5. BỐ CỤC
+
+========================================================= */
+
+
+
+.app{
+
+    max-width:1450px;
+
+    margin:28px auto;
+
+
+
+    padding:0 24px;
+
+
+
+    display:grid;
+
+
+
+    grid-template-columns:
+
+        270px
+
+        minmax(500px, 650px)
+
+        330px;
+
+
+
+    gap:27px;
+
+
+
+    align-items:start;
+
+}
+
+
+
+/* =========================================================
+
+   6. CARD
+
+========================================================= */
+
+
+
+.card{
+
+    background:white;
+
+
+
+    border-radius:22px;
+
+
+
+    box-shadow:var(--shadow);
+
+
+
+    border:2px solid #E8F2F8;
+
+
+
+    overflow:hidden;
+
+}
+
+
+
+/* =========================================================
+
+   7. MENU BÊN TRÁI
+
+========================================================= */
+
+
+
+.profile{
+
+    padding:22px;
+
+
+
+    text-align:center;
+
+
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #E6F5FF,
+
+            #FFF8DE
+
+        );
+
+}
+
+
+
+.avatar{
+
+    width:75px;
+
+    height:75px;
+
+
+
+    margin:auto;
+
+
+
+    border-radius:50%;
+
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+
+    background:white;
+
+
+
+    border:5px solid #BFE3FA;
+
+
+
+    font-size:40px;
+
+}
+
+
+
+.profile h3{
+
+    margin:11px 0 4px;
+
+    color:#3479B4;
+
+}
+
+
+
+.profile p{
+
+    margin:0;
+
+    color:#7D92A4;
+
+    font-size:14px;
+
+}
+
+
+
+/* ----- Bài học ----- */
+
+
+
+.lesson-title{
+
+    padding:18px 20px 10px;
+
+
+
+    font-size:13px;
+
+    font-weight:800;
+
+
+
+    color:#9AA8B5;
+
+
+
+    text-transform:uppercase;
+
+}
+
+
+
+.lesson{
+
+    margin:7px 12px;
+
+
+
+    padding:13px 14px;
+
+
+
+    border-radius:13px;
+
+
+
+    display:flex;
+
+    align-items:center;
+
+
+
+    gap:12px;
+
+
+
+    font-weight:700;
+
+
+
+    color:#63788B;
+
+
+
+    cursor:pointer;
+
+
+
+    transition:.2s;
+
+}
+
+
+
+.lesson:hover{
+
+    background:#F1F8FD;
+
+    transform:translateX(3px);
+
+}
+
+
+
+.lesson.active{
+
+    color:white;
+
+
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            var(--blue),
+
+            #6DB7E9
+
+        );
+
+
+
+    box-shadow:
+
+        0 5px 12px rgba(74,144,226,.25);
+
+}
+
+
+
+.lesson-icon{
+
+    width:34px;
+
+    height:34px;
+
+
+
+    border-radius:10px;
+
+
+
+    background:rgba(255,255,255,.22);
+
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+
+    font-size:22px;
+
+}
+
+
+
+/* =========================================================
+
+   8. KHU VỰC BÀN CỜ
+
+========================================================= */
+
+
+
+.center{
+
+    min-width:0;
+
+}
+
+
+
+.welcome{
+
+    background:white;
+
+
+
+    border-radius:18px;
+
+
+
+    padding:16px 20px;
+
+
+
+    margin-bottom:16px;
+
+
+
+    box-shadow:var(--shadow);
+
+
+
+    border:2px solid #E6F2F9;
+
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+}
+
+
+
+.welcome-icon{
+
+    font-size:33px;
+
+}
+
+
+
+.welcome strong{
+
+    display:block;
+
+    color:#3677AD;
+
+    font-size:18px;
+
+}
+
+
+
+.welcome span{
+
+    color:#7C8F9E;
+
+    font-size:14px;
+
+}
+
+
+
+/* ----- Board container ----- */
+
+
+
+.board-shell{
+
+    padding:13px;
+
+
+
+    border-radius:23px;
+
+
+
+    background:white;
+
+
+
+    box-shadow:
+
+        0 12px 35px rgba(47,100,140,.18);
+
+
+
+    border:3px solid #DDEFFA;
+
+}
+
+
+
+.board{
+
+    width:100%;
+
+
+
+    aspect-ratio:1;
+
+
+
+    display:grid;
+
+
+
+    grid-template-columns:repeat(8, minmax(0, 1fr));
+
+    grid-template-rows:repeat(8, minmax(0, 1fr));
+
+    overflow:hidden;
+
+
+
+    border-radius:14px;
+
+}
+
+
+
+/* ----- Ô cờ ----- */
+
+
+
+.square{
+
+    position:relative;
+
+    min-width:0;
+    min-height:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+
+    user-select:none;
+
+
+
+    font-size:
+
+        clamp(
+
+            36px,
+
+            5vw,
+
+            62px
+
+        );
+
+}
+
+
+
+.light{
+
+    background:var(--board-light);
+
+}
+
+
+
+.dark{
+
+    background:var(--board-dark);
+
+}
+
+
+
+/* ----- Quân đang chọn ----- */
+
+
+
+.square.selected{
+
+    box-shadow:
+
+        inset 0 0 0 6px
+
+        rgba(255,196,0,.95);
+
+
+
+    z-index:2;
+
+}
+
+
+
+/* ----- Hiển thị ô vừa đi ----- */
+
+
+
+.square.last{
+
+    box-shadow:
+
+        inset 0 0 0 5px
+
+        rgba(91,197,111,.75);
+
+}
+
+
+
+/* ----- Quân cờ ----- */
+
+
+
+.piece{
+
+    cursor:grab;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    height:100%;
+    line-height:1;
+    flex:0 0 auto;
+
+
+
+    filter:
+
+        drop-shadow(
+
+            0 3px 1px
+
+            rgba(0,0,0,.16)
+
+        );
+
+
+
+    transition:.12s;
+
+}
+
+
+
+.piece:hover{
+
+    transform:scale(1.08);
+
+}
+
+
+
+.piece:active{
+
+    cursor:grabbing;
+
+    transform:scale(.94);
+
+}
+
+
+
+/* =========================================================
+
+   9. THANH DƯỚI BÀN CỜ
+
+========================================================= */
+
+
+
+.board-toolbar{
+
+    margin-top:15px;
+
+
+
+    display:flex;
+
+    gap:9px;
+
+
+
+    flex-wrap:wrap;
+
+}
+
+
+
+.board-toolbar button{
+
+    flex:1;
+
+    min-width:125px;
+
+}
+
+
+
+/* =========================================================
+
+   10. PANEL GIÁO VIÊN / HỌC SINH
+
+========================================================= */
+
+
+
+.panel-header{
+
+    padding:20px;
+
+
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #4A90E2,
+
+            #69B6E8
+
+        );
+
+
+
+    color:white;
+
+}
+
+
+
+.panel-header h2{
+
+    margin:0;
+
+    font-size:20px;
+
+}
+
+
+
+.panel-header p{
+
+    margin:5px 0 0;
+
+    opacity:.88;
+
+    font-size:13px;
+
+}
+
+
+
+.panel-content{
+
+    padding:19px;
+
+}
+
+
+
+/* ----- Vai trò ----- */
+
+
+
+.roles{
+
+    display:grid;
+
+
+
+    grid-template-columns:1fr 1fr;
+
+
+
+    gap:9px;
+
+
+
+    margin-bottom:17px;
+
+}
+
+
+
+.role-btn{
+
+    border:2px solid #E2ECF3;
+
+
+
+    padding:12px 5px;
+
+
+
+    border-radius:12px;
+
+
+
+    background:#F7FAFC;
+
+
+
+    color:#708393;
+
+
+
+    font-weight:800;
+
+}
+
+
+
+.role-btn.active{
+
+    background:#E9F5FF;
+
+
+
+    border-color:#67ADE1;
+
+
+
+    color:#3178B1;
+
+}
+
+
+
+/* ----- Connection ----- */
+
+
+
+.connection{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+
+
+    padding:11px 12px;
+
+
+
+    background:#F0FAF4;
+
+
+
+    color:#4C8B65;
+
+
+
+    border-radius:11px;
+
+
+
+    font-size:13px;
+
+
+
+    font-weight:700;
+
+
+
+    margin-bottom:14px;
+
+}
+
+
+
+.dot{
+
+    width:10px;
+
+    height:10px;
+
+
+
+    background:#5AC47A;
+
+
+
+    border-radius:50%;
+
+
+
+    box-shadow:
+
+        0 0 0 4px
+
+        rgba(90,196,122,.15);
+
+}
+
+
+
+/* ----- Nhiệm vụ ----- */
+
+
+
+.mission{
+
+    padding:16px;
+
+
+
+    border-radius:15px;
+
+
+
+    background:#FFF8DF;
+
+
+
+    border:2px dashed #F2CE69;
+
+
+
+    margin-bottom:17px;
+
+}
+
+
+
+.mission-title{
+
+    color:#A87800;
+
+
+
+    font-size:14px;
+
+    font-weight:900;
+
+
+
+    margin-bottom:5px;
+
+}
+
+
+
+.mission p{
+
+    margin:0;
+
+
+
+    font-size:14px;
+
+
+
+    color:#796942;
+
+
+
+    line-height:1.5;
+
+}
+
+
+
+/* ----- Status ----- */
+
+
+
+.status{
+
+    padding:13px;
+
+
+
+    border-radius:12px;
+
+
+
+    background:#EFF7FD;
+
+
+
+    color:#557B98;
+
+
+
+    font-size:14px;
+
+
+
+    line-height:1.5;
+
+
+
+    margin-bottom:15px;
+
+}
+
+
+
+/* =========================================================
+
+   11. NHẬT KÝ
+
+========================================================= */
+
+
+
+.log-title{
+
+    font-size:14px;
+
+
+
+    font-weight:900;
+
+
+
+    color:#60788B;
+
+
+
+    margin-bottom:8px;
+
+}
+
+
+
+.log{
+
+    height:145px;
+
+
+
+    overflow:auto;
+
+
+
+    background:#F8FAFC;
+
+
+
+    border-radius:12px;
+
+
+
+    padding:10px;
+
+
+
+    border:1px solid #E7EEF3;
+
+
+
+    font-size:13px;
+
+}
+
+
+
+.log-entry{
+
+    padding:7px 4px;
+
+
+
+    border-bottom:
+
+        1px dashed #E3EAF0;
+
+
+
+    color:#6B7E8C;
+
+}
+
+
+
+/* =========================================================
+
+   12. SAO KHEN THƯỞNG
+
+========================================================= */
+
+
+
+.reward{
+
+    margin-top:15px;
+
+
+
+    display:flex;
+
+
+
+    justify-content:center;
+
+
+
+    gap:5px;
+
+
+
+    font-size:26px;
+
+}
+
+
+
+/* =========================================================
+
+   13. RESPONSIVE
+
+========================================================= */
+
+
+
+@media(max-width:1150px){
+
+
+
+    .app{
+
+        grid-template-columns:
+
+            220px
+
+            minmax(450px,1fr)
+
+            300px;
+
+    }
+
+
+
+}
+
+
+
+@media(max-width:950px){
+
+
+
+    .app{
+
+        grid-template-columns:1fr;
+
+        max-width:680px;
+
+    }
+
+
+
+    .sidebar{
+
+        display:none;
+
+    }
+
+
+
+    .header{
+
+        padding:0 15px;
+
+    }
+
+
+
+    .logo-text span{
+
+        display:none;
+
+    }
+
+
+
+}
+
+
+
+@media(max-width:600px){
+
+
+
+    .room-box span{
+
+        display:none;
+
+    }
+
+
+
+    .room-box input{
+
+        width:75px;
+
+    }
+
+
+
+    .logo-text{
+
+        display:none;
+
+    }
+
+
+
+    .header{
+
+        height:70px;
+
+    }
+
+
+
+    .app{
+
+        padding:0 10px;
+
+        margin-top:15px;
+
+    }
+
+
+
+    .board-shell{
+
+        padding:7px;
+
+    }
+
+
+
+}
+
+
+/* ===== TRÒ CHƠI NHẶT SAO THEO LUẬT QUÂN CỜ ===== */
+.piece-game-bar{display:none;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px;padding:12px 16px;border-radius:16px;background:#fff7d6;border:2px solid #ffd45c;font-weight:800;color:#5b6574;box-shadow:0 6px 16px rgba(79,116,150,.10)}
+.piece-game-bar.show{display:flex}
+.piece-game-title{font-size:17px;color:#4679a8}
+.piece-game-score{background:#fff;border-radius:999px;padding:8px 13px;color:#e49a00;white-space:nowrap}
+.piece-game-help{font-size:13px;font-weight:700;color:#7b8794;margin-top:3px}
+.board-star{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    font-size:clamp(24px,4vw,42px);
+    line-height:1;
+    pointer-events:none;
+    z-index:1;
+    filter:drop-shadow(0 3px 3px rgba(153,103,0,.30));
+    animation:starFloat 1.15s ease-in-out infinite, starGlow .9s ease-in-out infinite alternate;
+}
+.square .piece{position:relative;z-index:2}
+.square.illegal{animation:badMove .28s ease}
+@keyframes badMove{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@keyframes starFloat{
+    0%,100%{transform:translate(-50%,-50%) translateY(0) rotate(-5deg) scale(1)}
+    50%{transform:translate(-50%,-50%) translateY(-7px) rotate(5deg) scale(1.12)}
+}
+@keyframes starGlow{
+    from{filter:drop-shadow(0 2px 2px rgba(153,103,0,.25));opacity:.88}
+    to{filter:drop-shadow(0 0 10px rgba(255,201,40,.95));opacity:1}
+}
+@keyframes starCollected{
+    0%{transform:translate(-50%,-50%) scale(1);opacity:1}
+    65%{transform:translate(-50%,-70%) scale(1.55) rotate(18deg);opacity:1}
+    100%{transform:translate(-50%,-110%) scale(.2) rotate(35deg);opacity:0}
+}
+.board-star.collected{animation:starCollected .32s ease-out forwards}
+
+/* ===== GỢI Ý NƯỚC ĐI BẰNG CHẤM MỜ ===== */
+.move-hint{position:absolute;left:50%;top:50%;width:25%;height:25%;transform:translate(-50%,-50%);border-radius:50%;background:rgba(75,105,61,.68);pointer-events:none;z-index:3;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.square.has-star .move-hint{width:18%;height:18%;left:78%;top:22%;background:rgba(75,105,61,.55)}
+
+
+/* ===== Bộ quân cờ SVG sắc nét ===== */
+.piece svg,
+.palette-piece svg,
+.tray-piece svg,
+.chess-piece svg {
+    width: 86%;
+    height: 86%;
+    display: block;
+    margin: auto;
+    overflow: visible;
+    pointer-events: none;
+    filter: drop-shadow(0 2px 1px rgba(20, 35, 50, .18));
+}
+.piece,
+.palette-piece,
+.tray-piece,
+.chess-piece {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent !important;
+}
+
+</style>
 
 
 </head>
@@ -791,7 +2475,1561 @@
 
 
 
-  <script src="./script.js"></script>
+  <script>
+const CHESS_PIECE_SVG = {
+  "wK": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#fff" stroke="#26384a" stroke-width="5" stroke-linejoin="round"><path d="M50 8v22M40 18h20"/><path d="M34 39c0-11 7-17 16-17s16 6 16 17c0 8-5 14-10 18l10 15H34l10-15c-5-4-10-10-10-18z"/><path d="M27 73h46l6 12H21z"/><path d="M18 87h64v7H18z"/></g></svg>`,
+  "bK": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#26384a" stroke="#f5f7fa" stroke-width="3" stroke-linejoin="round"><path d="M50 8v22M40 18h20"/><path d="M34 39c0-11 7-17 16-17s16 6 16 17c0 8-5 14-10 18l10 15H34l10-15c-5-4-10-10-10-18z"/><path d="M27 73h46l6 12H21z"/><path d="M18 87h64v7H18z"/></g></svg>`,
+  "wQ": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#fff" stroke="#26384a" stroke-width="5" stroke-linejoin="round"><circle cx="18" cy="25" r="6"/><circle cx="38" cy="16" r="6"/><circle cx="62" cy="16" r="6"/><circle cx="82" cy="25" r="6"/><path d="M18 31l12 38h40l12-38-19 21-13-30-13 30z"/><path d="M26 70h48l5 13H21z"/><path d="M18 86h64v8H18z"/></g></svg>`,
+  "bQ": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#26384a" stroke="#f5f7fa" stroke-width="3" stroke-linejoin="round"><circle cx="18" cy="25" r="6"/><circle cx="38" cy="16" r="6"/><circle cx="62" cy="16" r="6"/><circle cx="82" cy="25" r="6"/><path d="M18 31l12 38h40l12-38-19 21-13-30-13 30z"/><path d="M26 70h48l5 13H21z"/><path d="M18 86h64v8H18z"/></g></svg>`,
+  "wR": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#fff" stroke="#26384a" stroke-width="5" stroke-linejoin="round"><path d="M24 16h13v12h13V16h13v12h13V16h8v27H16V16z"/><path d="M24 43h52l-6 34H30z"/><path d="M25 77h50l6 12H19z"/><path d="M16 90h68v6H16z"/></g></svg>`,
+  "bR": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#26384a" stroke="#f5f7fa" stroke-width="3" stroke-linejoin="round"><path d="M24 16h13v12h13V16h13v12h13V16h8v27H16V16z"/><path d="M24 43h52l-6 34H30z"/><path d="M25 77h50l6 12H19z"/><path d="M16 90h68v6H16z"/></g></svg>`,
+  "wB": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#fff" stroke="#26384a" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="18" r="7"/><path d="M50 25c-13 9-20 20-17 31 2 7 8 12 14 16h6c6-4 12-9 14-16 3-11-4-22-17-31z"/><path d="M58 33L43 53" fill="none" stroke-width="5"/><path d="M35 69h30l8 11H27z"/><path d="M23 80h54l6 11H17z"/><path d="M14 93h72" fill="none" stroke-width="6"/></g></svg>`,
+  "bB": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#26384a" stroke="#f5f7fa" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="18" r="7"/><path d="M50 25c-13 9-20 20-17 31 2 7 8 12 14 16h6c6-4 12-9 14-16 3-11-4-22-17-31z"/><path d="M58 33L43 53" fill="none" stroke-width="4"/><path d="M35 69h30l8 11H27z"/><path d="M23 80h54l6 11H17z"/><path d="M14 93h72" fill="none" stroke-width="5"/></g></svg>`,
+  "wN": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#fff" stroke="#26384a" stroke-width="5" stroke-linejoin="round"><path d="M27 70c2-20 10-31 27-40l-8-14c22 2 35 18 31 39-2 9-7 16-15 22H30z"/><path d="M48 35c-8 3-14 8-19 16 10-2 17-1 24 4"/><circle cx="61" cy="35" r="3" fill="#26384a" stroke="none"/><path d="M24 77h50l7 13H17z"/><path d="M14 92h70v5H14z"/></g></svg>`,
+  "bN": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#26384a" stroke="#f5f7fa" stroke-width="3" stroke-linejoin="round"><path d="M27 70c2-20 10-31 27-40l-8-14c22 2 35 18 31 39-2 9-7 16-15 22H30z"/><path d="M48 35c-8 3-14 8-19 16 10-2 17-1 24 4"/><circle cx="61" cy="35" r="3" fill="#f5f7fa" stroke="none"/><path d="M24 77h50l7 13H17z"/><path d="M14 92h70v5H14z"/></g></svg>`,
+  "wP": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#fff" stroke="#26384a" stroke-width="5" stroke-linejoin="round"><circle cx="50" cy="28" r="15"/><path d="M38 43h24c0 14 5 23 13 33H25c8-10 13-19 13-33z"/><path d="M23 77h54l7 14H16z"/><path d="M14 92h72v5H14z"/></g></svg>`,
+  "bP": `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#26384a" stroke="#f5f7fa" stroke-width="3" stroke-linejoin="round"><circle cx="50" cy="28" r="15"/><path d="M38 43h24c0 14 5 23 13 33H25c8-10 13-19 13-33z"/><path d="M23 77h54l7 14H16z"/><path d="M14 92h72v5H14z"/></g></svg>`
+};
+
+function pieceSvgMarkup(pieceCode){
+    if (!pieceCode) return "";
+    const isWhite = pieceCode === pieceCode.toUpperCase();
+    const key = (isWhite ? "w" : "b") + pieceCode.toUpperCase();
+    return CHESS_PIECE_SVG[key] || "";
+}
+
+const firebaseConfig={apiKey:"AIzaSyBL95lreBAEGfPL2TIv2FnxTNBVarVA1t0",authDomain:"hoccovua-1f26d.firebaseapp.com",projectId:"hoccovua-1f26d",storageBucket:"hoccovua-1f26d.firebasestorage.app",messagingSenderId:"33828595114",appId:"1:33828595114:web:18869b2affad6b4044f7d3",measurementId:"G-682SXZ1W48"};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.firestore();
+
+/* =========================================================
+
+   1. KÝ HIỆU QUÂN CỜ
+
+========================================================= */
+
+
+
+const pieceSymbols = {
+
+
+
+    r:"♜",
+
+    n:"♞",
+
+    b:"♝",
+
+    q:"♛",
+
+    k:"♚",
+
+    p:"♟",
+
+
+
+    R:"♖",
+
+    N:"♘",
+
+    B:"♗",
+
+    Q:"♕",
+
+    K:"♔",
+
+    P:"♙"
+
+
+
+};
+
+
+
+
+
+/* =========================================================
+
+   2. BIẾN TRẠNG THÁI
+
+========================================================= */
+
+
+
+let state = [];
+
+
+
+let selected = null;
+
+
+
+let lastFrom = null;
+
+let lastTo = null;
+
+
+
+let role = "student";
+
+
+
+let room = "";
+
+
+
+let roomUnsubscribe = null;
+let roomRef = null;
+
+
+
+let history = [];
+
+/* Trò chơi riêng cho từng quân cờ */
+let pieceGame = null;
+const pieceGameNames = {R:"Quân Xe",B:"Quân Tượng",Q:"Quân Hậu",K:"Quân Vua",N:"Quân Mã",P:"Quân Tốt"};
+const pieceGameTips = {
+  R:"Xe đi ngang hoặc dọc. Hãy đáp xuống ô có sao!",
+  B:"Tượng chỉ đi chéo. Có 2 quân Tượng đứng trên hai màu ô khác nhau; hãy dùng đúng quân để nhặt đủ 6 ngôi sao!",
+  Q:"Hậu đi ngang, dọc hoặc chéo.",
+  K:"Vua chỉ đi 1 ô mỗi lượt theo mọi hướng.",
+  N:"Mã đi hình chữ L: 2 ô một hướng và 1 ô vuông góc.",
+  P:"Tốt trắng đi thẳng lên 1 ô. Có 2 quân Tốt và đủ 10 ngôi sao hiện sẵn trên hai đường tiến."
+};
+
+
+
+
+
+/* =========================================================
+
+   3. TẠO THẾ CỜ BAN ĐẦU
+
+========================================================= */
+
+
+
+function getStartPosition(){
+
+
+
+    const s =
+
+        Array(64).fill("");
+
+
+
+    const blackBack =
+
+        "rnbqkbnr";
+
+
+
+    const whiteBack =
+
+        "RNBQKBNR";
+
+
+
+
+
+    /* Quân đen */
+
+
+
+    blackBack
+
+        .split("")
+
+        .forEach(
+
+            (piece,index) =>
+
+            s[index] = piece
+
+        );
+
+
+
+
+
+    for(
+
+        let i = 8;
+
+        i < 16;
+
+        i++
+
+    ){
+
+
+
+        s[i] = "p";
+
+
+
+    }
+
+
+
+
+
+    /* Quân trắng */
+
+
+
+    for(
+
+        let i = 48;
+
+        i < 56;
+
+        i++
+
+    ){
+
+
+
+        s[i] = "P";
+
+
+
+    }
+
+
+
+
+
+    whiteBack
+
+        .split("")
+
+        .forEach(
+
+            (piece,index) =>
+
+            s[56 + index] = piece
+
+        );
+
+
+
+
+
+    return s;
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   4. VẼ BÀN CỜ
+
+========================================================= */
+
+
+
+const board =
+
+    document.getElementById("board");
+
+
+
+
+
+function getPieceGameLegalMoves(from){
+    if(!pieceGame || from===null || !state[from]) return [];
+    const moving=state[from].toUpperCase();
+    if(moving!==pieceGame.piece) return [];
+    const moves=[];
+    for(let to=0;to<64;to++){
+        if(isLegalPieceGameMove(from,to,pieceGame.piece)) moves.push(to);
+    }
+    return moves;
+}
+
+function renderBoard(){
+
+
+
+    board.innerHTML = "";
+
+
+
+
+
+    state.forEach(
+
+        (piece,index) => {
+
+
+
+            const row =
+
+                Math.floor(index / 8);
+
+
+
+            const col =
+
+                index % 8;
+
+
+
+
+
+            const square =
+
+                document.createElement("div");
+
+
+
+
+
+            square.className =
+
+                "square " +
+
+                (
+
+                    (row + col) % 2 === 0
+
+                    ? "light"
+
+                    : "dark"
+
+                );
+
+
+
+
+
+            /* Ô đang chọn */
+
+
+
+            if(
+
+                selected === index
+
+            ){
+
+
+
+                square.classList.add(
+
+                    "selected"
+
+                );
+
+
+
+            }
+
+
+
+
+
+            /* Nước đi vừa rồi */
+
+
+
+            if(
+
+                index === lastFrom ||
+
+                index === lastTo
+
+            ){
+
+
+
+                square.classList.add(
+
+                    "last"
+
+                );
+
+
+
+            }
+
+
+
+
+
+            square.dataset.index =
+
+                index;
+
+
+
+
+
+            /* Cho phép thả quân */
+
+
+
+            square.ondragover =
+
+                event => {
+
+
+
+                    event.preventDefault();
+
+
+
+                };
+
+
+
+
+
+            square.ondrop =
+
+                event => {
+
+
+
+                    event.preventDefault();
+
+
+
+                    movePiece(index);
+
+
+
+                };
+
+
+
+
+
+            /* Click */
+
+
+
+            square.onclick =
+
+                () => {
+
+
+
+                    clickSquare(index);
+
+
+
+                };
+
+
+
+
+
+            /* Hiển thị các ô quân đang chọn có thể đi tới */
+            if(pieceGame && selected !== null && getPieceGameLegalMoves(selected).includes(index)){
+                const hint = document.createElement("span");
+                hint.className = "move-hint";
+                hint.setAttribute("aria-hidden", "true");
+                square.appendChild(hint);
+            }
+
+            /* Hiển thị ngôi sao cần nhặt trong thử thách */
+            if(pieceGame && pieceGame.stars && pieceGame.stars.has(index)){
+                square.classList.add("has-star");
+                const starElement = document.createElement("span");
+                starElement.className = "board-star";
+                starElement.textContent = "⭐";
+                starElement.setAttribute("aria-label", "Ngôi sao");
+                square.appendChild(starElement);
+            }
+
+
+
+            /* Nếu ô có quân */
+
+
+
+            if(piece){
+
+
+
+                const pieceElement =
+
+                    document.createElement(
+
+                        "span"
+
+                    );
+
+
+
+
+
+                pieceElement.className =
+
+                    "piece";
+
+
+
+
+
+                pieceElement.innerHTML = pieceSvgMarkup(piece);
+
+
+
+
+
+                pieceElement.draggable =
+
+                    true;
+
+
+
+
+
+                pieceElement.ondragstart =
+
+                    event => {
+
+                        selected = index;
+
+                        // Giữ kích thước ô cờ cố định khi kéo quân.
+                        // Chỉ truyền dữ liệu kéo, không thay đổi layout của bàn cờ.
+                        if(event.dataTransfer){
+                            event.dataTransfer.effectAllowed = "move";
+                            event.dataTransfer.setData("text/plain", String(index));
+                        }
+
+                    };
+
+
+
+
+
+                square.appendChild(
+
+                    pieceElement
+
+                );
+
+
+
+            }
+
+
+
+
+
+            board.appendChild(
+
+                square
+
+            );
+
+
+
+        }
+
+    );
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   5. CLICK VÀO Ô
+
+========================================================= */
+
+
+
+function clickSquare(index){
+    if(role==="teacher"&&roomRef){document.getElementById("status").textContent="👀 Giáo viên đang quan sát học sinh.";return;}
+
+
+
+    /* Chưa chọn quân */
+
+
+
+    if(selected === null){
+
+
+
+        if(state[index]){
+
+
+
+            selected = index;
+
+
+
+            renderBoard();
+
+
+
+        }
+
+
+
+        return;
+
+
+
+    }
+
+
+
+
+
+    /* Click lại chính ô đó */
+
+
+
+    if(selected === index){
+
+
+
+        selected = null;
+
+
+
+        renderBoard();
+
+
+
+        return;
+
+
+
+    }
+
+
+
+
+
+    movePiece(index);
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   6. DI CHUYỂN QUÂN
+
+========================================================= */
+
+
+
+function movePiece(to){
+    if(role==="teacher"&&roomRef){selected=null;renderBoard();return;}
+
+
+
+    if(selected === null){
+
+        return;
+
+    }
+
+
+
+
+
+    const from =
+
+        selected;
+
+
+
+
+
+    if(!state[from]){
+
+
+
+        selected = null;
+
+
+
+        renderBoard();
+
+
+
+        return;
+
+
+
+    }
+
+
+
+
+
+    /* Trong trò chơi quân cờ: chỉ cho phép nước đi đúng luật */
+    if(pieceGame){
+        if(!isLegalPieceGameMove(from,to,pieceGame.piece)){
+            document.getElementById("status").textContent = "💡 Chưa đúng luật của " + pieceGameNames[pieceGame.piece] + ". Thử lại nhé!";
+            const bad = board.children[to];
+            if(bad){ bad.classList.remove("illegal"); void bad.offsetWidth; bad.classList.add("illegal"); }
+            selected = from;
+            return;
+        }
+    }
+
+    /* Lưu để hoàn tác */
+
+
+
+    history.push(
+
+        [...state]
+
+    );
+
+
+
+
+
+    const movingPiece =
+
+        state[from];
+
+
+
+
+
+    state[to] =
+
+        movingPiece;
+
+
+
+
+
+    state[from] =
+
+        "";
+
+    let collectedStar = false;
+    if(pieceGame){
+        pieceGame.hasMoved = true;
+        if(pieceGame.stars.has(to)){
+            collectedStar = true;
+            const starNode = board.children[to]?.querySelector(".board-star");
+            if(starNode) starNode.classList.add("collected");
+            pieceGame.stars.delete(to);
+            pieceGame.score++;
+            updatePieceGameBar();
+            if(pieceGame.score >= 6){
+                document.getElementById("status").innerHTML = "🏆 <b>Xuất sắc!</b> Em đã nhặt đủ 6/6 ngôi sao với " + pieceGameNames[pieceGame.piece] + "!";
+            }
+        }
+    }
+
+
+
+    selected =
+
+        null;
+
+
+
+
+
+    lastFrom =
+
+        from;
+
+
+
+
+
+    lastTo =
+
+        to;
+
+
+
+
+
+    const message =
+
+        (
+
+            role === "student"
+
+            ? "Học sinh"
+
+            : "Giáo viên"
+
+        )
+
+        +
+
+        " đi "
+
+        +
+
+        squareName(from)
+
+        +
+
+        " → "
+
+        +
+
+        squareName(to);
+
+
+
+
+
+    addLog(message);
+
+
+
+
+
+    if(!pieceGame || pieceGame.score < 6){
+        document.getElementById(
+            "status"
+        ).innerHTML = pieceGame
+            ? "⭐ Đúng luật! Điểm: <b>" + pieceGame.score + "/6</b>"
+            : "👏 <b>Tốt lắm!</b> " + squareName(from) + " → " + squareName(to);
+    }
+
+
+
+
+
+    if(collectedStar){
+        // Cho hoạt ảnh nhặt sao chạy xong rồi mới vẽ lại bàn; sao đã bị xóa khỏi Set nên sẽ biến mất.
+        setTimeout(renderBoard, 300);
+    }else{
+        renderBoard();
+    }
+
+    sendBoard();
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   7. TÊN Ô CỜ
+
+========================================================= */
+
+
+
+function squareName(index){
+
+
+
+    const files =
+
+        "abcdefgh";
+
+
+
+
+
+    const column =
+
+        index % 8;
+
+
+
+
+
+    const row =
+
+        Math.floor(index / 8);
+
+
+
+
+
+    return (
+
+        files[column]
+
+        +
+
+        (8 - row)
+
+    );
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   8. NHẬT KÝ
+
+========================================================= */
+
+
+
+function addLog(text){
+
+
+
+    const log =
+
+        document.getElementById(
+
+            "log"
+
+        );
+
+
+
+
+
+    const entry =
+
+        document.createElement(
+
+            "div"
+
+        );
+
+
+
+
+
+    entry.className =
+
+        "log-entry";
+
+
+
+
+
+    entry.textContent =
+
+        new Date()
+
+            .toLocaleTimeString(
+
+                "vi-VN"
+
+            )
+
+        +
+
+        " • "
+
+        +
+
+        text;
+
+
+
+
+
+    log.prepend(
+
+        entry
+
+    );
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   9. CHỌN VAI TRÒ
+
+========================================================= */
+
+
+
+function setRole(newRole){
+
+
+
+    role =
+
+        newRole;
+
+
+
+
+
+    document
+
+        .getElementById(
+
+            "studentBtn"
+
+        )
+
+        .classList.toggle(
+
+            "active",
+
+            role === "student"
+
+        );
+
+
+
+
+
+    document
+
+        .getElementById(
+
+            "teacherBtn"
+
+        )
+
+        .classList.toggle(
+
+            "active",
+
+            role === "teacher"
+
+        );
+
+
+
+
+
+    if(
+
+        role === "teacher"
+
+    ){
+
+
+
+        document.getElementById(
+
+            "missionText"
+
+        ).textContent =
+
+            "Quan sát học sinh thao tác trực tiếp trên bàn cờ.";
+
+
+
+    }
+
+
+
+    else{
+
+
+
+        document.getElementById(
+
+            "missionText"
+
+        ).textContent =
+
+            "Hãy thử di chuyển một quân cờ trên bàn.";
+
+
+
+    }
+
+
+
+
+
+    addLog(
+
+        "Đổi vai trò thành "
+
+        +
+
+        (
+
+            role === "teacher"
+
+            ? "Giáo viên"
+
+            : "Học sinh"
+
+        )
+
+    );
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+   10. PHÒNG HỌC FIREBASE
+========================================================= */
+function normalizeRoomCode(v){return String(v||"").trim().toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,8);}
+function stopRoomListener(){if(roomUnsubscribe){roomUnsubscribe();roomUnsubscribe=null;}}
+function listenToRoom(){
+  stopRoomListener();
+  roomUnsubscribe=roomRef.onSnapshot(snap=>{
+    if(!snap.exists)return;
+    const data=snap.data();
+    if(Array.isArray(data.state)&&data.state.length===64){state=[...data.state];lastFrom=data.lastFrom??null;lastTo=data.lastTo??null;selected=null;renderBoard();}
+    if(role==="teacher"&&data.studentOnline)document.getElementById("connection").innerHTML='<div class="dot"></div>Học sinh đã vào • Phòng '+room;
+  },err=>{console.error(err);document.getElementById("status").textContent="Không thể kết nối Firebase. Kiểm tra Firestore Rules và Internet.";});
+}
+async function createRoom(){
+  try{
+    setRole("teacher");room=String(Math.floor(100000+Math.random()*900000));document.getElementById("roomCode").value=room;roomRef=db.collection("rooms").doc(room);
+    state=getStartPosition();lastFrom=lastTo=selected=null;renderBoard();
+    await roomRef.set({state:[...state],lastFrom:null,lastTo:null,studentOnline:false,lastActor:"teacher",createdAt:firebase.firestore.FieldValue.serverTimestamp(),updatedAt:firebase.firestore.FieldValue.serverTimestamp()});
+    listenToRoom();document.getElementById("connection").innerHTML='<div class="dot"></div>Đã tạo phòng '+room+' • Chờ học sinh';document.getElementById("status").innerHTML='📨 Gửi mã <b>'+room+'</b> cho học sinh.';addLog("Giáo viên đã tạo phòng "+room);
+  }catch(e){console.error(e);alert("Không tạo được phòng. Kiểm tra Firestore Rules và Internet.");}
+}
+async function joinRoom(){
+  try{
+    room=normalizeRoomCode(document.getElementById("roomCode").value);if(!room){alert("Hãy nhập mã phòng.");return;}document.getElementById("roomCode").value=room;roomRef=db.collection("rooms").doc(room);
+    const snap=await roomRef.get();if(!snap.exists){alert("Không tìm thấy phòng "+room+".");roomRef=null;return;}
+    if(role==="student")await roomRef.update({studentOnline:true,updatedAt:firebase.firestore.FieldValue.serverTimestamp()});
+    listenToRoom();document.getElementById("connection").innerHTML='<div class="dot"></div>Đã vào phòng '+room;document.getElementById("status").textContent=role==="student"?"✅ Đã kết nối với giáo viên.":"👀 Đang quan sát học sinh.";addLog((role==="student"?"Học sinh":"Giáo viên")+" đã vào phòng "+room);
+  }catch(e){console.error(e);alert("Không vào được phòng. Kiểm tra Firestore Rules và Internet.");}
+}
+/* =========================================================
+   11. GỬI BÀN CỜ LÊN FIRESTORE
+========================================================= */
+async function sendBoard(){
+  if(pieceGame)return;
+  if(!roomRef||role!=="student")return;
+  try{await roomRef.update({state:[...state],lastFrom:lastFrom??null,lastTo:lastTo??null,lastActor:"student",studentOnline:true,updatedAt:firebase.firestore.FieldValue.serverTimestamp()});}
+  catch(e){console.error(e);document.getElementById("status").textContent="⚠️ Chưa gửi được thao tác lên Firebase.";}
+}
+
+/* =========================================================
+   TRÒ CHƠI: MỖI QUÂN MỘT BÀN CỜ RIÊNG, NHẶT 10 SAO
+========================================================= */
+function isPathClear(from,to){
+  const fr=Math.floor(from/8), fc=from%8, tr=Math.floor(to/8), tc=to%8;
+  const dr=Math.sign(tr-fr), dc=Math.sign(tc-fc);
+  let r=fr+dr,c=fc+dc;
+  while(r!==tr || c!==tc){ if(state[r*8+c]) return false; r+=dr;c+=dc; }
+  return true;
+}
+function isLegalPieceGameMove(from,to,piece){
+  if(from===to || state[to]) return false;
+  const fr=Math.floor(from/8),fc=from%8,tr=Math.floor(to/8),tc=to%8;
+  const dr=tr-fr,dc=tc-fc,ar=Math.abs(dr),ac=Math.abs(dc);
+  if(piece==="R") return (dr===0||dc===0) && isPathClear(from,to);
+  if(piece==="B") return ar===ac && ar>0 && isPathClear(from,to);
+  if(piece==="Q") return ((dr===0||dc===0)||(ar===ac&&ar>0)) && isPathClear(from,to);
+  if(piece==="K") return Math.max(ar,ac)===1;
+  if(piece==="N") return (ar===2&&ac===1)||(ar===1&&ac===2);
+  if(piece==="P") return dc===0 && (dr===-1 || (!pieceGame.hasMoved && fr===6 && dr===-2));
+  return false;
+}
+function randomChoice(a){return a[Math.floor(Math.random()*a.length)];}
+function generateStarPath(piece,start,limit=6){
+  const stars=[]; let cur=start; let first=true; let guard=0;
+  while(stars.length<limit && guard++<1000){
+    const candidates=[];
+    for(let to=0;to<64;to++){
+      if(to===cur || stars.includes(to)) continue;
+      const saved=pieceGame;
+      pieceGame={piece,hasMoved:!first,stars:new Set(),score:0};
+      state=Array(64).fill(""); state[cur]=piece;
+      if(isLegalPieceGameMove(cur,to,piece)) candidates.push(to);
+      pieceGame=saved;
+    }
+    if(!candidates.length) break;
+    const next=randomChoice(candidates); stars.push(next); cur=next; first=false;
+  }
+  return stars;
+}
+function startPieceGame(piece){
+  history=[]; lastFrom=lastTo=selected=null;
+  let start = piece==="P" ? 52 : 36; // e2 cho Tốt, e4 cho các quân khác
+  state=Array(64).fill(""); state[start]=piece;
+  pieceGame={piece,stars:new Set(),score:0,hasMoved:false};
+  let stars=[];
+
+  // Chỉ dùng 6 sao. Các vị trí được chọn cách xa nhau để bàn cờ thoáng,
+  // học sinh phải di chuyển quân qua nhiều ô thay vì nhặt các sao liền nhau.
+  if(piece==="P"){
+    // Hai Tốt ở c2 và f2; mỗi quân có 3 sao trên đường tiến riêng.
+    // Các sao xen kẽ theo hàng nên không nằm sát nhau.
+    const pawnC=50; // c2
+    const pawnF=53; // f2
+    state=Array(64).fill("");
+    state[pawnC]="P"; state[pawnF]="P";
+    stars=[42,26,10, 37,21,5]; // c3,c5,c7 và f4,f6,f8
+  }else if(piece==="B"){
+    // Hai Tượng ở hai màu ô khác nhau, mỗi Tượng phụ trách 3 sao.
+    const bishopA=36; // e4
+    const bishopB=35; // d4
+    state=Array(64).fill("");
+    state[bishopA]="B"; state[bishopB]="B";
+    stars=[0,18,54, 7,21,51];
+  }else if(piece==="R"){
+    stars=[0,7,16,47,56,63];
+  }else if(piece==="Q"){
+    stars=[2,7,16,47,56,61];
+  }else if(piece==="K"){
+    stars=[0,7,18,45,56,63];
+  }else if(piece==="N"){
+    stars=[1,14,16,47,49,62];
+  }
+
+  pieceGame.stars=new Set(stars);
+  document.getElementById("pieceGameBar").classList.add("show");
+  document.getElementById("pieceGameTitle").textContent="⭐ Thử thách " + pieceGameNames[piece];
+  document.getElementById("pieceGameHelp").textContent=pieceGameTips[piece].replace(/10/g,"6");
+  document.querySelectorAll(".board-toolbar").forEach(x=>x.style.display="none");
+  document.getElementById("missionText").textContent="Đi đúng luật và nhặt đủ 6 ngôi sao. Mỗi sao = 1 điểm.";
+  updatePieceGameBar(); renderBoard();
+}
+function updatePieceGameBar(){
+  document.getElementById("pieceGameScore").textContent="⭐ " + pieceGame.score + " / 6";
+}
+function exitPieceGame(){
+  pieceGame=null; history=[]; selected=lastFrom=lastTo=null; state=getStartPosition();
+  document.getElementById("pieceGameBar").classList.remove("show");
+  document.querySelectorAll(".board-toolbar").forEach(x=>x.style.display="flex");
+  document.getElementById("missionText").textContent=role==="teacher"?"Quan sát học sinh thao tác trực tiếp trên bàn cờ.":"Hãy thử di chuyển một quân cờ trên bàn.";
+  renderBoard();
+}
+document.querySelectorAll(".lesson[data-piece]").forEach(item=>{
+  item.addEventListener("click",()=>{
+    document.querySelectorAll(".lesson").forEach(x=>x.classList.remove("active")); item.classList.add("active");
+    const p=item.dataset.piece;
+    if(p==="FREE") exitPieceGame(); else startPieceGame(p);
+  });
+});
+
+/* =========================================================
+
+   12. XẾP BÀN CHUẨN
+
+========================================================= */
+
+
+
+function setupStart(){
+
+
+
+    history.push(
+
+        [...state]
+
+    );
+
+
+
+
+
+    state =
+
+        getStartPosition();
+
+
+
+
+
+    lastFrom =
+
+        null;
+
+
+
+
+
+    lastTo =
+
+        null;
+
+
+
+
+
+    selected =
+
+        null;
+
+
+
+
+
+    renderBoard();
+
+
+
+
+
+    addLog(
+
+        "Đã xếp bàn cờ chuẩn"
+
+    );
+
+
+
+
+
+    sendBoard();
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   13. XÓA BÀN
+
+========================================================= */
+
+
+
+function clearBoard(){
+
+
+
+    history.push(
+
+        [...state]
+
+    );
+
+
+
+
+
+    state =
+
+        Array(64).fill("");
+
+
+
+
+
+    selected =
+
+        null;
+
+
+
+
+
+    lastFrom =
+
+        null;
+
+
+
+
+
+    lastTo =
+
+        null;
+
+
+
+
+
+    renderBoard();
+
+
+
+
+
+    addLog(
+
+        "Đã xóa bàn cờ"
+
+    );
+
+
+
+
+
+    sendBoard();
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   14. HOÀN TÁC
+
+========================================================= */
+
+
+
+function undoMove(){
+
+
+
+    if(
+
+        history.length === 0
+
+    ){
+
+
+
+        document
+
+            .getElementById(
+
+                "status"
+
+            )
+
+            .textContent =
+
+                "Chưa có nước đi nào để quay lại.";
+
+
+
+        return;
+
+
+
+    }
+
+
+
+
+
+    state =
+
+        history.pop();
+
+
+
+
+
+    selected =
+
+        null;
+
+
+
+
+
+    lastFrom =
+
+        null;
+
+
+
+
+
+    lastTo =
+
+        null;
+
+
+
+
+
+    renderBoard();
+
+
+
+
+
+    addLog(
+
+        "Đã quay lại thao tác trước"
+
+    );
+
+
+
+
+
+    sendBoard();
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   15. KHỞI TẠO
+
+========================================================= */
+
+
+
+state =
+
+    getStartPosition();
+
+
+
+
+
+renderBoard();
+
+
+
+
+
+addLog(
+
+    "Bàn cờ đã sẵn sàng!"
+
+);
+
+</script>
 </body>
 
 </html>
