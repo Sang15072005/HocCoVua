@@ -1,0 +1,1658 @@
+/* =========================================================
+
+   1. MÀU SẮC CHÍNH
+
+========================================================= */
+
+:root{
+
+    --blue:#4A90E2;
+
+    --blue-dark:#3176C5;
+
+    --blue-light:#EAF5FF;
+
+
+
+    --yellow:#FFD166;
+
+    --cream:#FFF8E8;
+
+
+
+    --green:#72C596;
+
+    --green-dark:#4EAA77;
+
+
+
+    --orange:#FF9F68;
+
+    --red:#F06A6A;
+
+
+
+    --text:#334155;
+
+    --muted:#718096;
+
+
+
+    --white:#FFFFFF;
+
+
+
+    --board-light:#FFF0C7;
+
+    --board-dark:#79B7E8;
+
+
+
+    --shadow:0 8px 24px rgba(53,94,130,.13);
+
+}
+
+
+
+/* =========================================================
+
+   2. CÀI ĐẶT CHUNG
+
+========================================================= */
+
+
+
+*{
+
+    box-sizing:border-box;
+
+}
+
+
+
+body{
+
+    margin:0;
+
+    font-family:
+
+        "Segoe UI",
+
+        Arial,
+
+        sans-serif;
+
+
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #EAF7FF 0%,
+
+            #F8FCFF 45%,
+
+            #FFF9EC 100%
+
+        );
+
+
+
+    color:var(--text);
+
+    min-height:100vh;
+
+}
+
+
+
+button,
+
+input{
+
+    font:inherit;
+
+}
+
+
+
+button{
+
+    cursor:pointer;
+
+}
+
+
+
+/* =========================================================
+
+   3. HEADER
+
+========================================================= */
+
+
+
+.header{
+
+    height:82px;
+
+    background:white;
+
+
+
+    display:flex;
+
+    align-items:center;
+
+
+
+    padding:0 34px;
+
+
+
+    border-bottom:4px solid #DDEFFF;
+
+
+
+    box-shadow:
+
+        0 3px 15px rgba(70,120,160,.08);
+
+}
+
+
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+}
+
+
+
+.logo-icon{
+
+    width:53px;
+
+    height:53px;
+
+
+
+    border-radius:17px;
+
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+
+    font-size:32px;
+
+
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            var(--blue),
+
+            #77C4F5
+
+        );
+
+
+
+    color:white;
+
+
+
+    box-shadow:
+
+        0 5px 0 #2871B5;
+
+}
+
+
+
+.logo-text strong{
+
+    display:block;
+
+    font-size:23px;
+
+    color:#306EA8;
+
+}
+
+
+
+.logo-text span{
+
+    font-size:13px;
+
+    color:#8294A6;
+
+}
+
+
+
+/* ----- Mã phòng ----- */
+
+
+
+.room-box{
+
+    margin-left:auto;
+
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+
+
+    background:#F3F9FF;
+
+
+
+    padding:8px;
+
+
+
+    border-radius:15px;
+
+
+
+    border:2px solid #D9ECFA;
+
+}
+
+
+
+.room-box span{
+
+    font-weight:700;
+
+    color:#4C7193;
+
+    padding-left:8px;
+
+}
+
+
+
+.room-box input{
+
+    width:100px;
+
+
+
+    border:2px solid #D4E6F4;
+
+    background:white;
+
+
+
+    padding:10px;
+
+
+
+    border-radius:10px;
+
+
+
+    text-align:center;
+
+    font-weight:800;
+
+
+
+    color:#3675AC;
+
+    outline:none;
+
+}
+
+
+
+.room-box input:focus{
+
+    border-color:var(--blue);
+
+}
+
+
+
+/* =========================================================
+
+   4. BUTTON
+
+========================================================= */
+
+
+
+.btn{
+
+    border:none;
+
+    border-radius:11px;
+
+
+
+    padding:11px 16px;
+
+
+
+    font-weight:750;
+
+
+
+    transition:.18s;
+
+}
+
+
+
+.btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+
+
+.btn:active{
+
+    transform:translateY(1px);
+
+}
+
+
+
+.btn-blue{
+
+    background:var(--blue);
+
+    color:white;
+
+    box-shadow:0 4px 0 var(--blue-dark);
+
+}
+
+
+
+.btn-green{
+
+    background:var(--green);
+
+    color:white;
+
+    box-shadow:0 4px 0 var(--green-dark);
+
+}
+
+
+
+.btn-yellow{
+
+    background:var(--yellow);
+
+    color:#745800;
+
+    box-shadow:0 4px 0 #E6AF37;
+
+}
+
+
+
+.btn-orange{
+
+    background:var(--orange);
+
+    color:white;
+
+    box-shadow:0 4px 0 #DD7845;
+
+}
+
+
+
+.btn-soft{
+
+    background:#EEF5FA;
+
+    color:#55718A;
+
+    box-shadow:0 4px 0 #D5E3ED;
+
+}
+
+
+
+/* =========================================================
+
+   5. BỐ CỤC
+
+========================================================= */
+
+
+
+.app{
+
+    max-width:1450px;
+
+    margin:28px auto;
+
+
+
+    padding:0 24px;
+
+
+
+    display:grid;
+
+
+
+    grid-template-columns:
+
+        270px
+
+        minmax(500px, 650px)
+
+        330px;
+
+
+
+    gap:27px;
+
+
+
+    align-items:start;
+
+}
+
+
+
+/* =========================================================
+
+   6. CARD
+
+========================================================= */
+
+
+
+.card{
+
+    background:white;
+
+
+
+    border-radius:22px;
+
+
+
+    box-shadow:var(--shadow);
+
+
+
+    border:2px solid #E8F2F8;
+
+
+
+    overflow:hidden;
+
+}
+
+
+
+/* =========================================================
+
+   7. MENU BÊN TRÁI
+
+========================================================= */
+
+
+
+.profile{
+
+    padding:22px;
+
+
+
+    text-align:center;
+
+
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #E6F5FF,
+
+            #FFF8DE
+
+        );
+
+}
+
+
+
+.avatar{
+
+    width:75px;
+
+    height:75px;
+
+
+
+    margin:auto;
+
+
+
+    border-radius:50%;
+
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+
+    background:white;
+
+
+
+    border:5px solid #BFE3FA;
+
+
+
+    font-size:40px;
+
+}
+
+
+
+.profile h3{
+
+    margin:11px 0 4px;
+
+    color:#3479B4;
+
+}
+
+
+
+.profile p{
+
+    margin:0;
+
+    color:#7D92A4;
+
+    font-size:14px;
+
+}
+
+
+
+/* ----- Bài học ----- */
+
+
+
+.lesson-title{
+
+    padding:18px 20px 10px;
+
+
+
+    font-size:13px;
+
+    font-weight:800;
+
+
+
+    color:#9AA8B5;
+
+
+
+    text-transform:uppercase;
+
+}
+
+
+
+.lesson{
+
+    margin:7px 12px;
+
+
+
+    padding:13px 14px;
+
+
+
+    border-radius:13px;
+
+
+
+    display:flex;
+
+    align-items:center;
+
+
+
+    gap:12px;
+
+
+
+    font-weight:700;
+
+
+
+    color:#63788B;
+
+
+
+    cursor:pointer;
+
+
+
+    transition:.2s;
+
+}
+
+
+
+.lesson:hover{
+
+    background:#F1F8FD;
+
+    transform:translateX(3px);
+
+}
+
+
+
+.lesson.active{
+
+    color:white;
+
+
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            var(--blue),
+
+            #6DB7E9
+
+        );
+
+
+
+    box-shadow:
+
+        0 5px 12px rgba(74,144,226,.25);
+
+}
+
+
+
+.lesson-icon{
+
+    width:34px;
+
+    height:34px;
+
+
+
+    border-radius:10px;
+
+
+
+    background:rgba(255,255,255,.22);
+
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+
+    font-size:22px;
+
+}
+
+
+
+/* =========================================================
+
+   8. KHU VỰC BÀN CỜ
+
+========================================================= */
+
+
+
+.center{
+
+    min-width:0;
+
+}
+
+
+
+.welcome{
+
+    background:white;
+
+
+
+    border-radius:18px;
+
+
+
+    padding:16px 20px;
+
+
+
+    margin-bottom:16px;
+
+
+
+    box-shadow:var(--shadow);
+
+
+
+    border:2px solid #E6F2F9;
+
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+}
+
+
+
+.welcome-icon{
+
+    font-size:33px;
+
+}
+
+
+
+.welcome strong{
+
+    display:block;
+
+    color:#3677AD;
+
+    font-size:18px;
+
+}
+
+
+
+.welcome span{
+
+    color:#7C8F9E;
+
+    font-size:14px;
+
+}
+
+
+
+/* ----- Board container ----- */
+
+
+
+.board-shell{
+
+    padding:13px;
+
+
+
+    border-radius:23px;
+
+
+
+    background:white;
+
+
+
+    box-shadow:
+
+        0 12px 35px rgba(47,100,140,.18);
+
+
+
+    border:3px solid #DDEFFA;
+
+}
+
+
+
+.board{
+
+    width:100%;
+
+
+
+    aspect-ratio:1;
+
+
+
+    display:grid;
+
+
+
+    grid-template-columns:repeat(8, minmax(0, 1fr));
+
+    grid-template-rows:repeat(8, minmax(0, 1fr));
+
+    overflow:hidden;
+
+
+
+    border-radius:14px;
+
+}
+
+
+
+/* ----- Ô cờ ----- */
+
+
+
+.square{
+
+    position:relative;
+
+    min-width:0;
+    min-height:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+
+    user-select:none;
+
+
+
+    font-size:
+
+        clamp(
+
+            36px,
+
+            5vw,
+
+            62px
+
+        );
+
+}
+
+
+
+.light{
+
+    background:var(--board-light);
+
+}
+
+
+
+.dark{
+
+    background:var(--board-dark);
+
+}
+
+
+
+/* ----- Quân đang chọn ----- */
+
+
+
+.square.selected{
+
+    box-shadow:
+
+        inset 0 0 0 6px
+
+        rgba(255,196,0,.95);
+
+
+
+    z-index:2;
+
+}
+
+
+
+/* ----- Hiển thị ô vừa đi ----- */
+
+
+
+.square.last{
+
+    box-shadow:
+
+        inset 0 0 0 5px
+
+        rgba(91,197,111,.75);
+
+}
+
+
+
+/* ----- Quân cờ ----- */
+
+
+
+.piece{
+
+    cursor:grab;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    height:100%;
+    line-height:1;
+    flex:0 0 auto;
+
+
+
+    filter:
+
+        drop-shadow(
+
+            0 3px 1px
+
+            rgba(0,0,0,.16)
+
+        );
+
+
+
+    transition:.12s;
+
+}
+
+
+
+.piece:hover{
+
+    transform:scale(1.08);
+
+}
+
+
+
+.piece:active{
+
+    cursor:grabbing;
+
+    transform:scale(.94);
+
+}
+
+
+
+/* =========================================================
+
+   9. THANH DƯỚI BÀN CỜ
+
+========================================================= */
+
+
+
+.board-toolbar{
+
+    margin-top:15px;
+
+
+
+    display:flex;
+
+    gap:9px;
+
+
+
+    flex-wrap:wrap;
+
+}
+
+
+
+.board-toolbar button{
+
+    flex:1;
+
+    min-width:125px;
+
+}
+
+
+
+/* =========================================================
+
+   10. PANEL GIÁO VIÊN / HỌC SINH
+
+========================================================= */
+
+
+
+.panel-header{
+
+    padding:20px;
+
+
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #4A90E2,
+
+            #69B6E8
+
+        );
+
+
+
+    color:white;
+
+}
+
+
+
+.panel-header h2{
+
+    margin:0;
+
+    font-size:20px;
+
+}
+
+
+
+.panel-header p{
+
+    margin:5px 0 0;
+
+    opacity:.88;
+
+    font-size:13px;
+
+}
+
+
+
+.panel-content{
+
+    padding:19px;
+
+}
+
+
+
+/* ----- Vai trò ----- */
+
+
+
+.roles{
+
+    display:grid;
+
+
+
+    grid-template-columns:1fr 1fr;
+
+
+
+    gap:9px;
+
+
+
+    margin-bottom:17px;
+
+}
+
+
+
+.role-btn{
+
+    border:2px solid #E2ECF3;
+
+
+
+    padding:12px 5px;
+
+
+
+    border-radius:12px;
+
+
+
+    background:#F7FAFC;
+
+
+
+    color:#708393;
+
+
+
+    font-weight:800;
+
+}
+
+
+
+.role-btn.active{
+
+    background:#E9F5FF;
+
+
+
+    border-color:#67ADE1;
+
+
+
+    color:#3178B1;
+
+}
+
+
+
+/* ----- Connection ----- */
+
+
+
+.connection{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+
+
+    padding:11px 12px;
+
+
+
+    background:#F0FAF4;
+
+
+
+    color:#4C8B65;
+
+
+
+    border-radius:11px;
+
+
+
+    font-size:13px;
+
+
+
+    font-weight:700;
+
+
+
+    margin-bottom:14px;
+
+}
+
+
+
+.dot{
+
+    width:10px;
+
+    height:10px;
+
+
+
+    background:#5AC47A;
+
+
+
+    border-radius:50%;
+
+
+
+    box-shadow:
+
+        0 0 0 4px
+
+        rgba(90,196,122,.15);
+
+}
+
+
+
+/* ----- Nhiệm vụ ----- */
+
+
+
+.mission{
+
+    padding:16px;
+
+
+
+    border-radius:15px;
+
+
+
+    background:#FFF8DF;
+
+
+
+    border:2px dashed #F2CE69;
+
+
+
+    margin-bottom:17px;
+
+}
+
+
+
+.mission-title{
+
+    color:#A87800;
+
+
+
+    font-size:14px;
+
+    font-weight:900;
+
+
+
+    margin-bottom:5px;
+
+}
+
+
+
+.mission p{
+
+    margin:0;
+
+
+
+    font-size:14px;
+
+
+
+    color:#796942;
+
+
+
+    line-height:1.5;
+
+}
+
+
+
+/* ----- Status ----- */
+
+
+
+.status{
+
+    padding:13px;
+
+
+
+    border-radius:12px;
+
+
+
+    background:#EFF7FD;
+
+
+
+    color:#557B98;
+
+
+
+    font-size:14px;
+
+
+
+    line-height:1.5;
+
+
+
+    margin-bottom:15px;
+
+}
+
+
+
+/* =========================================================
+
+   11. NHẬT KÝ
+
+========================================================= */
+
+
+
+.log-title{
+
+    font-size:14px;
+
+
+
+    font-weight:900;
+
+
+
+    color:#60788B;
+
+
+
+    margin-bottom:8px;
+
+}
+
+
+
+.log{
+
+    height:145px;
+
+
+
+    overflow:auto;
+
+
+
+    background:#F8FAFC;
+
+
+
+    border-radius:12px;
+
+
+
+    padding:10px;
+
+
+
+    border:1px solid #E7EEF3;
+
+
+
+    font-size:13px;
+
+}
+
+
+
+.log-entry{
+
+    padding:7px 4px;
+
+
+
+    border-bottom:
+
+        1px dashed #E3EAF0;
+
+
+
+    color:#6B7E8C;
+
+}
+
+
+
+/* =========================================================
+
+   12. SAO KHEN THƯỞNG
+
+========================================================= */
+
+
+
+.reward{
+
+    margin-top:15px;
+
+
+
+    display:flex;
+
+
+
+    justify-content:center;
+
+
+
+    gap:5px;
+
+
+
+    font-size:26px;
+
+}
+
+
+
+/* =========================================================
+
+   13. RESPONSIVE
+
+========================================================= */
+
+
+
+@media(max-width:1150px){
+
+
+
+    .app{
+
+        grid-template-columns:
+
+            220px
+
+            minmax(450px,1fr)
+
+            300px;
+
+    }
+
+
+
+}
+
+
+
+@media(max-width:950px){
+
+
+
+    .app{
+
+        grid-template-columns:1fr;
+
+        max-width:680px;
+
+    }
+
+
+
+    .sidebar{
+
+        display:none;
+
+    }
+
+
+
+    .header{
+
+        padding:0 15px;
+
+    }
+
+
+
+    .logo-text span{
+
+        display:none;
+
+    }
+
+
+
+}
+
+
+
+@media(max-width:600px){
+
+
+
+    .room-box span{
+
+        display:none;
+
+    }
+
+
+
+    .room-box input{
+
+        width:75px;
+
+    }
+
+
+
+    .logo-text{
+
+        display:none;
+
+    }
+
+
+
+    .header{
+
+        height:70px;
+
+    }
+
+
+
+    .app{
+
+        padding:0 10px;
+
+        margin-top:15px;
+
+    }
+
+
+
+    .board-shell{
+
+        padding:7px;
+
+    }
+
+
+
+}
+
+
+/* ===== TRÒ CHƠI NHẶT SAO THEO LUẬT QUÂN CỜ ===== */
+.piece-game-bar{display:none;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px;padding:12px 16px;border-radius:16px;background:#fff7d6;border:2px solid #ffd45c;font-weight:800;color:#5b6574;box-shadow:0 6px 16px rgba(79,116,150,.10)}
+.piece-game-bar.show{display:flex}
+.piece-game-title{font-size:17px;color:#4679a8}
+.piece-game-score{background:#fff;border-radius:999px;padding:8px 13px;color:#e49a00;white-space:nowrap}
+.piece-game-help{font-size:13px;font-weight:700;color:#7b8794;margin-top:3px}
+.board-star{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    font-size:clamp(24px,4vw,42px);
+    line-height:1;
+    pointer-events:none;
+    z-index:1;
+    filter:drop-shadow(0 3px 3px rgba(153,103,0,.30));
+    animation:starFloat 1.15s ease-in-out infinite, starGlow .9s ease-in-out infinite alternate;
+}
+.square .piece{position:relative;z-index:2}
+.square.illegal{animation:badMove .28s ease}
+@keyframes badMove{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@keyframes starFloat{
+    0%,100%{transform:translate(-50%,-50%) translateY(0) rotate(-5deg) scale(1)}
+    50%{transform:translate(-50%,-50%) translateY(-7px) rotate(5deg) scale(1.12)}
+}
+@keyframes starGlow{
+    from{filter:drop-shadow(0 2px 2px rgba(153,103,0,.25));opacity:.88}
+    to{filter:drop-shadow(0 0 10px rgba(255,201,40,.95));opacity:1}
+}
+@keyframes starCollected{
+    0%{transform:translate(-50%,-50%) scale(1);opacity:1}
+    65%{transform:translate(-50%,-70%) scale(1.55) rotate(18deg);opacity:1}
+    100%{transform:translate(-50%,-110%) scale(.2) rotate(35deg);opacity:0}
+}
+.board-star.collected{animation:starCollected .32s ease-out forwards}
+
+/* ===== GỢI Ý NƯỚC ĐI BẰNG CHẤM MỜ ===== */
+.move-hint{position:absolute;left:50%;top:50%;width:25%;height:25%;transform:translate(-50%,-50%);border-radius:50%;background:rgba(75,105,61,.68);pointer-events:none;z-index:3;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.square.has-star .move-hint{width:18%;height:18%;left:78%;top:22%;background:rgba(75,105,61,.55)}
