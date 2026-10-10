@@ -4103,18 +4103,26 @@ const MATE_EXERCISES = [{"num": 52, "fen": "7R/8/8/8/3p4/8/r7/k1K4Q w - - 0 1"},
 // Đáp án sách: nước mở đầu và các phương án đáp trả tiêu biểu.
 // Tên quân: X=Xe, H=Hậu, T=Tượng, V=Vua; dấu ! chỉ nước then chốt.
 const MATE_BOOK = [
+ // Hình 52–54: giữ nguyên lời giải đã thiết lập
  {first:'h8a8', branches:[['a2a8','h1a8'],['d4d3','h1h8']]},
  {first:'a2a3', branches:[['b4a3','a1a3'],['a4a5','a3b4']]},
  {first:'h3f5', branches:[['h8h7','h2h5'],['g6f5','h2h5']]},
- {first:'h6g6', branches:[['h7g6','h5h4'],['h7h5','h5h6'],['a2b2','h5g8']]},
- {first:'c4g4', branches:[['h7g6','g4h4'],['h7h5','g4h6'],['a2b2','g4g8']]},
+ // Hình 55: 1.Xg6! h:g6 2.Xh4#; 1...h5 2.Xh6#
+ {first:'h6g6', branches:[['h7g6','c4h4'],['h7h5','g6h6']]},
+ // Hình 56: 1.Hd6! c:d6 2.Xc1#; c6/c5 2.Hb8#; Xe đi 2.H:d7#
  {first:'h2d6', branches:[['c7d6','d1c1'],['c7c6','d6b8'],['c7c5','d6b8'],['d8d7','d6d7']]},
- {first:'f3b7', branches:[['g6h5','h5h7'],['g6f6','f3h6']]},
- {first:'h3d7', branches:[['a6a5','b3b5'],['b7b6','b3a3'],['b7b5','d7b5'],['a7a8','d7a4']]},
- {first:'f1d8', branches:[['g8h8','d8f8']]},
+ // Hình 57: 1.Hb7! V:h5 2.Hh7#; 1...Vf6 2.Xh6#
+ {first:'f3b7', branches:[['g6h5','b7h7'],['g6f6','h5h6']]},
+ // Hình 58: 1.Hd7! Va5 2.Hb5#; b6 2.Xa3#; b5 2.H:b5#; Xa8 2.Ha4#
+ {first:'h3d7', branches:[['a6a5','d7b5'],['b7b6','b3a3'],['b7b5','d7b5'],['a7a8','d7a4']]},
+ // Hình 59: 1.Hd8! V:b4 2.Hd4#; T:b4 2.Hd1#; a:b4 2.Ha8#
+ {first:'h4d8', branches:[['a4b4','d8d4'],['d2b4','d8d1'],['a5b4','d8a8'],['d2c3','d8a5']]},
+ // Hình 60: 1.Th8! V:h8 2.Hf8#
+ {first:'a1h8', branches:[['g8h8','f1f8']]},
+ // Hình 61: 1.Xa3+! b:a3 2.b3#
  {first:'h3a3', branches:[['b4a3','b2b3']]}
 ];
-function mateBookMove(move){return move && move.from+move.to===MATE_BOOK[mateIndex].first;}
+function mateBookMove(move){return move && MATE_BOOK[mateIndex] && move.from+move.to===MATE_BOOK[mateIndex].first;}
 function mateBookReply(){
  const book=MATE_BOOK[mateIndex];
  for(const [black] of book.branches){
