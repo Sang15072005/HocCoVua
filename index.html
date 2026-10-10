@@ -1715,6 +1715,61 @@ button{
 .mate-side{display:flex;flex-direction:column;gap:9px}.mate-side button{padding:10px;border-radius:10px;border:1px solid #c8e0f2;background:#f0f8ff;font-weight:700}
 .mate-msg{background:#fff6dc;padding:12px;border-radius:12px;line-height:1.5;font-size:14px;min-height:90px}
 @media(max-width:700px){.mate-dialog{padding:12px}.mate-layout{grid-template-columns:1fr;gap:12px}.mate-board{width:min(100%,calc(96vh - 220px))}.mate-side{display:grid;grid-template-columns:1fr 1fr}.mate-msg{grid-column:1/-1}}
+.mate3-overlay{position:fixed;inset:0;z-index:5100;background:#13273aba;display:none;align-items:center;justify-content:center;padding:12px;overflow:auto}.mate3-overlay.open{display:flex}.mate3-dialog{background:white;border-radius:20px;padding:20px;max-width:1160px;width:min(1160px,98vw);max-height:96vh;overflow:auto}.mate3-layout{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:20px}.mate3-board{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));grid-template-rows:repeat(8,minmax(0,1fr));aspect-ratio:1;width:min(100%,calc(96vh - 125px));margin:auto;border:5px solid #e0eaf4;border-radius:10px;overflow:hidden}.mate3-side{display:flex;flex-direction:column;gap:9px}.mate3-side button{padding:10px;border-radius:10px;border:1px solid #c8e0f2;background:#f0f8ff;font-weight:700}@media(max-width:700px){.mate3-layout{grid-template-columns:1fr}.mate3-board{width:min(100%,calc(96vh - 220px))}.mate3-side{display:grid;grid-template-columns:1fr 1fr}.mate3-side .mate-msg{grid-column:1/-1}}
+/* Tọa độ a–h, 1–8 hiển thị trực tiếp trong ô cờ, không làm thu nhỏ bàn cờ. */
+.board>.square,.mate-board>.mate-square,.mate3-board>.mate-square{position:relative}
+.board>.square:nth-child(8n+1)::before,
+.mate-board>.mate-square:nth-child(8n+1)::before,
+.mate3-board>.mate-square:nth-child(8n+1)::before{
+ content:"8";position:absolute;left:3px;top:2px;z-index:5;
+ font-size:clamp(10px,1vw,14px);font-weight:800;line-height:1;
+ color:#285a83;pointer-events:none;text-shadow:0 1px 1px #fff8;
+}
+.board>.square:nth-child(8n+9)::before,
+.mate-board>.mate-square:nth-child(8n+9)::before,
+.mate3-board>.mate-square:nth-child(8n+9)::before{content:"7"}
+.board>.square:nth-child(8n+17)::before,
+.mate-board>.mate-square:nth-child(8n+17)::before,
+.mate3-board>.mate-square:nth-child(8n+17)::before{content:"6"}
+.board>.square:nth-child(8n+25)::before,
+.mate-board>.mate-square:nth-child(8n+25)::before,
+.mate3-board>.mate-square:nth-child(8n+25)::before{content:"5"}
+.board>.square:nth-child(8n+33)::before,
+.mate-board>.mate-square:nth-child(8n+33)::before,
+.mate3-board>.mate-square:nth-child(8n+33)::before{content:"4"}
+.board>.square:nth-child(8n+41)::before,
+.mate-board>.mate-square:nth-child(8n+41)::before,
+.mate3-board>.mate-square:nth-child(8n+41)::before{content:"3"}
+.board>.square:nth-child(8n+49)::before,
+.mate-board>.mate-square:nth-child(8n+49)::before,
+.mate3-board>.mate-square:nth-child(8n+49)::before{content:"2"}
+.board>.square:nth-child(8n+57)::before,
+.mate-board>.mate-square:nth-child(8n+57)::before,
+.mate3-board>.mate-square:nth-child(8n+57)::before{content:"1"}
+.board>.square:nth-child(n+57)::after,
+.mate-board>.mate-square:nth-child(n+57)::after,
+.mate3-board>.mate-square:nth-child(n+57)::after{
+ position:absolute;bottom:2px;right:3px;z-index:5;
+ font-size:clamp(10px,1vw,14px);font-weight:800;line-height:1;
+ color:#285a83;pointer-events:none;text-shadow:0 1px 1px #fff8;
+}
+.board>.square:nth-child(8n+57)::after,.mate-board>.mate-square:nth-child(8n+57)::after,.mate3-board>.mate-square:nth-child(8n+57)::after{content:"a"}
+.board>.square:nth-child(8n+58)::after,.mate-board>.mate-square:nth-child(8n+58)::after,.mate3-board>.mate-square:nth-child(8n+58)::after{content:"b"}
+.board>.square:nth-child(8n+59)::after,.mate-board>.mate-square:nth-child(8n+59)::after,.mate3-board>.mate-square:nth-child(8n+59)::after{content:"c"}
+.board>.square:nth-child(8n+60)::after,.mate-board>.mate-square:nth-child(8n+60)::after,.mate3-board>.mate-square:nth-child(8n+60)::after{content:"d"}
+.board>.square:nth-child(8n+61)::after,.mate-board>.mate-square:nth-child(8n+61)::after,.mate3-board>.mate-square:nth-child(8n+61)::after{content:"e"}
+.board>.square:nth-child(8n+62)::after,.mate-board>.mate-square:nth-child(8n+62)::after,.mate3-board>.mate-square:nth-child(8n+62)::after{content:"f"}
+.board>.square:nth-child(8n+63)::after,.mate-board>.mate-square:nth-child(8n+63)::after,.mate3-board>.mate-square:nth-child(8n+63)::after{content:"g"}
+.board>.square:nth-child(8n+64)::after,.mate-board>.mate-square:nth-child(8n+64)::after,.mate3-board>.mate-square:nth-child(8n+64)::after{content:"h"}
+
+
+/* Đối kháng hai người — bàn cờ vuông và tọa độ */
+.pvp-overlay{position:fixed;inset:0;z-index:5200;background:rgba(18,39,58,.76);display:none;align-items:center;justify-content:center;padding:12px;overflow:auto}
+.pvp-overlay.open{display:flex}.pvp-dialog{background:white;border-radius:20px;padding:18px;width:min(1100px,98vw);max-height:96vh;overflow:auto}
+.pvp-layout{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:18px}.pvp-board{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));grid-template-rows:repeat(8,minmax(0,1fr));width:min(100%,calc(96vh - 120px));aspect-ratio:1;margin:auto;border:5px solid #dcecf7;border-radius:12px;overflow:hidden}
+.pvp-cell{position:relative;min-width:0;min-height:0;display:flex;align-items:center;justify-content:center;cursor:pointer}.pvp-cell.light{background:#fff0c7}.pvp-cell.dark{background:#79b7e8}.pvp-cell.selected{box-shadow:inset 0 0 0 5px #f5c542}.pvp-cell.legal:after{content:'';position:absolute;width:24%;height:24%;background:#3e794e80;border-radius:50%;pointer-events:none}.pvp-cell img{width:86%;height:86%;object-fit:contain;z-index:1;pointer-events:none}
+.pvp-coord{position:absolute;z-index:2;font-size:clamp(9px,1vw,13px);font-weight:800;color:#27465e;opacity:.85;pointer-events:none}.pvp-file{bottom:2px;right:4px}.pvp-rank{top:2px;left:4px}.pvp-side{display:flex;flex-direction:column;gap:10px}.pvp-side button,.pvp-side select{padding:10px;border-radius:10px;border:1px solid #c8e0f2;background:#f0f8ff;font-weight:700}.pvp-status{padding:12px;border-radius:12px;background:#fff5d9;line-height:1.5}.pvp-history{background:#f3f7fb;border-radius:10px;padding:10px;max-height:180px;overflow:auto;overflow-wrap:anywhere;font-size:14px}.pvp-side label{font-weight:700}
+@media(max-width:700px){.pvp-layout{grid-template-columns:1fr}.pvp-board{width:min(100%,calc(96vh - 260px))}.pvp-side{display:grid;grid-template-columns:1fr 1fr}.pvp-status,.pvp-history{grid-column:1/-1}}
 </style>
 
 
@@ -1897,32 +1952,6 @@ button{
         Khám phá quân cờ
 
     </div>
-
-
-
-
-
-    <div class="lesson active" data-piece="FREE">
-
-
-
-        <div class="lesson-icon">
-
-            ♟
-
-        </div>
-
-
-
-        Các quân cờ
-
-
-
-    </div>
-
-
-
-
 
     <div class="lesson" data-piece="R">
 
@@ -2109,7 +2138,7 @@ button{
 
 
 <div class="lesson" id="openMateExercises" role="button" tabindex="0" onclick="openMateExercises(0)" onkeydown="if(event.key==='Enter')openMateExercises(0)"><div class="lesson-icon">♔</div> Chiếu hết trong 2 nước (10 bài)</div>
-</aside>
+<div class="lesson" role="button" tabindex="0" onclick="openMate3(0)"><div class="lesson-icon">♛</div> Chiếu hết trong 3 nước (6 bài)</div><div class="lesson" id="pvpMenu" role="button" tabindex="0" onclick="openPvp()" onkeydown="if(event.key==='Enter')openPvp()"><div class="lesson-icon">⚔️</div> Đối kháng trực tuyến</div></aside>
 
 
 
@@ -2492,6 +2521,20 @@ button{
 <button onclick="matePrev()">← Bài trước</button><button onclick="mateNext()">Bài sau →</button>
 <button onclick="mateReset()">↻ Làm lại</button><button onclick="mateHint()">💡 Gợi ý</button>
 </div></div></div></div>
+<div class="mate3-overlay" id="mate3Overlay" role="dialog" aria-modal="true"><div class="mate3-dialog"><div class="mate-top"><strong id="mate3Title">♛ Chiếu hết trong 3 nước</strong><button class="btn btn-soft" onclick="closeMate3()">✕ Đóng</button></div><div class="mate3-layout"><div class="mate3-board" id="mate3Board"></div><div class="mate3-side"><div class="mate-msg" id="mate3Message"></div><button onclick="openMate3(mate3Index-1)">← Bài trước</button><button onclick="openMate3(mate3Index+1)">Bài sau →</button><button onclick="resetMate3()">↻ Làm lại</button><button onclick="hintMate3()">💡 Gợi ý</button></div></div></div></div>
+<div class="pvp-overlay" id="pvpOverlay" role="dialog" aria-modal="true" aria-label="Đối kháng trực tuyến">
+ <div class="pvp-dialog"><div class="mate-top"><strong>⚔️ Giáo viên đấu với học sinh</strong><button class="btn btn-soft" onclick="closePvp()">✕ Đóng</button></div>
+ <div class="pvp-layout"><div id="pvpBoard" class="pvp-board"></div><div class="pvp-side">
+ <div class="pvp-status" id="pvpStatus">Tạo phòng hoặc vào lớp để bắt đầu.</div>
+ <label for="pvpTeacherColor">Giáo viên cầm quân</label>
+ <select id="pvpTeacherColor"><option value="w">⚪ Trắng</option><option value="b">⚫ Đen</option></select>
+ <button id="pvpStartBtn" onclick="pvpStart()">♟ Bắt đầu ván mới</button>
+ <button onclick="pvpOfferDraw()">🤝 Đề nghị hòa</button>
+ <button onclick="pvpResign()">🏳️ Xin thua</button>
+ <div class="pvp-history" id="pvpHistory">Chưa có nước đi.</div>
+ <small>Giáo viên chọn màu trước khi bắt đầu. Học sinh tự động nhận màu còn lại. Chỉ được đi đúng lượt.</small>
+ </div></div></div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
@@ -3645,7 +3688,7 @@ function applyPieceGameUI(){
   }else{
     document.getElementById("missionText").textContent=role==="teacher"?"Quan sát học sinh thao tác trực tiếp trên bàn cờ.":"Hãy thử di chuyển một quân cờ trên bàn.";
   }
-  document.querySelectorAll(".lesson[data-piece]").forEach(el=>el.classList.toggle("active",el.dataset.piece===(active?pieceGame.piece:"FREE")));
+  document.querySelectorAll(".lesson[data-piece]").forEach(el=>el.classList.toggle("active",active && el.dataset.piece===pieceGame.piece));
 }
 function listenToRoom(){
   stopRoomListener();
@@ -3653,6 +3696,7 @@ function listenToRoom(){
     if(!snap.exists)return;
     const data=snap.data();
     if(data.mateExercise)receiveMateExercise(data.mateExercise);
+    pvpReceive(data.pvp||null);
     // Chỉ nhận dữ liệu từ máy khác hoặc bản đã xác nhận, không xóa nước đi đang chọn.
     if(Array.isArray(data.state)&&data.state.length===64){
       state=[...data.state];lastFrom=data.lastFrom??null;lastTo=data.lastTo??null;
@@ -4159,6 +4203,20 @@ function receiveMateExercise(data){
   }
 }
 
+
+/* ===== BÀI TẬP CHIẾU HẾT TRONG 3 NƯỚC: HÌNH 162–167 ===== */
+const MATE3_DATA=[{"num": 162, "fen": "k2N4/7R/8/4K3/8/8/8/8 w - - 0 1", "lines": [["e5d6", "a8b8", "d8c6", "b8a8", "h7a7"]]}, {"num": 163, "fen": "8/6P1/8/8/8/3K4/1k6/R7 w - - 0 1", "lines": [["g7g8r", "b2a1", "d3c2", "a1b2", "g8a8"]]}, {"num": 164, "fen": "3k4/8/8/3B4/8/3Q4/3K4/8 w - - 0 1", "lines": [["d3h7", "d8c8", "d5c6", "c8b8", "h7b7"]]}, {"num": 165, "fen": "4R3/8/8/8/8/8/1k6/R2K4 w - - 0 1", "lines": [["a1b1", "b2c3", "e8a8", "c3d3", "b1b3"]]}, {"num": 166, "fen": "6nk/4R3/R7/5K2/8/8/8/8 w - - 0 1", "lines": [["a6h6", "g8h6", "f5g6", "h6g8", "e7h7"]]}, {"num": 167, "fen": "8/2p2K2/8/6R1/k7/8/7p/1R6 w - - 0 1", "lines": [["g5g6", "a4a5", "b1a1", "a5b4", "a1a2"]]}];
+let mate3Index=0,mate3Chess=null,mate3Selected=null,mate3White=0,mate3Done=false,mate3History=[];
+function openMate3(i){if(typeof Chess==='undefined'){alert('Cần Internet để tải thư viện luật cờ vua.');return;}mate3Index=(i+6)%6;document.getElementById('mate3Overlay').classList.add('open');resetMate3();}
+function closeMate3(){document.getElementById('mate3Overlay').classList.remove('open');}
+function mate3Message(t){document.getElementById('mate3Message').textContent=t;}
+function resetMate3(){const p=MATE3_DATA[mate3Index];mate3Chess=new Chess(p.fen);mate3Selected=null;mate3White=0;mate3Done=false;mate3History=[];document.getElementById('mate3Title').textContent='♛ Chiếu hết trong 3 nước — Bài '+(mate3Index+1)+'/6 (Hình '+p.num+')';mate3Message('Trắng đi trước. Hãy chiếu hết Vua Đen trong 3 nước của Trắng.');renderMate3();}
+function renderMate3(){const b=document.getElementById('mate3Board');b.innerHTML='';const hints=mate3Selected?mate3Chess.moves({square:mate3Selected,verbose:true}).map(m=>m.to):[];for(let i=0;i<64;i++){const sq=mateCoords(i),pc=mate3Chess.get(sq),el=document.createElement('div');el.className='mate-square '+((Math.floor(i/8)+i%8)%2?'dark':'light');if(sq===mate3Selected)el.classList.add('selected');if(hints.includes(sq))el.classList.add('hint');if(pc){const w=document.createElement('span');w.className='piece';w.innerHTML=pieceSvgMarkup(pc.color==='w'?pc.type.toUpperCase():pc.type);el.appendChild(w);}el.onclick=()=>clickMate3(sq);b.appendChild(el);}}
+function mate3Key(m){return m.from+m.to+(m.promotion||'');}
+function mate3Options(){return MATE3_DATA[mate3Index].lines.filter(l=>mate3History.every((m,i)=>l[i]===m));}
+function clickMate3(sq){if(!mate3Chess||mate3Done||mate3Chess.turn()!=='w'||(role==='teacher'&&roomRef))return;const pc=mate3Chess.get(sq);if(!mate3Selected){if(pc&&pc.color==='w'){mate3Selected=sq;renderMate3();}return;}if(pc&&pc.color==='w'){mate3Selected=sq;renderMate3();return;}const from=mate3Selected;mate3Selected=null;const moves=mate3Chess.moves({verbose:true}).filter(m=>m.from===from&&m.to===sq);if(!moves.length){mate3Message('Nước đi không hợp lệ.');renderMate3();return;}const book=mate3Options().map(l=>l[mate3History.length]);const selected=moves.find(m=>book.includes(mate3Key(m)))||moves[0];if(!book.includes(mate3Key(selected))){mate3Message('Nước này chưa đúng phương án trong sách. Hãy thử lại hoặc chọn Gợi ý.');renderMate3();return;}mate3Chess.move(selected);mate3History.push(mate3Key(selected));mate3White++;renderMate3();if(mate3Chess.in_checkmate()){mate3Done=true;mate3Message('🏆 Chính xác! Đã chiếu hết Vua Đen!');return;}if(mate3White===3){mate3Done=true;mate3Message('Chưa chiếu hết. Nhấn Làm lại.');return;}const options=mate3Options().map(l=>l[mate3History.length]);const reply=mate3Chess.moves({verbose:true}).find(m=>options.includes(mate3Key(m)));if(!reply){mate3Done=true;mate3Message('Phương án đáp trả chưa khớp với thế cờ; cần kiểm tra lại hình sách.');return;}mate3Chess.move(reply);mate3History.push(mate3Key(reply));renderMate3();mate3Message('Đen đã đi. Hãy tìm nước tiếp theo!');}
+function hintMate3(){if(!mate3Chess||mate3Done)return;const o=mate3Options();const m=o.length?o[0][mate3History.length]:null;mate3Message(m?'💡 Gợi ý: Hãy thử quân ở ô '+m.slice(0,2)+'.':'Chưa tìm thấy gợi ý phù hợp.');}
+
 /* =========================================================
 
    15. KHỞI TẠO
@@ -4186,6 +4244,126 @@ addLog(
     "Bàn cờ đã sẵn sàng!"
 
 );
+
+
+/* ===== ĐỐI KHÁNG TRỰC TUYẾN: chess.js + giao dịch Firestore ===== */
+let pvpData=null,pvpSelected=null,pvpSending=false;
+function pvpMyColor(){return !pvpData?null:(role==='teacher'?pvpData.teacherColor:(pvpData.teacherColor==='w'?'b':'w'));}
+function pvpChess(){if(typeof Chess==='undefined')return null;const c=new Chess();if(pvpData&&pvpData.fen&&!c.load(pvpData.fen))return null;return c;}
+function pvpFinished(c){
+ if(c.in_checkmate())return '🏆 Chiếu hết! '+(c.turn()==='w'?'Đen':'Trắng')+' thắng.';
+ if(c.in_stalemate())return '🤝 Hòa do hết nước đi hợp lệ (pat).';
+ if(c.in_threefold_repetition())return '🤝 Hòa do lặp lại thế cờ 3 lần.';
+ if(c.insufficient_material())return '🤝 Hòa do không đủ lực lượng.';
+ if(c.in_draw())return '🤝 Ván cờ hòa theo luật.';
+ return null;
+}
+function pvpStatus(msg){document.getElementById('pvpStatus').textContent=msg;}
+function openPvp(){
+ document.getElementById('pvpOverlay').classList.add('open');pvpSelected=null;
+ if(typeof Chess==='undefined')pvpStatus('Không tải được chess.js. Kiểm tra Internet.');
+ else if(!roomRef)pvpStatus('Hãy tạo phòng (giáo viên) hoặc vào lớp (học sinh) ở thanh trên trước.');
+ renderPvp();
+}
+function closePvp(){document.getElementById('pvpOverlay').classList.remove('open');}
+function pvpReceive(data){pvpData=data||null;pvpSelected=null;renderPvp();}
+function pvpHistoryChess(){
+ const c=new Chess();if(!pvpData)return c;
+ for(const uci of (pvpData.moves||[])){
+  const move=c.move({from:uci.slice(0,2),to:uci.slice(2,4),promotion:uci[4]||'q'});
+  if(!move)break;
+ }
+ return c;
+}
+function renderPvp(){
+ const board=document.getElementById('pvpBoard');if(!board)return;
+ const chess=pvpChess()||new Chess();const mine=pvpMyColor()||'w';const flip=mine==='b';
+ const squares=[];for(let i=0;i<64;i++)squares.push('abcdefgh'[i%8]+(8-Math.floor(i/8)));
+ if(flip)squares.reverse();board.innerHTML='';
+ const allowed=pvpSelected?chess.moves({square:pvpSelected,verbose:true}).map(m=>m.to):[];
+ squares.forEach((sq,i)=>{
+  const pc=chess.get(sq),cell=document.createElement('div');
+  const f=sq.charCodeAt(0)-97,r=Number(sq[1]);
+  cell.className='pvp-cell '+((f+r)%2?'light':'dark');
+  if(sq===pvpSelected)cell.classList.add('selected');
+  if(allowed.includes(sq))cell.classList.add('legal');
+  if(pc){const key=pc.color+pc.type.toUpperCase();const img=document.createElement('img');img.src=CHESS_PIECE_IMAGES[key];img.alt=key;img.draggable=false;cell.appendChild(img);}
+  if(i%8===0){const rank=document.createElement('span');rank.className='pvp-coord pvp-rank';rank.textContent=sq[1];cell.appendChild(rank);}
+  if(i>=56){const file=document.createElement('span');file.className='pvp-coord pvp-file';file.textContent=sq[0];cell.appendChild(file);}
+  cell.onclick=()=>pvpClick(sq);board.appendChild(cell);
+ });
+ const selector=document.getElementById('pvpTeacherColor'),start=document.getElementById('pvpStartBtn');
+ selector.disabled=role!=='teacher';start.disabled=role!=='teacher'||!roomRef;
+ if(pvpData){selector.value=pvpData.teacherColor||'w';selector.disabled=role!=='teacher'||pvpData.status==='playing';}
+ const history=document.getElementById('pvpHistory');
+ if(pvpData&&pvpData.moves&&pvpData.moves.length){
+  const replay=pvpHistoryChess();history.textContent=replay.history().map((m,i)=>(i%2===0?Math.floor(i/2)+1+'. ':'')+m).join('  ');
+ }else history.textContent='Chưa có nước đi.';
+ if(!pvpData){pvpStatus('Chưa bắt đầu ván. Giáo viên chọn Trắng/Đen và nhấn Bắt đầu ván mới.');return;}
+ if(pvpData.status==='finished'){pvpStatus(pvpData.result||'Ván đấu đã kết thúc.');return;}
+ if(pvpData.status==='draw_offer'){pvpStatus((pvpData.drawBy===role?'Bạn đã đề nghị hòa. Đang chờ đối phương.':'Đối phương đề nghị hòa. Nhấn Đề nghị hòa để chấp nhận.'));return;}
+ const turn=chess.turn(),me=pvpMyColor();
+ pvpStatus('Bạn cầm '+(me==='w'?'Trắng':'Đen')+'. '+(chess.in_check()?'⚠️ Đang bị chiếu! ':'')+(turn===me?'Đến lượt bạn.':'Đang chờ đối phương đi...'));
+}
+async function pvpStart(){
+ if(role!=='teacher'||!roomRef){pvpStatus('Chỉ giáo viên trong phòng mới được bắt đầu ván.');return;}
+ if(!confirm('Bắt đầu ván mới? Ván đối kháng đang chơi (nếu có) sẽ được thay thế.'))return;
+ const teacherColor=document.getElementById('pvpTeacherColor').value==='b'?'b':'w';
+ try{await db.runTransaction(async tx=>{
+  const snap=await tx.get(roomRef);if(!snap.exists)throw Error('Phòng không tồn tại');
+  tx.update(roomRef,{pvp:{fen:new Chess().fen(),moves:[],teacherColor,status:'playing',result:'',drawBy:null,version:0},updatedAt:firebase.firestore.FieldValue.serverTimestamp()});
+ });}catch(e){console.error(e);pvpStatus('Không thể bắt đầu ván. Kiểm tra kết nối và quyền Firestore.');}
+}
+function pvpClick(sq){
+ if(pvpSending||!pvpData||pvpData.status!=='playing')return;
+ const c=pvpChess();if(!c)return;
+ const mine=pvpMyColor();if(c.turn()!==mine)return;
+ const pc=c.get(sq);
+ if(!pvpSelected){if(pc&&pc.color===mine){pvpSelected=sq;renderPvp();}return;}
+ if(pc&&pc.color===mine){pvpSelected=sq;renderPvp();return;}
+ const from=pvpSelected;pvpSelected=null;
+ const legal=c.moves({verbose:true}).filter(m=>m.from===from&&m.to===sq);
+ if(!legal.length){renderPvp();return;}
+ let promotion='q';
+ if(legal.some(m=>m.flags.includes('p'))){
+  const answer=prompt('Phong cấp thành quân nào? Nhập H (Hậu), X (Xe), T (Tượng), M (Mã):','H');
+  if(answer===null){renderPvp();return;}
+  promotion=({'H':'q','Q':'q','X':'r','R':'r','T':'b','B':'b','M':'n','N':'n'})[answer.trim().toUpperCase()]||'q';
+ }
+ pvpSendMove(from,sq,promotion);
+}
+async function pvpSendMove(from,to,promotion){
+ if(!roomRef||pvpSending)return;pvpSending=true;
+ try{
+  await db.runTransaction(async tx=>{
+   const snap=await tx.get(roomRef);if(!snap.exists)throw Error('Không tìm thấy phòng');
+   const d=snap.data().pvp;if(!d||d.status!=='playing')throw Error('Ván không còn diễn ra');
+   const c=new Chess();if(!c.load(d.fen))throw Error('Thế cờ không hợp lệ');
+   const mine=role==='teacher'?d.teacherColor:(d.teacherColor==='w'?'b':'w');
+   if(c.turn()!==mine)throw Error('Chưa đến lượt bạn');
+   const m=c.move({from,to,promotion});if(!m)throw Error('Nước đi không hợp lệ');
+   const result=pvpFinished(c);
+   tx.update(roomRef,{pvp:{...d,fen:c.fen(),moves:[...(d.moves||[]),from+to+(m.promotion||'')],version:(d.version||0)+1,status:result?'finished':'playing',result:result||''},updatedAt:firebase.firestore.FieldValue.serverTimestamp()});
+  });
+ }catch(e){console.error(e);pvpStatus('Không gửi được nước đi: '+e.message);}
+ finally{pvpSending=false;}
+}
+async function pvpResign(){
+ if(!roomRef||!pvpData||pvpData.status==='finished'||!confirm('Bạn chắc chắn muốn xin thua?'))return;
+ try{await db.runTransaction(async tx=>{const snap=await tx.get(roomRef),d=snap.data()?.pvp;
+  if(!d||d.status==='finished')return;
+  const mine=role==='teacher'?d.teacherColor:(d.teacherColor==='w'?'b':'w');
+  tx.update(roomRef,{pvp:{...d,status:'finished',result:'🏳️ '+(mine==='w'?'Trắng':'Đen')+' xin thua. '+(mine==='w'?'Đen':'Trắng')+' thắng.'}});
+ });}catch(e){pvpStatus('Không gửi được yêu cầu xin thua.');}
+}
+async function pvpOfferDraw(){
+ if(!roomRef||!pvpData||pvpData.status==='finished')return;
+ try{await db.runTransaction(async tx=>{const snap=await tx.get(roomRef),d=snap.data()?.pvp;
+  if(!d||d.status==='finished')return;
+  if(d.status==='draw_offer'&&d.drawBy!==role)tx.update(roomRef,{pvp:{...d,status:'finished',result:'🤝 Hai bên đồng ý hòa.'}});
+  else if(d.status==='playing')tx.update(roomRef,{pvp:{...d,status:'draw_offer',drawBy:role}});
+ });}catch(e){pvpStatus('Không gửi được đề nghị hòa.');}
+}
 
 </script>
 </body>
