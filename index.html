@@ -1699,6 +1699,22 @@ button{
 }
 
 .piece .chess-piece-img{width:88%;height:88%;object-fit:contain;display:block;pointer-events:none;user-select:none;background:transparent!important;box-shadow:none!important;border:none!important}
+
+/* Bài tập chiếu hết trong hai nước */
+.mate-overlay{position:fixed;inset:0;z-index:5000;background:rgba(19,39,58,.72);display:none;align-items:center;justify-content:center;padding:12px;overflow:auto}
+.mate-overlay.open{display:flex}
+.mate-dialog{background:#fff;border-radius:20px;padding:20px;max-width:1160px;width:min(1160px,98vw);max-height:96vh;overflow:auto;box-shadow:0 18px 65px #172d4666}
+.mate-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+.mate-layout{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:20px;align-items:start;justify-content:center}
+.mate-board{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));grid-template-rows:repeat(8,minmax(0,1fr));aspect-ratio:1/1;width:min(100%,calc(96vh - 125px));height:auto;min-width:0;min-height:0;margin-inline:auto;border:5px solid #e0eaf4;border-radius:10px;overflow:hidden;align-content:stretch}
+.mate-square{display:flex;align-items:center;justify-content:center;position:relative;min-width:0;min-height:0;width:100%;height:100%;aspect-ratio:1/1;overflow:hidden;cursor:pointer}
+.mate-square.light{background:#fff0c7}.mate-square.dark{background:#79b7e8}
+.mate-square.selected{outline:4px solid #ffc933;outline-offset:-4px}
+.mate-square.hint:after{content:'';position:absolute;background:#4b8e6380;width:23%;height:23%;border-radius:50%;pointer-events:none}
+.mate-square img,.mate-square svg{display:block;width:88%;height:88%;max-width:100%;max-height:100%;object-fit:contain;pointer-events:none;position:relative;z-index:1}
+.mate-side{display:flex;flex-direction:column;gap:9px}.mate-side button{padding:10px;border-radius:10px;border:1px solid #c8e0f2;background:#f0f8ff;font-weight:700}
+.mate-msg{background:#fff6dc;padding:12px;border-radius:12px;line-height:1.5;font-size:14px;min-height:90px}
+@media(max-width:700px){.mate-dialog{padding:12px}.mate-layout{grid-template-columns:1fr;gap:12px}.mate-board{width:min(100%,calc(96vh - 220px))}.mate-side{display:grid;grid-template-columns:1fr 1fr}.mate-msg{grid-column:1/-1}}
 </style>
 
 
@@ -2092,6 +2108,7 @@ button{
 
 
 
+<div class="lesson" id="openMateExercises" role="button" tabindex="0" onclick="openMateExercises(0)" onkeydown="if(event.key==='Enter')openMateExercises(0)"><div class="lesson-icon">♔</div> Chiếu hết trong 2 nước (10 bài)</div>
 </aside>
 
 
@@ -2468,6 +2485,14 @@ button{
 
 
 
+<div class="mate-overlay" id="mateOverlay" role="dialog" aria-modal="true" aria-label="Bài tập chiếu hết trong hai nước">
+<div class="mate-dialog"><div class="mate-top"><strong id="mateTitle">♔ Chiếu hết trong 2 nước</strong><button class="btn btn-soft" onclick="closeMateExercises()">✕ Đóng</button></div>
+<div class="mate-layout"><div id="mateBoard" class="mate-board"></div><div class="mate-side">
+<div class="mate-msg" id="mateMessage">Trắng đi trước và chiếu hết trong hai nước.</div>
+<button onclick="matePrev()">← Bài trước</button><button onclick="mateNext()">Bài sau →</button>
+<button onclick="mateReset()">↻ Làm lại</button><button onclick="mateHint()">💡 Gợi ý</button>
+</div></div></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 
@@ -3627,6 +3652,7 @@ function listenToRoom(){
   roomUnsubscribe=roomRef.onSnapshot(snap=>{
     if(!snap.exists)return;
     const data=snap.data();
+    if(data.mateExercise)receiveMateExercise(data.mateExercise);
     // Chỉ nhận dữ liệu từ máy khác hoặc bản đã xác nhận, không xóa nước đi đang chọn.
     if(Array.isArray(data.state)&&data.state.length===64){
       state=[...data.state];lastFrom=data.lastFrom??null;lastTo=data.lastTo??null;
@@ -4026,6 +4052,112 @@ function undoMove(){
 
 
 
+
+
+// Mười thế cờ từ Hình 52–61, Trắng đi trước. Chess.js kiểm tra nước đi hợp lệ.
+const MATE_EXERCISES = [{"num": 52, "fen": "7R/8/8/8/3p4/8/r7/k1K4Q w - - 0 1"}, {"num": 53, "fen": "8/2p5/2P5/2K5/kp6/1p6/PP6/Q7 w - - 0 1"}, {"num": 54, "fen": "7k/5K2/6p1/6Pb/8/7B/7R/8 w - - 0 1"}, {"num": 55, "fen": "5K1k/7p/7R/8/2R5/8/b7/8 w - - 0 1"}, {"num": 56, "fen": "2kr4/K1pp4/8/8/8/8/7Q/3R4 w - - 0 1"}, {"num": 57, "fen": "8/8/6k1/7R/5K2/5Q2/8/8 w - - 0 1"}, {"num": 58, "fen": "8/rp6/k7/8/8/1R1K3Q/8/8 w - - 0 1"}, {"num": 59, "fen": "8/8/8/pp6/kB5Q/8/K2b4/8 w - - 0 1"}, {"num": 60, "fen": "6k1/7p/7K/8/8/8/8/B4Q2 w - - 0 1"}, {"num": 61, "fen": "6r1/1R6/8/p5r1/kp6/7R/1P5P/7K w - - 0 1"}];
+// Đáp án sách: nước mở đầu và các phương án đáp trả tiêu biểu.
+// Tên quân: X=Xe, H=Hậu, T=Tượng, V=Vua; dấu ! chỉ nước then chốt.
+const MATE_BOOK = [
+ {first:'h8a8', branches:[['a2a8','h1a8'],['d4d3','h1h8']]},
+ {first:'a2a3', branches:[['b4a3','a1a3'],['a4a5','a3b4']]},
+ {first:'g5f5', branches:[['h8h7','h2h5'],['g6f5','h2h5']]},
+ {first:'h6g6', branches:[['h7g6','h5h4'],['h7h5','h5h6'],['a2b2','h5g8']]},
+ {first:'c4g4', branches:[['h7g6','g4h4'],['h7h5','g4h6'],['a2b2','g4g8']]},
+ {first:'h2d6', branches:[['c7d6','d1c1'],['c7c6','d6b8'],['c7c5','d6b8'],['d8d7','d6d7']]},
+ {first:'f3b7', branches:[['g6h5','h5h7'],['g6f6','f3h6']]},
+ {first:'h3d7', branches:[['a6a5','b3b5'],['b7b6','b3a3'],['b7b5','d7b5'],['a7a8','d7a4']]},
+ {first:'f1d8', branches:[['g8h8','d8f8']]},
+ {first:'h3a3', branches:[['b4a3','b2b3']]}
+];
+function mateBookMove(move){return move && move.from+move.to===MATE_BOOK[mateIndex].first;}
+function mateBookReply(){
+ const book=MATE_BOOK[mateIndex];
+ for(const [black] of book.branches){
+   const from=black.slice(0,2),to=black.slice(2,4);
+   if(mateChess.moves({verbose:true}).some(m=>m.from===from&&m.to===to))return {from,to};
+ }
+ return null;
+}
+let mateChess=null,mateIndex=0,mateSelected=null,mateWhiteMoves=0,mateBusy=false,mateDone=false;
+function mateMessage(t){document.getElementById('mateMessage').textContent=t;}
+function mateCoords(i){return 'abcdefgh'[i%8]+(8-Math.floor(i/8));}
+function openMateExercises(i){
+  if(typeof Chess==='undefined'){alert('Cần có Internet để tải thư viện luật cờ vua. Hãy thử tải lại trang.');return;}
+  document.getElementById('mateOverlay').classList.add('open');
+  mateIndex=(i+MATE_EXERCISES.length)%MATE_EXERCISES.length;
+  mateReset();
+}
+function closeMateExercises(){document.getElementById('mateOverlay').classList.remove('open');}
+function matePrev(){openMateExercises(mateIndex-1);}
+function mateNext(){openMateExercises(mateIndex+1);}
+function mateReset(){
+  const p=MATE_EXERCISES[mateIndex];mateChess=new Chess(p.fen);mateSelected=null;mateWhiteMoves=0;mateBusy=false;mateDone=false;
+  document.getElementById('mateTitle').textContent='♔ Chiếu hết trong 2 nước — Bài '+(mateIndex+1)+'/10 (Hình '+p.num+')';
+  mateMessage('Trắng đi trước. Chọn quân Trắng, sau đó chọn ô đến. Hãy chiếu hết Vua Đen trong tối đa 2 nước của Trắng.');
+  renderMateBoard();
+}
+function renderMateBoard(){
+  if(!mateChess)return;
+  const el=document.getElementById('mateBoard');el.innerHTML='';
+  const hints=mateSelected?mateChess.moves({square:mateSelected,verbose:true}).map(x=>x.to):[];
+  for(let i=0;i<64;i++){
+    const sq=mateCoords(i),pc=mateChess.get(sq),cell=document.createElement('div');
+    cell.className='mate-square '+((Math.floor(i/8)+i%8)%2?'dark':'light');
+    if(sq===mateSelected)cell.classList.add('selected');
+    if(hints.includes(sq))cell.classList.add('hint');
+    if(pc){const wrap=document.createElement('span');wrap.className='piece';wrap.innerHTML=pieceSvgMarkup(pc.color==='w'?pc.type.toUpperCase():pc.type);cell.appendChild(wrap);}
+    cell.onclick=()=>mateClick(sq);el.appendChild(cell);
+  }
+}
+function mateClick(sq){
+  if(!mateChess||mateBusy||mateDone||mateChess.turn()!=='w'||(role==='teacher'&&roomRef))return;
+  const pc=mateChess.get(sq);
+  if(!mateSelected){if(pc&&pc.color==='w'){mateSelected=sq;renderMateBoard();}return;}
+  if(pc&&pc.color==='w'){mateSelected=sq;renderMateBoard();return;}
+  const from=mateSelected;
+  const mv=mateChess.move({from,to:sq,promotion:'q'});
+  if(!mv){mateMessage('Nước đi chưa hợp lệ. Hãy chọn lại.');mateSelected=null;renderMateBoard();return;}
+  mateSelected=null;mateWhiteMoves++;renderMateBoard();syncMateExercise();
+  if(mateChess.in_checkmate()){mateDone=true;mateMessage('🏆 Chính xác! Trắng đã chiếu hết Vua Đen!');syncMateExercise();return;}
+  if(mateWhiteMoves>=2){mateDone=true;mateMessage('Chưa chiếu hết sau 2 nước. Nhấn “Làm lại” để thử lại.');syncMateExercise();return;}
+  // Đối chiếu nước then chốt của sách trước khi chọn phương án đáp trả.
+  if(!mateBookMove(mv)){
+    mateDone=true;mateMessage('Nước đầu chưa đúng phương án chiếu hết trong 2 nước của sách. Hãy nhấn “Làm lại” và tìm nước mở đầu khác.');syncMateExercise();return;
+  }
+  const replies=mateChess.moves({verbose:true});
+  if(!replies.length){mateDone=true;mateMessage('Ván cờ kết thúc. Hãy làm lại.');syncMateExercise();return;}
+  const chosen=mateBookReply();
+  if(chosen)mateChess.move(chosen);
+  else {
+    // Khi đáp án không khớp thế cờ, không chọn bừa nước khiến bài tập mất lời giải.
+    const safe=replies.map(r=>{mateChess.move(r);const hasMate=mateChess.moves({verbose:true}).some(w=>{mateChess.move(w);const yes=mateChess.in_checkmate();mateChess.undo();return yes;});mateChess.undo();return {r,hasMate};}).find(x=>x.hasMate);
+    if(!safe){mateDone=true;mateMessage('Thế cờ hoặc đáp án bài này cần được kiểm tra lại.');syncMateExercise();return;}
+    mateChess.move(safe.r);
+  }
+  renderMateBoard();syncMateExercise();
+  mateMessage('Đen đã đáp trả. Hãy tìm nước chiếu hết thứ hai!');
+}
+function mateHint(){
+  if(!mateChess||mateDone)return;
+  if(mateWhiteMoves===0){mateMessage('💡 Gợi ý: Hãy thử di chuyển quân Trắng ở ô '+MATE_BOOK[mateIndex].first.slice(0,2)+'.');return;}
+  const win=mateChess.moves({verbose:true}).find(m=>{mateChess.move(m);const yes=mateChess.in_checkmate();mateChess.undo();return yes;});
+  mateMessage(win?'💡 Gợi ý: Hãy thử quân ở ô '+win.from+'.':'Chưa tìm thấy nước chiếu hết từ vị trí này.');
+}
+async function syncMateExercise(){
+  if(!roomRef||role!=='student'||!mateChess)return;
+  try{await roomRef.update({mateExercise:{index:mateIndex,fen:mateChess.fen(),whiteMoves:mateWhiteMoves,done:mateDone},updatedAt:firebase.firestore.FieldValue.serverTimestamp()});}catch(e){console.warn('Chưa đồng bộ bài tập',e);}
+}
+function receiveMateExercise(data){
+  if(role!=='teacher'||!data||typeof Chess==='undefined')return;
+  if(!Number.isInteger(data.index)||data.index<0||data.index>=10||typeof data.fen!=='string')return;
+  if(!mateChess||mateIndex!==data.index||mateChess.fen()!==data.fen){
+    mateIndex=data.index;mateChess=new Chess(data.fen);mateWhiteMoves=data.whiteMoves||0;mateDone=!!data.done;mateSelected=null;
+    document.getElementById('mateOverlay').classList.add('open');
+    document.getElementById('mateTitle').textContent='👀 Theo dõi HS — Hình '+MATE_EXERCISES[mateIndex].num;
+    renderMateBoard();mateMessage(mateDone?'Học sinh đã hoàn thành hoặc kết thúc lượt.':'Đang theo dõi các nước đi của học sinh.');
+  }
+}
 
 /* =========================================================
 
