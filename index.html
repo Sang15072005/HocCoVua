@@ -2518,6 +2518,11 @@ button{
 <div class="mate-dialog"><div class="mate-top"><strong id="mateTitle">♔ Chiếu hết trong 2 nước</strong><button class="btn btn-soft" onclick="closeMateExercises()">✕ Đóng</button></div>
 <div class="mate-layout"><div id="mateBoard" class="mate-board"></div><div class="mate-side">
 <div class="mate-msg" id="mateMessage">Trắng đi trước và chiếu hết trong hai nước.</div>
+<div id="mateVariationsPanel" style="margin:12px 0;padding:10px;border:1px solid #c8b89c;border-radius:10px">
+<label for="mateVariation" style="display:block;font-weight:700;margin-bottom:7px">Các trường hợp “Nếu…” (Đen đáp trả)</label>
+<select id="mateVariation" onchange="mateChangeVariation(this.value)" style="width:100%;max-width:100%;padding:9px;border-radius:8px"><option value="">Đi nước đầu để xem phương án</option></select>
+<div id="mateVariationInfo" style="font-size:12px;line-height:1.5;margin-top:7px">Chọn một phương án để luyện cách chiếu hết tương ứng.</div>
+</div>
 <button onclick="matePrev()">← Bài trước</button><button onclick="mateNext()">Bài sau →</button>
 <button onclick="mateReset()">↻ Làm lại</button><button onclick="mateHint()">💡 Gợi ý</button>
 </div></div></div></div>
@@ -4116,20 +4121,57 @@ const MATE_BOOK = [
  // Hình 58: 1.Hd7! Va5 2.Hb5#; b6 2.Xa3#; b5 2.H:b5#; Xa8 2.Ha4#
  {first:'h3d7', branches:[['a6a5','d7b5'],['b7b6','b3a3'],['b7b5','d7b5'],['a7a8','d7a4']]},
  // Hình 59: 1.Hd8! V:b4 2.Hd4#; T:b4 2.Hd1#; a:b4 2.Ha8#
- {first:'h4d8', branches:[['a4b4','d8d4'],['d2b4','d8d1'],['a5b4','d8a8'],['d2c3','d8a5']]},
+ {first:'h4d8', branches:[['a4b4','d8d4'],['d2b4','d8d1'],['a5b4','d8a8']]},
  // Hình 60: 1.Th8! V:h8 2.Hf8#
  {first:'a1h8', branches:[['g8h8','f1f8']]},
  // Hình 61: 1.Xa3+! b:a3 2.b3#
  {first:'h3a3', branches:[['b4a3','b2b3']]}
 ];
 function mateBookMove(move){return move && MATE_BOOK[mateIndex] && move.from+move.to===MATE_BOOK[mateIndex].first;}
-function mateBookReply(){
+// Chỉ nhận các phương án mà chess.js xác nhận là hợp lệ và Trắng có thể chiếu hết.
+function mateLegalVariations(){
+ const options=[];
+ if(!mateChess||mateChess.turn()!=='b')return options;
  const book=MATE_BOOK[mateIndex];
- for(const [black] of book.branches){
-   const from=black.slice(0,2),to=black.slice(2,4);
-   if(mateChess.moves({verbose:true}).some(m=>m.from===from&&m.to===to))return {from,to};
+ const legal=mateChess.moves({verbose:true});
+ for(const reply of legal){
+   const uci=reply.from+reply.to;
+   mateChess.move(reply);
+   const wins=mateChess.moves({verbose:true}).filter(w=>{
+     mateChess.move(w);const mate=mateChess.in_checkmate();mateChess.undo();return mate;
+   });
+   mateChess.undo();
+   if(!wins.length)continue;
+   // Hình 59: sách ghi “Nếu 1...T (bất kỳ) sẽ 2.H:a5#”.
+   // Áp dụng cho mọi nước Tượng Đen hợp lệ, không chỉ một ô cố định.
+   const recorded=book.branches.find(b=>b[0]===uci);
+   const bishop59=mateIndex===7 && reply.piece==='b' && reply.color==='b';
+   const expected=bishop59?'d8a5':recorded?recorded[1]:null;
+   const preferred=expected&&wins.find(w=>w.from+w.to===expected);
+   options.push({uci,san:reply.san,answer:(preferred||wins[0]).san,
+     documented:!!preferred,matched:!!preferred,
+     bookLabel:preferred?(bishop59?'Theo sách — Tượng đi: ':'Theo sách: '):'Phương án hợp lệ khác: '});
  }
- return null;
+ options.sort((a,b)=>Number(b.documented)-Number(a.documented)||a.san.localeCompare(b.san));
+ return options;
+}
+let mateVariations=[],mateFirstFen='',mateFirstMove='';
+function mateVariationDisplay(){
+ const select=document.getElementById('mateVariation');if(!select)return;
+ select.innerHTML='';
+ if(!mateVariations.length){select.add(new Option('Không tìm thấy phương án chiếu hết hợp lệ',''));return;}
+ mateVariations.forEach((v,i)=>select.add(new Option(v.bookLabel+'1...'+v.san+' → 2.'+v.answer+'#',String(i))));
+}
+function mateChangeVariation(value){
+ if(!mateFirstFen||!mateFirstMove||!mateVariations.length)return;
+ const index=Number(value),variation=mateVariations[index];if(!variation)return;
+ mateChess=new Chess(mateFirstFen);
+ const black=mateChess.move({from:variation.uci.slice(0,2),to:variation.uci.slice(2,4)});
+ if(!black){mateMessage('Phương án này không hợp lệ với thế cờ hiện tại.');return;}
+ mateSelected=null;mateBusy=false;mateDone=false;mateWhiteMoves=1;
+ renderMateBoard();syncMateExercise();
+ document.getElementById('mateVariationInfo').textContent='Đen đi '+black.san+'. Hãy tìm nước chiếu hết; đáp án sẽ được xác nhận theo luật cờ vua.';
+ mateMessage('Đen đã đi '+black.san+'. Hãy tìm nước chiếu hết thứ hai!');
 }
 let mateChess=null,mateIndex=0,mateSelected=null,mateWhiteMoves=0,mateBusy=false,mateDone=false;
 function mateMessage(t){document.getElementById('mateMessage').textContent=t;}
@@ -4144,7 +4186,7 @@ function closeMateExercises(){document.getElementById('mateOverlay').classList.r
 function matePrev(){openMateExercises(mateIndex-1);}
 function mateNext(){openMateExercises(mateIndex+1);}
 function mateReset(){
-  const p=MATE_EXERCISES[mateIndex];mateChess=new Chess(p.fen);mateSelected=null;mateWhiteMoves=0;mateBusy=false;mateDone=false;
+  const p=MATE_EXERCISES[mateIndex];mateChess=new Chess(p.fen);mateSelected=null;mateWhiteMoves=0;mateBusy=false;mateDone=false;mateVariations=[];mateFirstFen='';mateFirstMove='';const sel=document.getElementById('mateVariation');if(sel)sel.innerHTML='<option value="">Đi nước đầu để xem phương án</option>';const info=document.getElementById('mateVariationInfo');if(info)info.textContent='Chọn một phương án để luyện cách chiếu hết tương ứng.';
   document.getElementById('mateTitle').textContent='♔ Chiếu hết trong 2 nước — Bài '+(mateIndex+1)+'/10 (Hình '+p.num+')';
   mateMessage('Trắng đi trước. Chọn quân Trắng, sau đó chọn ô đến. Hãy chiếu hết Vua Đen trong tối đa 2 nước của Trắng.');
   renderMateBoard();
@@ -4177,18 +4219,13 @@ function mateClick(sq){
   if(!mateBookMove(mv)){
     mateDone=true;mateMessage('Nước đầu chưa đúng phương án chiếu hết trong 2 nước của sách. Hãy nhấn “Làm lại” và tìm nước mở đầu khác.');syncMateExercise();return;
   }
-  const replies=mateChess.moves({verbose:true});
-  if(!replies.length){mateDone=true;mateMessage('Ván cờ kết thúc. Hãy làm lại.');syncMateExercise();return;}
-  const chosen=mateBookReply();
-  if(chosen)mateChess.move(chosen);
-  else {
-    // Khi đáp án không khớp thế cờ, không chọn bừa nước khiến bài tập mất lời giải.
-    const safe=replies.map(r=>{mateChess.move(r);const hasMate=mateChess.moves({verbose:true}).some(w=>{mateChess.move(w);const yes=mateChess.in_checkmate();mateChess.undo();return yes;});mateChess.undo();return {r,hasMate};}).find(x=>x.hasMate);
-    if(!safe){mateDone=true;mateMessage('Thế cờ hoặc đáp án bài này cần được kiểm tra lại.');syncMateExercise();return;}
-    mateChess.move(safe.r);
-  }
-  renderMateBoard();syncMateExercise();
-  mateMessage('Đen đã đáp trả. Hãy tìm nước chiếu hết thứ hai!');
+  mateFirstFen=mateChess.fen();mateFirstMove=mv.from+mv.to;
+  mateVariations=mateLegalVariations();
+  if(!mateVariations.length){mateDone=true;mateMessage('⚠️ Không có phương án Đen đáp trả nào dẫn tới chiếu hết ở nước thứ hai. Cần kiểm tra lại thế cờ so với hình sách.');syncMateExercise();return;}
+  mateVariationDisplay();
+  document.getElementById('mateVariation').value='0';
+  mateChangeVariation('0');
+
 }
 function mateHint(){
   if(!mateChess||mateDone)return;
@@ -4274,7 +4311,7 @@ function openPvp(){
  renderPvp();
 }
 function closePvp(){document.getElementById('pvpOverlay').classList.remove('open');}
-function pvpReceive(data){pvpData=data||null;pvpSelected=null;renderPvp();}
+function pvpReceive(data){const changed=JSON.stringify(data||null)!==JSON.stringify(pvpData);if(!changed)return;pvpData=data||null;pvpSelected=null;renderPvp();}
 function pvpHistoryChess(){
  const c=new Chess();if(!pvpData)return c;
  for(const uci of (pvpData.moves||[])){
@@ -4285,6 +4322,7 @@ function pvpHistoryChess(){
 }
 function renderPvp(){
  const board=document.getElementById('pvpBoard');if(!board)return;
+ if(typeof Chess!=='function'){board.textContent='Không tải được thư viện chess.js. Hãy kiểm tra Internet và tải lại trang.';return;}
  const chess=pvpChess()||new Chess();const mine=pvpMyColor()||'w';const flip=mine==='b';
  const squares=[];for(let i=0;i<64;i++)squares.push('abcdefgh'[i%8]+(8-Math.floor(i/8)));
  if(flip)squares.reverse();board.innerHTML='';
@@ -4307,21 +4345,39 @@ function renderPvp(){
  if(pvpData&&pvpData.moves&&pvpData.moves.length){
   const replay=pvpHistoryChess();history.textContent=replay.history().map((m,i)=>(i%2===0?Math.floor(i/2)+1+'. ':'')+m).join('  ');
  }else history.textContent='Chưa có nước đi.';
- if(!pvpData){pvpStatus('Chưa bắt đầu ván. Giáo viên chọn Trắng/Đen và nhấn Bắt đầu ván mới.');return;}
+ if(!pvpData){pvpStatus(!roomRef?'Hãy tạo phòng hoặc vào lớp ở thanh trên trước.':'Chưa bắt đầu ván. Giáo viên chọn Trắng/Đen và nhấn Bắt đầu ván mới.');return;}
  if(pvpData.status==='finished'){pvpStatus(pvpData.result||'Ván đấu đã kết thúc.');return;}
- if(pvpData.status==='draw_offer'){pvpStatus((pvpData.drawBy===role?'Bạn đã đề nghị hòa. Đang chờ đối phương.':'Đối phương đề nghị hòa. Nhấn Đề nghị hòa để chấp nhận.'));return;}
+ if(pvpData.drawBy){pvpStatus(pvpData.drawBy===role?'Bạn đã đề nghị hòa; đang chờ đối phương.':'Đối phương đề nghị hòa. Nhấn Đề nghị hòa để chấp nhận, hoặc tiếp tục đi cờ.');return;}
  const turn=chess.turn(),me=pvpMyColor();
  pvpStatus('Bạn cầm '+(me==='w'?'Trắng':'Đen')+'. '+(chess.in_check()?'⚠️ Đang bị chiếu! ':'')+(turn===me?'Đến lượt bạn.':'Đang chờ đối phương đi...'));
 }
 async function pvpStart(){
- if(role!=='teacher'||!roomRef){pvpStatus('Chỉ giáo viên trong phòng mới được bắt đầu ván.');return;}
- if(!confirm('Bắt đầu ván mới? Ván đối kháng đang chơi (nếu có) sẽ được thay thế.'))return;
+ const button=document.getElementById('pvpStartBtn');
+ if(role!=='teacher'){pvpStatus('Hãy chọn vai trò Giáo viên để bắt đầu ván.');return;}
+ if(!roomRef){pvpStatus('Bạn cần nhấn Tạo phòng ở phía trên trước khi bắt đầu.');return;}
+ if(typeof Chess!=='function'){pvpStatus('Chưa tải được thư viện luật cờ chess.js. Kiểm tra Internet và tải lại trang.');return;}
+ if(!confirm('Bắt đầu ván mới? Ván đang chơi sẽ được thay thế.'))return;
  const teacherColor=document.getElementById('pvpTeacherColor').value==='b'?'b':'w';
- try{await db.runTransaction(async tx=>{
-  const snap=await tx.get(roomRef);if(!snap.exists)throw Error('Phòng không tồn tại');
-  tx.update(roomRef,{pvp:{fen:new Chess().fen(),moves:[],teacherColor,status:'playing',result:'',drawBy:null,version:0},updatedAt:firebase.firestore.FieldValue.serverTimestamp()});
- });}catch(e){console.error(e);pvpStatus('Không thể bắt đầu ván. Kiểm tra kết nối và quyền Firestore.');}
+ button.disabled=true;pvpStatus('Đang khởi tạo ván đấu và đồng bộ lên phòng...');
+ try{
+  const initial=new Chess();
+  const snapshot=await roomRef.get();
+  if(!snapshot.exists)throw Error('Phòng không tồn tại. Hãy tạo phòng mới.');
+  const newGame={fen:initial.fen(),moves:[],teacherColor,status:'playing',result:'',drawBy:null,version:0,startedAt:Date.now()};
+  // Ghi một trường của phòng thay vì giao dịch toàn bộ phòng: phù hợp hơn với
+  // các quy tắc Firestore cho phép cập nhật phòng của phiên học.
+  await roomRef.update({pvp:newGame,updatedAt:firebase.firestore.FieldValue.serverTimestamp()});
+  pvpData=newGame;pvpSelected=null;renderPvp();
+  pvpStatus('✅ Đã bắt đầu! Giáo viên cầm '+(teacherColor==='w'?'Trắng':'Đen')+'. '+(teacherColor==='w'?'Đến lượt giáo viên.':'Đến lượt học sinh.') );
+ }catch(e){
+  console.error('Lỗi bắt đầu đối kháng:',e);
+  const code=e&&e.code||'';
+  pvpStatus(code==='permission-denied'
+    ?'❌ Firestore từ chối quyền ghi phòng (permission-denied). Cần cập nhật Firestore Security Rules để cho phép ghi trường pvp.'
+    :'❌ Không thể bắt đầu ván: '+(e&&e.message||String(e)));
+ }finally{button.disabled=role!=='teacher'||!roomRef;}
 }
+
 function pvpClick(sq){
  if(pvpSending||!pvpData||pvpData.status!=='playing')return;
  const c=pvpChess();if(!c)return;
@@ -4350,8 +4406,10 @@ async function pvpSendMove(from,to,promotion){
    const mine=role==='teacher'?d.teacherColor:(d.teacherColor==='w'?'b':'w');
    if(c.turn()!==mine)throw Error('Chưa đến lượt bạn');
    const m=c.move({from,to,promotion});if(!m)throw Error('Nước đi không hợp lệ');
-   const result=pvpFinished(c);
-   tx.update(roomRef,{pvp:{...d,fen:c.fen(),moves:[...(d.moves||[]),from+to+(m.promotion||'')],version:(d.version||0)+1,status:result?'finished':'playing',result:result||''},updatedAt:firebase.firestore.FieldValue.serverTimestamp()});
+   const replay=new Chess();for(const u of (d.moves||[])){if(!replay.move({from:u.slice(0,2),to:u.slice(2,4),promotion:u[4]||'q'}))break;}
+   replay.move({from,to,promotion});
+   const result=pvpFinished(replay);
+   tx.update(roomRef,{pvp:{...d,fen:c.fen(),moves:[...(d.moves||[]),from+to+(m.promotion||'')],drawBy:null,version:(d.version||0)+1,status:result?'finished':'playing',result:result||''},updatedAt:firebase.firestore.FieldValue.serverTimestamp()});
   });
  }catch(e){console.error(e);pvpStatus('Không gửi được nước đi: '+e.message);}
  finally{pvpSending=false;}
@@ -4368,8 +4426,8 @@ async function pvpOfferDraw(){
  if(!roomRef||!pvpData||pvpData.status==='finished')return;
  try{await db.runTransaction(async tx=>{const snap=await tx.get(roomRef),d=snap.data()?.pvp;
   if(!d||d.status==='finished')return;
-  if(d.status==='draw_offer'&&d.drawBy!==role)tx.update(roomRef,{pvp:{...d,status:'finished',result:'🤝 Hai bên đồng ý hòa.'}});
-  else if(d.status==='playing')tx.update(roomRef,{pvp:{...d,status:'draw_offer',drawBy:role}});
+  if(d.drawBy&&d.drawBy!==role)tx.update(roomRef,{pvp:{...d,status:'finished',result:'🤝 Hai bên đồng ý hòa.'}});
+  else if(d.status==='playing')tx.update(roomRef,{pvp:{...d,drawBy:role}});
  });}catch(e){pvpStatus('Không gửi được đề nghị hòa.');}
 }
 
